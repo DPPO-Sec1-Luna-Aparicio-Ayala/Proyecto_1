@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>660</x>
+      <y>190</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Coordinator&gt;&gt;
+Aplicacion
+--
+
+--
++escogerProyecto()
++crearProyecto()
++nuevaActividad()
++terminarActividad()
++añadirParticipante()
++mostrarReporte()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>660</x>
+      <y>450</y>
+      <w>230</w>
+      <h>220</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Structurer&gt;&gt;
+Proyecto
+--
+-nombre: String
+-descripcion: String
+-fechaInicio: String
+-fechaFin: String
+-tiposActividad: ArrayList&lt;String&gt;
+--
++mostrarReporte()
++nuevaActividad()
++modificarActividad()
++añadirParticipante()
++generarReporte()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>310</x>
+      <y>450</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Information holder&gt;&gt;
+Participante
+--
+-correo: String
+-nombre: String
+-dueño: boolean
+--
++getActividades()
++setActividades()
++setEsDueño()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1010</x>
+      <y>450</y>
+      <w>210</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Information holder&gt;&gt;
+Actividad
+--
+-titulo: String
+-descripcion: String
+-tipo: String
+-fecha: String
+-horaInicio: String
+-horaFin: String
+-responsable: Participante
+-tiempo: double
+--
++getTiempo()
++getResponsable()
++setTiempo()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>330</x>
+      <y>140</y>
+      <w>190</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Service provider&gt;&gt;
+Reporte
+--
+-reporteString: String
+--
++construirReporte()
++getReporte()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>510</x>
+      <y>540</y>
+      <w>170</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=participantes\n0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>830</x>
+      <y>370</y>
+      <w>120</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=proyectoActual\n0..1</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>370</y>
+      <w>90</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=proyectos\n0..n</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>880</x>
+      <y>520</y>
+      <w>150</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=actividades\n0..n</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>630</y>
+      <w>810</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=actividades\n0..n</panel_attributes>
+    <additional_attributes>720.0;50.0;720.0;120.0;10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>410</x>
+      <y>320</y>
+      <w>270</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=reporte\n0..1</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0;190.0;100.0;190.0;170.0;250.0;170.0</additional_attributes>
+  </element>
+</diagram>
