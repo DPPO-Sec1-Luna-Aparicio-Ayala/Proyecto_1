@@ -28,7 +28,7 @@ Aplicacion
       <x>660</x>
       <y>450</y>
       <w>230</w>
-      <h>220</h>
+      <h>240</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Structurer&gt;&gt;
 Proyecto
@@ -43,7 +43,9 @@ Proyecto
 +nuevaActividad()
 +modificarActividad()
 +añadirParticipante()
-+generarReporte()</panel_attributes>
++generarReporte()
++getParticipantes()
++getActividades()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -70,9 +72,9 @@ Participante
     <id>UMLClass</id>
     <coordinates>
       <x>1010</x>
-      <y>450</y>
+      <y>420</y>
       <w>210</w>
-      <h>230</h>
+      <h>260</h>
     </coordinates>
     <panel_attributes>&lt;&lt;Information holder&gt;&gt;
 Actividad
@@ -88,7 +90,9 @@ Actividad
 --
 +getTiempo()
 +getResponsable()
-+setTiempo()</panel_attributes>
++setTiempo()
++setHoraInicio()
++setHoraFin()</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
