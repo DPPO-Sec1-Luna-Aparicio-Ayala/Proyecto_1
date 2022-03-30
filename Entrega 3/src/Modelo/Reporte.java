@@ -10,6 +10,6 @@ public class Reporte {
 	}
 	
 	public String getReporte() {
-		
+		return this.reporteString;
 	}
 }

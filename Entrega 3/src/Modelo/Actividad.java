@@ -5,19 +5,27 @@ public class Actividad {
 	private String titulo;
 	private String descripcion;
 	private String tipo;
-	private String fecha;
-	private String horaInicio;
-	private String horaFin;
+	private String fechaInicio;
+	private String fechaFin;
 	private Participante responsable;
 	private double tiempo;
 	
+	public Actividad (String title, String descrip, String type, String fechaI,String fechaF, Participante encargado ) {
+		this.titulo=title;
+		this.descripcion=descrip;
+		this.tipo=type;
+		this.fechaInicio=fechaI;
+		this.fechaFin=fechaF;
+		this.responsable=encargado;
+	}
+	
 	//MÉTODOS//
 	public double getTiempo() {
-		return tiempo;
+		return this.tiempo;
 	}
 	
 	public Participante getResponsable() {
-		return responsable;
+		return this.hresponsable;
 	}
 
 	public void setTiempo() {

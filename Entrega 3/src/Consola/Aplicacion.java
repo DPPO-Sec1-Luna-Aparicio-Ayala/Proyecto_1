@@ -17,6 +17,7 @@ public class Aplicacion {
 	{
 		System.out.println("GESTOR DE PROYECTOS\n");
 
+		prepararAplicacion();
 		boolean continuar = true;
 		while (continuar)
 		{
@@ -36,9 +37,11 @@ public class Aplicacion {
 					terminarActividad();
 				else if (opcion_seleccionada == 6 && proyectoActual != null)
 					ejecutarModificarActividad();
-				else if (opcion_seleccionada == 7)
+				else if (opcion_seleccionada == 7 && proyectoActual != null)
+					ejecutarMostrarReporte();
+				else if (opcion_seleccionada == 8)
 				{
-					System.out.println("Saliendo de la aplicación ...");
+					System.out.println("Saliendo de la aplicación...");
 					continuar = false;
 				}
 				else if (proyectoActual == null)
@@ -79,10 +82,25 @@ public class Aplicacion {
 	}
 	
 	public void crearProyecto() {
+		System.out.println("Por favor diligencie los siguientes datos ");
+		String nombre = input("Escriba el nombre de su proyecto");
+		String descripcion = input ("Escriba una descripción para su proyecto");
+		String fechaI= input("Por favor registre la fecha de inicio del proyecto");
+		String fechaF = input ("Por favor registre la fecha final de su proyecto\n(Si aun no lo tiene escriba 0)");
+		String tiposAc = input ("Separando por comas y sin espacios escriba los tipos de actividades que se realizaran en su proyecto ");
+		String[] tiposAcList = tiposAc.split(",");
+		ArrayList<String> tiposAcAr = new ArrayList<String>();
+		for (String actividad : tiposAcList)
+		{
+			tiposAcAr.add(actividad);
+		}
 		
+		Proyecto newProyect= new Proyecto(nombre,descripcion,fechaI,fechaF,tiposAcAr);
+		this.proyectos.add(newProyect);
 	}
 	
 	public void ejecutarNuevaActividad() {
+		
 		
 	}
 
@@ -92,6 +110,15 @@ public class Aplicacion {
 	
 	public void ejecutarAñadirParticipante() {
 		
+		System.out.println("Por favor diligencie los siguientes datos ");
+		String correo = input ("Diligencie su correo");
+		String nombre = input("Escriba su nombre");
+		boolean owner= false;
+		if (proyectoActual.getParticipantes().isEmpty())
+		{
+			owner = true;
+		}
+		proyectoActual.añadirParticipante(correo,nombre,owner);
 	}
 	
 	public void ejecutarMostrarReporte() {
@@ -128,6 +155,10 @@ public class Aplicacion {
 		System.out.println("6. Modificar una actividad");
 		System.out.println("7. Mostrar reporte");
 		System.out.println("8. Salir de la aplicación"); 
+	}
+	
+	public void prepararAplicacion(){
+		this.proyectos = new ArrayList<Proyecto>();
 	}
 	
 	public static void main(String[] args) throws IOException

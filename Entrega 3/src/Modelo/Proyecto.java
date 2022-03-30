@@ -9,9 +9,22 @@ public class Proyecto {
 	private String fechaInicio;
 	private String fechaFin;
 	private ArrayList<String> tiposActividad;
-	private Reporte reporte;
+	private String reporte;
 	private ArrayList<Participante> participantes;
 	private ArrayList<Actividad> actividades;
+	
+	//Constructor//
+	public Proyecto (String name, String descrip, String feIni,String feFin, ArrayList<String> typeActi) 
+	{
+		this.nombre=name;
+		this.descripcion= descrip;
+		this.fechaInicio=feIni;
+		this.fechaFin=feFin;
+		this.tiposActividad=typeActi;
+		this.participantes = new ArrayList<Participante>();
+		this.actividades = new ArrayList<Actividad>();
+		
+	}
 	
 	//MÉTODOS//
 	public String generarReporte() {
@@ -26,23 +39,25 @@ public class Proyecto {
 		
 	}
 	
-	public void añadirParticipante() {
+	public void añadirParticipante(String correo, String nombre,boolean owner) {
 		
+		Participante newParticipant = new Participante (correo,nombre,owner);
+		this.participantes.add(newParticipant);
 	}
 
 	public ArrayList<Participante> getParticipantes(){
-		return participantes;
+		return this.participantes;
 	}
 	
 	public ArrayList<Actividad> getActividades(){
-		return actividades;
+		return this.actividades;
 	}
 	
 	public String getNombre() {
-		return nombre;
+		return this.nombre;
 	}
 	
 	public String getDescripcion() {
-		return descripcion;
+		return this.descripcion;
 	}
 }
