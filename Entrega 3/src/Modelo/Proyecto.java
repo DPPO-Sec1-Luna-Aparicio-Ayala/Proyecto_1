@@ -37,4 +37,12 @@ public class Proyecto {
 	public ArrayList<Actividad> getActividades(){
 		return actividades;
 	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+	
+	public String getDescripcion() {
+		return descripcion;
+	}
 }
