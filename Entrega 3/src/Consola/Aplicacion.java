@@ -28,7 +28,7 @@ public class Aplicacion {
 					crearProyecto();
 				else if (opcion_seleccionada == 2)
 					escogerProyecto();
-				else if (opcion_seleccionada == 3 && proyectoActual ! null)
+				else if (opcion_seleccionada == 3 && proyectoActual != null)
 					ejecutarAñadirParticipante();
 				else if (opcion_seleccionada == 4 && proyectoActual != null)
 					ejecutarNuevaActividad();
@@ -41,9 +41,9 @@ public class Aplicacion {
 					System.out.println("Saliendo de la aplicación ...");
 					continuar = false;
 				}
-				else if (restaurante == null)
+				else if (proyectoActual == null)
 				{
-					System.out.println("Para poder ejecutar esta opción primero debe cargar los archivos.");
+					System.out.println("Para poder ejecutar esta opción primero debe escoger un proyecto");
 				}
 				else
 				{
@@ -62,10 +62,18 @@ public class Aplicacion {
 		if (proyectos.isEmpty()) {
 			System.out.println("No hay proyectos registrados.");
 		}
-		else if{
+		else {
+			int h = 1;
 			for (Proyecto proyectoActual : proyectos) {
-				System.out.println(proyectoActual.getNombre());
+				System.out.println(h + ". " + proyectoActual.getNombre());
+				h ++;
 			}
+			
+			String p = input("Por favor ingrese el número de la opción deseada");
+			int ip = Integer.parseInt(p);
+			
+			Proyecto proyectoElegido = proyectos.get(ip-1);
+			proyectoActual = proyectoElegido;
 		}
 		
 	}
