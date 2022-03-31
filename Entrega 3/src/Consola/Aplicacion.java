@@ -101,6 +101,13 @@ public class Aplicacion {
 	
 	public void ejecutarNuevaActividad() {
 		
+		System.out.println("Por favor diligencie los siguientes datos ");
+		String titulo = input("Escriba el titulo de su actividad");
+		String descripcion = input ("Escriba una descripción para su proyecto");
+		String tipo= input("Por favor escriba el tipo de su actividad");
+		
+		proyectoActual.nuevaActividad(titulo, descripcion, tipo);
+		
 		
 	}
 

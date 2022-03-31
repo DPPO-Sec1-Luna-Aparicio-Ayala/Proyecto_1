@@ -1,5 +1,7 @@
 package Modelo;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Proyecto {
@@ -28,10 +30,20 @@ public class Proyecto {
 	
 	//MÉTODOS//
 	public String generarReporte() {
+		return null;
 		
 	}
 	
-	public void nuevaActividad() {
+	public void nuevaActividad(String titulo, String descripcionActividad, String tipo) {
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		LocalDateTime date = LocalDateTime.now();
+		String fechaI = LocalDateTime.now().format(formatter); //Hora/fecha inicio se autocompleta...  
+		String fechaF = "" ; //Hora/fecha fin se rellenaria al oprimir acabar actividad... 
+		Participante responsable = null; //Autocompletado
+		
+		Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable);
+		System.out.println(fechaI);
 		
 	}
 	

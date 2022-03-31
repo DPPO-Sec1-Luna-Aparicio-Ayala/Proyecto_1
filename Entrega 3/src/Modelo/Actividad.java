@@ -25,7 +25,7 @@ public class Actividad {
 	}
 	
 	public Participante getResponsable() {
-		return this.hresponsable;
+		return this.responsable;
 	}
 
 	public void setTiempo() {
