@@ -28,4 +28,11 @@ public class Participante {
 	public void setEsDueño() {
 		
 	}
+	public String getCorreo() {
+		return this.correo;
+	}
+	
+	public String getNombre() {
+		return this.nombre;
+	}
 }

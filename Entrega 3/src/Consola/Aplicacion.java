@@ -12,6 +12,7 @@ public class Aplicacion {
 	//ATRIBUTOS//
 	private ArrayList<Proyecto> proyectos;
 	private Proyecto proyectoActual;
+	private Participante participanteActual;
 	
 	public void ejecutarAplicacion() throws IOException
 	{
@@ -62,6 +63,7 @@ public class Aplicacion {
 	
 	//MÉTODOS//
 	public void escogerProyecto() {
+		
 		if (proyectos.isEmpty()) {
 			System.out.println("No hay proyectos registrados.");
 		}
@@ -77,6 +79,17 @@ public class Aplicacion {
 			
 			Proyecto proyectoElegido = proyectos.get(ip-1);
 			proyectoActual = proyectoElegido;
+			String login = input("Por favor ingrese el correo con el que se registro en este proyecto");
+			ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();
+			for (Participante esParte : participantesProyecto) {
+				String correo = esParte.getCorreo();
+				if (!correo.equals(login)) {
+					System.out.println("Usted no hace parte de este proyecto, intente con otro correo o pida ser añadido");
+				}
+				else {
+					this.participanteActual=esParte;
+				}
+			}
 		}
 		
 	}
@@ -94,22 +107,30 @@ public class Aplicacion {
 		{
 			tiposAcAr.add(actividad);
 		}
+		String ownerName = input("Por favor escriba el nombre del dueño del proyecto");
+		String ownerMail = input("Por favor escriba el correo del dueño del proyecto");
 		
 		Proyecto newProyect= new Proyecto(nombre,descripcion,fechaI,fechaF,tiposAcAr);
 		this.proyectos.add(newProyect);
+		newProyect.añadirParticipante(ownerMail, ownerName, true);
+		System.out.println("\n Su proyecto ha sido creado con exitó!");
 	}
 	
 	public void ejecutarNuevaActividad() {
 		
 		System.out.println("Por favor diligencie los siguientes datos ");
 		String titulo = input("Escriba el titulo de su actividad");
-		String descripcion = input ("Escriba una descripción para su proyecto");
+		String descripcion = input ("Escriba una descripción para su actividad");
 		String tipo= input("Por favor escriba el tipo de su actividad");
-		
-		proyectoActual.nuevaActividad(titulo, descripcion, tipo);
-		
-		
-	}
+		String cambiarEncargado = input("Desea cambiar al engargado, por defecto sera usted quien quede registrado"+"\n Escriba Si o No");
+		if(cambiarEncargado=="Si") {
+			String newEncargado =  input("Escriba el nombre del encargado de la actividad");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
+		}	
+		else{
+				proyectoActual.nuevaActividad(titulo,descripcion,tipo,participanteActual.getNombre());
+			
+		}
+}
 
 	public void terminarActividad() {
 		

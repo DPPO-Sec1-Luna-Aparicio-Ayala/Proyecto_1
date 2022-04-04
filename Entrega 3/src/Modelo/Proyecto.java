@@ -34,7 +34,7 @@ public class Proyecto {
 		
 	}
 	
-	public void nuevaActividad(String titulo, String descripcionActividad, String tipo) {
+	public void nuevaActividad(String titulo, String descripcionActividad, String tipo, String encargado) {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 		LocalDateTime date = LocalDateTime.now();
