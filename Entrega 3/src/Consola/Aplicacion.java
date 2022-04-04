@@ -87,6 +87,7 @@ public class Aplicacion {
 					System.out.println("Usted no hace parte de este proyecto, intente con otro correo o pida ser añadido");
 				}
 				else {
+					System.out.println("Ha ingresado correctamente al sistema");
 					this.participanteActual=esParte;
 				}
 			}
@@ -121,15 +122,33 @@ public class Aplicacion {
 		System.out.println("Por favor diligencie los siguientes datos ");
 		String titulo = input("Escriba el titulo de su actividad");
 		String descripcion = input ("Escriba una descripción para su actividad");
-		String tipo= input("Por favor escriba el tipo de su actividad");
-		String cambiarEncargado = input("Desea cambiar al engargado, por defecto sera usted quien quede registrado"+"\n Escriba Si o No");
-		if(cambiarEncargado=="Si") {
-			String newEncargado =  input("Escriba el nombre del encargado de la actividad");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
+		int count=1;
+		for(String actividad : proyectoActual.gettypeActividades()) {
+			System.out.println(count + ". "+actividad);
+			count+=1;	
+		}
+		
+		String numtipo= input("Por favor elija el tipo de actividad a relaizar e ingrese el numero");
+		String tipo = proyectoActual.gettypeActividades().get(Integer.parseInt(numtipo)-1);
+		int count2= 1;
+		String cambiarEncargado = input("Desea cambiar al encargado, por defecto sera usted quien quede registrado"+"\n Escriba Si o No");
+		if(cambiarEncargado.equals("Si")) {
+						ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();
+						
+			for (Participante esParte : participantesProyecto) {
+				System.out.println(count2 +". " + esParte.getNombre());
+				count2+=1;	
+			}
+			String newEncargado =  input("Seleccione la persona que desea poner a cargo (escriba solo el numero)\n Si la persona no se encuentra en la lista añadalo como participante");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
+			
+			Participante newEncargadoo = proyectoActual.getParticipantes().get(Integer.parseInt(newEncargado)-1);
+			proyectoActual.nuevaActividad(titulo, descripcion, tipo, newEncargadoo);
+			System.out.println("\n Actividad creada con exito");
 		}	
 		else{
-				proyectoActual.nuevaActividad(titulo,descripcion,tipo,participanteActual.getNombre());
-			
-		}
+				proyectoActual.nuevaActividad(titulo,descripcion,tipo,participanteActual);
+				System.out.println("\n Actividad creada con exito");
+			}
 }
 
 	public void terminarActividad() {

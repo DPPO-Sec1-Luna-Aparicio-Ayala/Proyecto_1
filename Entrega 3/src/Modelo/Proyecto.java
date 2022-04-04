@@ -34,13 +34,13 @@ public class Proyecto {
 		
 	}
 	
-	public void nuevaActividad(String titulo, String descripcionActividad, String tipo, String encargado) {
+	public void nuevaActividad(String titulo, String descripcionActividad, String tipo, Participante encargado) {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 		LocalDateTime date = LocalDateTime.now();
 		String fechaI = LocalDateTime.now().format(formatter); //Hora/fecha inicio se autocompleta...  
 		String fechaF = "" ; //Hora/fecha fin se rellenaria al oprimir acabar actividad... 
-		Participante responsable = null; //Autocompletado
+		Participante responsable = encargado; //Autocompletado
 		
 		Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable);
 		System.out.println(fechaI);
@@ -63,6 +63,10 @@ public class Proyecto {
 	
 	public ArrayList<Actividad> getActividades(){
 		return this.actividades;
+	}
+	
+	public ArrayList<String> gettypeActividades(){
+		return this.tiposActividad;
 	}
 	
 	public String getNombre() {
