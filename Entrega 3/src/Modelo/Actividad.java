@@ -36,7 +36,9 @@ public class Actividad {
 		
 	}
 	
-	public void setHoraFin() {
+	public void setFechaFin(String nuevaFecha) {
+		
+		this.fechaFin = nuevaFecha;
 		
 	}
 }

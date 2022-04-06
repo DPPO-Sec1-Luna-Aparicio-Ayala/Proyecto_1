@@ -14,6 +14,7 @@ public class Proyecto {
 	private String reporte;
 	private ArrayList<Participante> participantes;
 	private ArrayList<Actividad> actividades;
+	private Actividad actividadActual;
 	
 	//Constructor//
 	public Proyecto (String name, String descrip, String feIni,String feFin, ArrayList<String> typeActi) 
@@ -45,7 +46,15 @@ public class Proyecto {
 		Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable);
 		actividades.add(nuevaActividad); //me toca poner this?
 		System.out.println(fechaI);
-		
+		actividadActual = nuevaActividad;
+	}
+	
+	public void terminarActividad() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		LocalDateTime date = LocalDateTime.now();
+		String fechaF = LocalDateTime.now().format(formatter);
+		actividadActual.setFechaFin(fechaF); 
+		System.out.println(fechaF);
 	}
 	
 	public void modificarActividad() {

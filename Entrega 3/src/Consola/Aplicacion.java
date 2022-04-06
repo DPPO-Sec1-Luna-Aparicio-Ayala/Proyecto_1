@@ -177,6 +177,7 @@ public class Aplicacion {
 		String cambiarEncargado = input("Desea cambiar al engargado, por defecto sera usted quien quede registrado"+"\n Escriba Si o No");
 		if(cambiarEncargado=="Si") {
 			String newEncargado =  input("Escriba el nombre del encargado de la actividad");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
+			proyectoActual.nuevaActividad(titulo,descripcion,tipo, newEncargado); //mover esto de cambiar encargado a modificar actividad, dejar solo por defecto !!!
 		}	
 		else{
 				proyectoActual.nuevaActividad(titulo,descripcion,tipo,participanteActual.getNombre());
@@ -185,7 +186,9 @@ public class Aplicacion {
 }
 
 	public void terminarActividad() {
-		
+	
+		proyectoActual.terminarActividad();
+	
 	}
 	
 	public void ejecutarAñadirParticipante() {
