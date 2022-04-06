@@ -40,9 +40,10 @@ public class Proyecto {
 		LocalDateTime date = LocalDateTime.now();
 		String fechaI = LocalDateTime.now().format(formatter); //Hora/fecha inicio se autocompleta...  
 		String fechaF = "" ; //Hora/fecha fin se rellenaria al oprimir acabar actividad... 
-		Participante responsable = null; //Autocompletado
+		Participante responsable = null; //Autocompletado deberia ser de tipo participante 
 		
 		Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable);
+		actividades.add(nuevaActividad); //me toca poner this?
 		System.out.println(fechaI);
 		
 	}

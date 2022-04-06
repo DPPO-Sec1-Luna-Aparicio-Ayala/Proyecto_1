@@ -1,8 +1,15 @@
 package Consola;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import Modelo.Proyecto;
 import Modelo.Actividad;
 import Modelo.Participante;
@@ -62,6 +69,51 @@ public class Aplicacion {
 	}
 	
 	//MÉTODOS//
+	
+	/*
+	public void persistenciaArchivo() {
+		//bucle entrar a cada proyecto, en cada proyecto bucle por actividad
+		CSVWriter writer = new CSVWriter(new FileWriter("C://output.csv"));
+	      //Writing data to a csv file
+	      String line1[] = {"id", "name", "salary", "start_date", "dept"};
+	      String line2[] = {"1", "Krishna", "2548", "2012-01-01", "IT"};
+	      String line3[] = {"2", "Vishnu", "4522", "2013-02-26", "Operations"};
+	      String line4[] = {"3", "Raja", "3021", "2016-10-10", "HR"};
+	      String line5[] = {"4", "Raghav", "6988", "2012-01-01", "IT"};
+	      //Instantiating the List Object
+	      List list = new ArrayList();
+	      list.add(line1);
+	      list.add(line2);
+	      list.add(line3);
+	      list.add(line4);
+	      list.add(line5);
+	      //Writing data to the csv file
+	      writer.writeAll(list);
+	      writer.flush();
+	      System.out.println("Data entered");
+		for (Proyecto proyectoActual : proyectos) {
+			
+			for (Actividad actividadActual: proyectoActual.getActividades()) {
+				  
+				    // first create file object for file placed at location
+				    // specified by filepath
+					
+				    
+				    
+			
+			}
+			
+			
+			Proyecto newProyect= new Proyecto(nombre,descripcion,fechaI,fechaF,tiposAcAr);
+			newProyect.añadirParticipante(ownerMail, ownerName, true);
+			Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable);
+			
+			
+		}
+	}
+	*/
+
+	
 	public void escogerProyecto() {
 		
 		if (proyectos.isEmpty()) {
