@@ -171,20 +171,21 @@ public class Aplicacion {
 	
 	public void ejecutarNuevaActividad() {
 		
-		System.out.println("Por favor diligencie los siguientes datos ");
-		String titulo = input("Escriba el titulo de su actividad");
-		String descripcion = input ("Escriba una descripción para su actividad");
-
-		int count=1;
-		for(String actividad : proyectoActual.gettypeActividades()) {
-			System.out.println(count + ". "+actividad);
-			count+=1;	
-		}
 		
-		String numtipo= input("Por favor elija el tipo de actividad a relaizar e ingrese el numero");
-		String tipo = proyectoActual.gettypeActividades().get(Integer.parseInt(numtipo)-1);
-		proyectoActual.nuevaActividad(titulo,descripcion,tipo,participanteActual);
-		System.out.println("\n Actividad creada con exito");
+			System.out.println("Por favor diligencie los siguientes datos ");
+			String titulo = input("Escriba el titulo de su actividad");
+			String descripcion = input ("Escriba una descripción para su actividad");
+	
+			int count=1;
+			for(String actividad : proyectoActual.gettypeActividades()) {
+				System.out.println(count + ". "+actividad);
+				count+=1;	
+			}
+			
+			String numtipo= input("Por favor elija el tipo de actividad a relaizar e ingrese el numero");
+			String tipo = proyectoActual.gettypeActividades().get(Integer.parseInt(numtipo)-1);
+			proyectoActual.nuevaActividad(titulo,descripcion,tipo,participanteActual);
+			System.out.println("\n Actividad creada con exito");
 }
 
 	public void terminarActividad() {
@@ -219,42 +220,42 @@ public class Aplicacion {
 		String acti = input("Escriba el titulo de la actividad que desea modificar (tal cual aparece en pantalla)");
 		
 		if(proyectoActual.getActividades().containsKey(acti)) {
-			System.out.println("\n Escriba el numero de la acción que desea hacer");
-			String cambio = input("Desea modificar el encargado de la actividad (1) o la hora de realización(2)");
-			
-			if(cambio.equals("1")) {
-				int count2= 1;
-				ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();			
-				for (Participante esParte : participantesProyecto) {
-					System.out.println(count2 +". " + esParte.getNombre());
-					count2+=1;	
-				}
-				String newEncargado =  input("Seleccione la persona que desea poner a cargo (escriba solo el numero)\n Si la persona no se encuentra en la lista añadalo como participante");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
-				Participante newEncargadoo = proyectoActual.getParticipantes().get(Integer.parseInt(newEncargado)-1);
-				int count3=1;
-				for (Actividad activity : proyectoActual.getActividades().get(acti)) {
-					System.out.println(count3+". "+activity.getFechaI());
-					count3+=1;
-				}
-				String cualActividad = input("Escriba el numero de la fecha en la cuál realizó la actividad que desea modificar");
-				Actividad actividadAModificar = proyectoActual.getActividades().get(acti).get(Integer.parseInt(cualActividad)-1);
-				proyectoActual.modificarEncargado(newEncargadoo, actividadAModificar);
-				System.out.println("\nEncargado modificado con exito!");
-			}
-			else if (cambio.equals("2")) {
-				int count4=1;
-				for (Actividad activity : proyectoActual.getActividades().get(acti)) {
-					System.out.println(count4+". "+activity.getFechaI());
-					count4+=1;
-				}
-				String cualActividad = input("Escriba el numero de la fecha en la cuál realizó la actividad que desea modificar");
-				Actividad actividadAModificar = proyectoActual.getActividades().get(acti).get(Integer.parseInt(cualActividad)-1);
-				String nuevaFechaI = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38");
-				String nuevaFechaF = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38"); 
-			}
-			else {
-				System.out.println("La opción ingresada no es válida");
-			}
+					
+					System.out.println("\n Escriba el numero de la acción que desea hacer");
+					String cambio = input("Desea modificar el encargado de la actividad (1) o la hora de realización(2) o (3) para ambas");
+					int count3=1;
+					for (Actividad activity : proyectoActual.getActividades().get(acti)) {
+						System.out.println(count3+". "+activity.getFechaI());
+						count3+=1;
+					}
+					String cualActividad = input("Escoja la actividad a modificar");
+					Actividad actividadAModificar = proyectoActual.getActividades().get(acti).get(Integer.parseInt(cualActividad)-1);
+					
+		
+					if(cambio.equals("1") || cambio.equals("3")) {
+						int count2= 1;
+						ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();			
+						for (Participante esParte : participantesProyecto) {
+							System.out.println(count2 +". " + esParte.getNombre());
+							count2+=1;	
+						}
+						String newEncargado =  input("Seleccione la persona que desea poner a cargo (escriba solo el numero)\n Si la persona no se encuentra en la lista añadalo como participante");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
+						Participante newEncargadoo = proyectoActual.getParticipantes().get(Integer.parseInt(newEncargado)-1);
+						proyectoActual.modificarEncargado(newEncargadoo, actividadAModificar);
+						
+						System.out.println("\n El nuevo encargado es: "+ newEncargadoo.getNombre());
+					}
+					if (cambio.equals("2") || cambio.equals("3")) {
+						int count4=1;
+						String nuevaFechaI = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar");
+						String nuevaFechaF = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar"); 
+						proyectoActual.modificarFecha(nuevaFechaI,nuevaFechaF,actividadAModificar);
+						System.out.println("\n Las nuevas fechas son: \n Fecha inicio: "+ nuevaFechaI+"\n Fecha fin: "+ nuevaFechaF);
+					}
+					
+					else {
+						System.out.println("La opción ingresada no es válida");
+					}
 		}
 		else {
 			System.out.println("Escribio mal el título de la actividad, intente de nuevo");

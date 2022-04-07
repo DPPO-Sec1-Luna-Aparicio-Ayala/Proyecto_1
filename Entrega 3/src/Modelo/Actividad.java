@@ -38,7 +38,7 @@ public class Actividad {
 		
 	}
 	
-	public void setHoraInicio() {
+	public void setFechaInicio(String nuevaFecha) {
 		
 	}
 	
