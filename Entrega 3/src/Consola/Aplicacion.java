@@ -232,7 +232,7 @@ public class Aplicacion {
 					Actividad actividadAModificar = proyectoActual.getActividades().get(acti).get(Integer.parseInt(cualActividad)-1);
 					
 		
-					if(cambio.equals("1") || cambio.equals("3")) {
+					if(cambio.equals("1")) {
 						int count2= 1;
 						ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();			
 						for (Participante esParte : participantesProyecto) {
@@ -241,17 +241,33 @@ public class Aplicacion {
 						}
 						String newEncargado =  input("Seleccione la persona que desea poner a cargo (escriba solo el numero)\n Si la persona no se encuentra en la lista añadalo como participante");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
 						Participante newEncargadoo = proyectoActual.getParticipantes().get(Integer.parseInt(newEncargado)-1);
-						proyectoActual.modificarEncargado(newEncargadoo, actividadAModificar);
+						
+						proyectoActual.modificarActividad(cambio, newEncargadoo,"","", actividadAModificar);
+						
 						
 						System.out.println("\n El nuevo encargado es: "+ newEncargadoo.getNombre());
 					}
-					if (cambio.equals("2") || cambio.equals("3")) {
-						int count4=1;
+					if (cambio.equals("2")) {
 						String nuevaFechaI = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar");
 						String nuevaFechaF = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar"); 
-						proyectoActual.modificarFecha(nuevaFechaI,nuevaFechaF,actividadAModificar);
+						proyectoActual.modificarActividad(cambio,participanteActual,nuevaFechaI,nuevaFechaF, actividadAModificar);
 						System.out.println("\n Las nuevas fechas son: \n Fecha inicio: "+ nuevaFechaI+"\n Fecha fin: "+ nuevaFechaF);
 					}
+					
+					if(cambio.equals("3")) {
+						int count2= 1;
+						ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();			
+						for (Participante esParte : participantesProyecto) {
+							System.out.println(count2 +". " + esParte.getNombre());
+							count2+=1;	
+						}
+						String newEncargado =  input("Seleccione la persona que desea poner a cargo (escriba solo el numero)\n Si la persona no se encuentra en la lista añadalo como participante");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
+						Participante newEncargadoo = proyectoActual.getParticipantes().get(Integer.parseInt(newEncargado)-1);
+						String nuevaFechaI = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar");
+						String nuevaFechaF = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar"); 
+						System.out.println("\n El nuevo encargado es: "+ newEncargadoo.getNombre() +"\n Las nuevas fechas son: \n Fecha inicio: "+ nuevaFechaI+"\n Fecha fin: "+ nuevaFechaF);
+					}
+					
 					
 					else {
 						System.out.println("La opción ingresada no es válida");

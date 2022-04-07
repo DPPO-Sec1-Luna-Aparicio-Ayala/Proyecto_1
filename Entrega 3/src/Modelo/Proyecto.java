@@ -65,21 +65,18 @@ public class Proyecto {
 		System.out.println(fechaF);
 	}
 	
-	public void modificarEncargado(Participante newEncargado, Actividad actividadModificar) {
+	public void modificarActividad(String tipoCambio,Participante newEncargado,String nuevaFechaI,String nuevaFechaF, Actividad actividadModificar) {
 		actividadActual=actividadModificar; 
+		if (tipoCambio.equals("2")|| tipoCambio.equals("3"))
 		actividadActual.setEncargado(newEncargado);
-	}
-	public void  modificarFecha(String nuevaFechaI,String nuevaFechaF, Actividad actividadModificar) {
-		actividadActual=actividadModificar;
 		if (!nuevaFechaI.equals("MANTENER")) {
 			actividadActual.setFechaInicio(nuevaFechaI);
 		}
 		if (!nuevaFechaF.equals("MANTENER")) {
 			actividadActual.setFechaFin(nuevaFechaF);
 		}
-		
-		
 	}
+	
 	public void añadirParticipante(String correo, String nombre,boolean owner) {
 		
 		Participante newParticipant = new Participante (correo,nombre,owner);
