@@ -65,10 +65,14 @@ public class Proyecto {
 		System.out.println(fechaF);
 	}
 	
-	public void modificarActividad(Participante newEncargado) {
+	public void modificarEncargado(Participante newEncargado, Actividad actividadModificar) {
+		actividadActual=actividadModificar; 
+		actividadActual.setEncargado(newEncargado);
+	}
+	public void  modificarFecha(String nuevaFecha, Actividad actividadModificar) {
+		actividadActual=actividadModificar; 
 		
 	}
-	
 	public void añadirParticipante(String correo, String nombre,boolean owner) {
 		
 		Participante newParticipant = new Participante (correo,nombre,owner);

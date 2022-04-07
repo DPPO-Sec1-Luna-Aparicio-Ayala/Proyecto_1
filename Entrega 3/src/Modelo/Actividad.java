@@ -23,6 +23,9 @@ public class Actividad {
 	public double getTiempo() {
 		return this.tiempo;
 	}
+	public String getFechaI() {
+		return this.fechaInicio;
+	}
 	public String getTitle() {
 		return this.titulo;
 	}
@@ -43,5 +46,8 @@ public class Actividad {
 		
 		this.fechaFin = nuevaFecha;
 		
+	}
+	public void setEncargado(Participante encargado) {
+		 this.responsable=encargado;
 	}
 }

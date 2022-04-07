@@ -230,9 +230,21 @@ public class Aplicacion {
 					count2+=1;	
 				}
 				String newEncargado =  input("Seleccione la persona que desea poner a cargo (escriba solo el numero)\n Si la persona no se encuentra en la lista añadalo como participante");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
-				
 				Participante newEncargadoo = proyectoActual.getParticipantes().get(Integer.parseInt(newEncargado)-1);
-				proyectoActual.modificarActividad(newEncargadoo);
+				int count3=1;
+				for (Actividad activity : proyectoActual.getActividades().get(acti)) {
+					System.out.println(count3+". "+activity.getFechaI());
+					count3+=1;
+				}
+				String cualActividad = input("Escriba el numero de la fecha en la cuál realizó la actividad que desea modificar");
+				Actividad actividadAModificar = proyectoActual.getActividades().get(acti).get(Integer.parseInt(cualActividad));
+				proyectoActual.modificarEncargado(newEncargadoo, actividadAModificar);
+			}
+			else if (cambio.equals("2")) {
+				 
+			}
+			else {
+				System.out.println("La opción ingresada no es válida");
 			}
 		}
 		else {
