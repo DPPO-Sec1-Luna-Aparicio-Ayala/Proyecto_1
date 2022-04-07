@@ -3,6 +3,8 @@ package Modelo;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Proyecto {
 	//ATRIBUTOS//
@@ -13,7 +15,8 @@ public class Proyecto {
 	private ArrayList<String> tiposActividad;
 	private String reporte;
 	private ArrayList<Participante> participantes;
-	private ArrayList<Actividad> actividades;
+	private Map<String,ArrayList<Actividad>> actividades;
+	private Actividad actividadActual;
 	
 	//Constructor//
 	public Proyecto (String name, String descrip, String feIni,String feFin, ArrayList<String> typeActi) 
@@ -24,7 +27,7 @@ public class Proyecto {
 		this.fechaFin=feFin;
 		this.tiposActividad=typeActi;
 		this.participantes = new ArrayList<Participante>();
-		this.actividades = new ArrayList<Actividad>();
+		this.actividades =  new HashMap<String,ArrayList<Actividad>>();
 		
 	}
 	
@@ -40,14 +43,29 @@ public class Proyecto {
 		LocalDateTime date = LocalDateTime.now();
 		String fechaI = LocalDateTime.now().format(formatter); //Hora/fecha inicio se autocompleta...  
 		String fechaF = "" ; //Hora/fecha fin se rellenaria al oprimir acabar actividad... 
-		Participante responsable = encargado; //Autocompletado
-		
+		Participante responsable = encargado; 
 		Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable);
+		if (actividades.containsKey(nuevaActividad.getTitle())) {
+			actividades.get(nuevaActividad.getTitle()).add(nuevaActividad);
+		}
+		else {
+			ArrayList<Actividad> actis= new ArrayList<Actividad>();
+			actis.add(nuevaActividad);
+			actividades.put(nuevaActividad.getTitle(),actis);
+		}
 		System.out.println(fechaI);
-		
+		actividadActual = nuevaActividad;
 	}
 	
-	public void modificarActividad() {
+	public void terminarActividad() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		LocalDateTime date = LocalDateTime.now();
+		String fechaF = LocalDateTime.now().format(formatter);
+		actividadActual.setFechaFin(fechaF); 
+		System.out.println(fechaF);
+	}
+	
+	public void modificarActividad(Participante newEncargado) {
 		
 	}
 	
@@ -61,7 +79,7 @@ public class Proyecto {
 		return this.participantes;
 	}
 	
-	public ArrayList<Actividad> getActividades(){
+	public Map<String,ArrayList<Actividad>> getActividades(){
 		return this.actividades;
 	}
 	

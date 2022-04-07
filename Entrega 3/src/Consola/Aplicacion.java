@@ -1,8 +1,15 @@
 package Consola;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import Modelo.Proyecto;
 import Modelo.Actividad;
 import Modelo.Participante;
@@ -62,6 +69,51 @@ public class Aplicacion {
 	}
 	
 	//MÉTODOS//
+	
+	/*
+	public void persistenciaArchivo() {
+		//bucle entrar a cada proyecto, en cada proyecto bucle por actividad
+		CSVWriter writer = new CSVWriter(new FileWriter("C://output.csv"));
+	      //Writing data to a csv file
+	      String line1[] = {"id", "name", "salary", "start_date", "dept"};
+	      String line2[] = {"1", "Krishna", "2548", "2012-01-01", "IT"};
+	      String line3[] = {"2", "Vishnu", "4522", "2013-02-26", "Operations"};
+	      String line4[] = {"3", "Raja", "3021", "2016-10-10", "HR"};
+	      String line5[] = {"4", "Raghav", "6988", "2012-01-01", "IT"};
+	      //Instantiating the List Object
+	      List list = new ArrayList();
+	      list.add(line1);
+	      list.add(line2);
+	      list.add(line3);
+	      list.add(line4);
+	      list.add(line5);
+	      //Writing data to the csv file
+	      writer.writeAll(list);
+	      writer.flush();
+	      System.out.println("Data entered");
+		for (Proyecto proyectoActual : proyectos) {
+			
+			for (Actividad actividadActual: proyectoActual.getActividades()) {
+				  
+				    // first create file object for file placed at location
+				    // specified by filepath
+					
+				    
+				    
+			
+			}
+			
+			
+			Proyecto newProyect= new Proyecto(nombre,descripcion,fechaI,fechaF,tiposAcAr);
+			newProyect.añadirParticipante(ownerMail, ownerName, true);
+			Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable);
+			
+			
+		}
+	}
+	*/
+
+	
 	public void escogerProyecto() {
 		
 		if (proyectos.isEmpty()) {
@@ -122,6 +174,7 @@ public class Aplicacion {
 		System.out.println("Por favor diligencie los siguientes datos ");
 		String titulo = input("Escriba el titulo de su actividad");
 		String descripcion = input ("Escriba una descripción para su actividad");
+
 		int count=1;
 		for(String actividad : proyectoActual.gettypeActividades()) {
 			System.out.println(count + ". "+actividad);
@@ -130,29 +183,14 @@ public class Aplicacion {
 		
 		String numtipo= input("Por favor elija el tipo de actividad a relaizar e ingrese el numero");
 		String tipo = proyectoActual.gettypeActividades().get(Integer.parseInt(numtipo)-1);
-		int count2= 1;
-		String cambiarEncargado = input("Desea cambiar al encargado, por defecto sera usted quien quede registrado"+"\n Escriba Si o No");
-		if(cambiarEncargado.equals("Si")) {
-						ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();
-						
-			for (Participante esParte : participantesProyecto) {
-				System.out.println(count2 +". " + esParte.getNombre());
-				count2+=1;	
-			}
-			String newEncargado =  input("Seleccione la persona que desea poner a cargo (escriba solo el numero)\n Si la persona no se encuentra en la lista añadalo como participante");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
-			
-			Participante newEncargadoo = proyectoActual.getParticipantes().get(Integer.parseInt(newEncargado)-1);
-			proyectoActual.nuevaActividad(titulo, descripcion, tipo, newEncargadoo);
-			System.out.println("\n Actividad creada con exito");
-		}	
-		else{
-				proyectoActual.nuevaActividad(titulo,descripcion,tipo,participanteActual);
-				System.out.println("\n Actividad creada con exito");
-			}
+		proyectoActual.nuevaActividad(titulo,descripcion,tipo,participanteActual);
+		System.out.println("\n Actividad creada con exito");
 }
 
 	public void terminarActividad() {
-		
+	
+		proyectoActual.terminarActividad();
+	
 	}
 	
 	public void ejecutarAñadirParticipante() {
@@ -173,6 +211,33 @@ public class Aplicacion {
 	}
 	
 	public void ejecutarModificarActividad() {
+		int count = 1;
+		for (String actividad: proyectoActual.getActividades().keySet()) {
+			System.out.println(count +". " + actividad);
+			count+=1;
+		}
+		String acti = input("Escriba el titulo de la actividad que desea modificar (tal cual aparece en pantalla)");
+		
+		if(proyectoActual.getActividades().containsKey(acti)) {
+			
+			String cambio = input("Desea modificar el encargado de la actividad (1) o la hora de realización(2)");
+			System.out.println("\n Escriba el numero de la acción que desea hacer");
+			if(cambio.equals("1")) {
+				int count2= 1;
+				ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();			
+				for (Participante esParte : participantesProyecto) {
+					System.out.println(count2 +". " + esParte.getNombre());
+					count2+=1;	
+				}
+				String newEncargado =  input("Seleccione la persona que desea poner a cargo (escriba solo el numero)\n Si la persona no se encuentra en la lista añadalo como participante");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
+				
+				Participante newEncargadoo = proyectoActual.getParticipantes().get(Integer.parseInt(newEncargado)-1);
+				proyectoActual.modificarActividad(newEncargadoo);
+			}
+		}
+		else {
+			System.out.println("Escribio mal el título de la actividad, intente de nuevo");
+		}
 		
 	}
 	
