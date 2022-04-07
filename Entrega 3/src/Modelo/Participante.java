@@ -7,13 +7,13 @@ public class Participante implements Serializable{
 	//ATRIBUTOS//
 	private String correo;
 	private String nombre;
-	private boolean dueño;
+	private boolean duenio;
 	private ArrayList<Actividad> actividades;
 	
 	public Participante(String mail, String name, boolean owner) {
 		this.correo=mail;
 		this.nombre= name;
-		this.dueño=owner;
+		this.duenio=owner;
 		this.actividades = new ArrayList<Actividad>();
 	}
 	
@@ -35,5 +35,9 @@ public class Participante implements Serializable{
 	
 	public String getNombre() {
 		return this.nombre;
+	}
+	
+	public boolean esDuenio() {
+		return this.duenio;
 	}
 }

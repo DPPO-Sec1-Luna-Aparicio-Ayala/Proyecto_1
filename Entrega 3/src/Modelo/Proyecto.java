@@ -103,4 +103,12 @@ public class Proyecto implements Serializable{
 	public String getDescripcion() {
 		return this.descripcion;
 	}
+	
+	public String getFechaInicio() {
+		return this.fechaInicio;
+	}
+	
+	public String getFechaFin() {
+		return this.fechaFin;
+	}
 }

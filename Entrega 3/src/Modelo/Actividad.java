@@ -35,6 +35,14 @@ public class Actividad implements Serializable{
 	public Participante getResponsable() {
 		return this.responsable;
 	}
+	
+	public String getFechaF() {
+		return this.fechaFin;
+	}
+	
+	public String getType() {
+		return this.tipo;
+	}
 
 	public void setTiempo() {
 		
@@ -51,5 +59,9 @@ public class Actividad implements Serializable{
 	}
 	public void setEncargado(Participante encargado) {
 		 this.responsable=encargado;
+	}
+	
+	public String getDescripcion() {
+		return this.descripcion;
 	}
 }

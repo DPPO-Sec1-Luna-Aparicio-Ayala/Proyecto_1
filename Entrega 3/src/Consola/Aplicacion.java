@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import GestionArchivos.FileManager;
 import Modelo.Proyecto;
 import Modelo.Actividad;
 import Modelo.Participante;
@@ -84,6 +85,8 @@ public class Aplicacion implements Serializable {
 	
 	
 	public void persistenciaArchivoGuardar() throws IOException {
+		FileManager fileManager = new FileManager();
+		fileManager.write(proyectos, "appData.txt");
 		/*
 	for (Proyecto proyGuardar: proyectos) {
 	String nomProyecto = proyGuardar.getNombre();
@@ -97,13 +100,13 @@ public class Aplicacion implements Serializable {
 	
 	}
 	*/ 
-		String nom = "Aplicacion";
+		/*String nom = "Aplicacion";
 		FileOutputStream file = new FileOutputStream("C:\\Users\\santi\\Documents\\Poryecto 1 DPOO\\Proyecto_1\\data" + nom + ".ser"); //lograr poner la ruta del archivo
 		ObjectOutputStream out = new ObjectOutputStream(file); //cambiar nombres si se puede
 		out.writeObject(this);
 		out.close();
 		file.close();
-		System.out.println("Informacion del proyecto guardada"); //pq no carga nada
+		System.out.println("Informacion del proyecto guardada"); //pq no carga nada*/
 	}
 	
 	// TO DO: Cronometro -> Var tiempo -> Funcion Tiempo -> Dos opciones menu de empezar/pausar/continuar cronometro
