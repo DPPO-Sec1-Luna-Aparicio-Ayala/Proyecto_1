@@ -36,8 +36,8 @@ public class Actividad implements Serializable{
 		return this.responsable;
 	}
 
-	public void setTiempo() {
-		
+	public void setTiempo(long tiempoc) {
+		this.tiempo = tiempoc;
 	}
 	
 	public void setFechaInicio(String nuevaFecha) {
