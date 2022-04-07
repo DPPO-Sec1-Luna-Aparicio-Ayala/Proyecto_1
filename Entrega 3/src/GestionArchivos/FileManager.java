@@ -30,7 +30,6 @@ public class FileManager {
 		ww.write("");
 		
 		for (Proyecto proyectoActual : proyectos) {
-			ww.append("\n");
 				ww.append(proyectoActual.getNombre());
 				ww.append(";");
 				ww.append(proyectoActual.getDescripcion());
@@ -126,10 +125,12 @@ public class FileManager {
 						ww.append("·");
 						
 						ww.append(actActual.getType());
+						ww.append("·");
 						ww.append(",");
 					}
 				}
-				ww.append(";");
+		ww.append(";");
+		ww.append("\n");
 		}
 		
 		ww.close();

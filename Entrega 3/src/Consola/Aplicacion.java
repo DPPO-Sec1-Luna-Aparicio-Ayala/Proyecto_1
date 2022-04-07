@@ -100,20 +100,13 @@ public class Aplicacion implements Serializable {
 	}
 
 	private void ejecutarIniciarTemporizador() {
-		// TODO Auto-generated method stub
-		int count = 1;
-		for (String actividad: proyectoActual.getActividades().keySet()) {
-			System.out.println(count +". " + actividad);
-			count+=1;
-		}
-		String acti = input("Escriba el titulo de la actividad que desea modificar (tal cual aparece en pantalla)");
 		
-		if(proyectoActual.getActividades().containsKey(acti)) {
-		
+				
 				cronometro.start();
 				System.out.println("Empezo el Cronometro");
 				System.out.println("\n");
 				boolean prueba = true;
+				
 				while (prueba) {
 				System.out.println("Si desea pausar el cronometro oprima 1");
 				System.out.println("Si desea detener el cronometro oprima 2");
@@ -121,7 +114,7 @@ public class Aplicacion implements Serializable {
 				long var = 0;
 				if (opcion == 1) {
 					cronometro.stop();
-					var = cronometro.getElapsedHours();
+					var = cronometro.getElapsedMinutes();
 					int cont = Integer.parseInt(input("Cuando desee renaudar el cronometro oprima 1"));
 					if (cont == 1) {
 						cronometro.start();
@@ -129,20 +122,17 @@ public class Aplicacion implements Serializable {
 				}
 				else if (opcion == 2) {
 					cronometro.stop();
-					var += cronometro.getElapsedHours();
+					var += cronometro.getElapsedMinutes();
 					prueba = false;
 				}
 				else { System.out.println("Escribio mal el numero");
 				}
 		}
-				//actividadActual = proyectoActual.getActividades().get(acti);	
-		}
-		else {
-			System.out.println("Escribio mal el título de la actividad, intente de nuevo");
-		}
+				
 		
 	}
 
+	//No crear nueva actividad hasta q no termine otra
 	//MÉTODOS//
 
 	
