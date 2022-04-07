@@ -1,8 +1,9 @@
 package Modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Participante {
+public class Participante implements Serializable{
 	//ATRIBUTOS//
 	private String correo;
 	private String nombre;

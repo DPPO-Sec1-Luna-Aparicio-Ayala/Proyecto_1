@@ -1,10 +1,16 @@
 package Consola;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,15 +21,18 @@ import Modelo.Actividad;
 import Modelo.Participante;
 import Modelo.Reporte;
 
-public class Aplicacion {
+public class Aplicacion implements Serializable {
 	//ATRIBUTOS//
 	private ArrayList<Proyecto> proyectos;
 	private Proyecto proyectoActual;
 	private Participante participanteActual;
 	
+	ArrayList<String> proyectosGuardados = new ArrayList<String>();
+	
 	public void ejecutarAplicacion() throws IOException
 	{
 		System.out.println("GESTOR DE PROYECTOS\n");
+		
 
 		prepararAplicacion();
 		boolean continuar = true;
@@ -47,8 +56,11 @@ public class Aplicacion {
 					ejecutarModificarActividad();
 				else if (opcion_seleccionada == 7 && proyectoActual != null)
 					ejecutarMostrarReporte();
+				
+				
 				else if (opcion_seleccionada == 8)
 				{
+					persistenciaArchivoGuardar();
 					System.out.println("Saliendo de la aplicación...");
 					continuar = false;
 				}
@@ -70,48 +82,48 @@ public class Aplicacion {
 	
 	//MÉTODOS//
 	
-	/*
-	public void persistenciaArchivo() {
-		//bucle entrar a cada proyecto, en cada proyecto bucle por actividad
-		CSVWriter writer = new CSVWriter(new FileWriter("C://output.csv"));
-	      //Writing data to a csv file
-	      String line1[] = {"id", "name", "salary", "start_date", "dept"};
-	      String line2[] = {"1", "Krishna", "2548", "2012-01-01", "IT"};
-	      String line3[] = {"2", "Vishnu", "4522", "2013-02-26", "Operations"};
-	      String line4[] = {"3", "Raja", "3021", "2016-10-10", "HR"};
-	      String line5[] = {"4", "Raghav", "6988", "2012-01-01", "IT"};
-	      //Instantiating the List Object
-	      List list = new ArrayList();
-	      list.add(line1);
-	      list.add(line2);
-	      list.add(line3);
-	      list.add(line4);
-	      list.add(line5);
-	      //Writing data to the csv file
-	      writer.writeAll(list);
-	      writer.flush();
-	      System.out.println("Data entered");
-		for (Proyecto proyectoActual : proyectos) {
-			
-			for (Actividad actividadActual: proyectoActual.getActividades()) {
-				  
-				    // first create file object for file placed at location
-				    // specified by filepath
-					
-				    
-				    
-			
-			}
-			
-			
-			Proyecto newProyect= new Proyecto(nombre,descripcion,fechaI,fechaF,tiposAcAr);
-			newProyect.añadirParticipante(ownerMail, ownerName, true);
-			Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable);
-			
-			
-		}
+	
+	public void persistenciaArchivoGuardar() throws IOException {
+		/*
+	for (Proyecto proyGuardar: proyectos) {
+	String nomProyecto = proyGuardar.getNombre();
+	proyectosGuardados.add(nomProyecto);
+	FileOutputStream file = new FileOutputStream("C:\\Users\\santi\\Documents\\Poryecto 1 DPOO\\Proyecto_1\\data" + nomProyecto + ".ser"); //lograr poner la ruta del archivo
+	ObjectOutputStream out = new ObjectOutputStream(file); //cambiar nombres si se puede
+	out.writeObject(proyectoActual);
+	out.close();
+	file.close();
+	System.out.println("Informacion del proyecto guardada " + proyGuardar.getNombre()); //pq no carga nada
+	
 	}
-	*/
+	*/ 
+		String nom = "Aplicacion";
+		FileOutputStream file = new FileOutputStream("C:\\Users\\santi\\Documents\\Poryecto 1 DPOO\\Proyecto_1\\data" + nom + ".ser"); //lograr poner la ruta del archivo
+		ObjectOutputStream out = new ObjectOutputStream(file); //cambiar nombres si se puede
+		out.writeObject(this);
+		out.close();
+		file.close();
+		System.out.println("Informacion del proyecto guardada"); //pq no carga nada
+	}
+	
+	// TO DO: Cronometro -> Var tiempo -> Funcion Tiempo -> Dos opciones menu de empezar/pausar/continuar cronometro
+	// TO DO: Persistencia -> Hacer opcion de guardar proyectos o que sea automatico al cambiar/cerrar proyecto
+	// TO DO: Persistencia -> Cargar informacion
+	
+	public void persistenciaArchivoCargar() throws IOException, ClassNotFoundException {
+		if (proyectosGuardados != null) {
+			for (String guardados: proyectosGuardados) {
+				String nombre = "data"+ guardados;
+				FileInputStream file = new FileInputStream("C:\\Users\\santi\\Documents\\Poryecto 1 DPOO\\Proyecto_1\\data" + nombre +".ser");
+				ObjectInputStream in = new ObjectInputStream(file);
+				proyectoActual = (Proyecto) in.readObject();
+				proyectos.add(proyectoActual);
+				file.close();
+				in.close();
+		}
+		}
+		System.out.println(proyectos);
+	}
 
 	
 	public void escogerProyecto() {

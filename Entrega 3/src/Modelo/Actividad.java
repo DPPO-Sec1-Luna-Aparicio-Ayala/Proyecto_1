@@ -1,6 +1,8 @@
 package Modelo;
 
-public class Actividad {
+import java.io.Serializable;
+
+public class Actividad implements Serializable{
 	//ATRIBUTOS//
 	private String titulo;
 	private String descripcion;

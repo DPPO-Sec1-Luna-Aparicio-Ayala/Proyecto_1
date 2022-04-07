@@ -1,12 +1,13 @@
 package Modelo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Proyecto {
+public class Proyecto implements Serializable{
 	//ATRIBUTOS//
 	private String nombre;
 	private String descripcion;

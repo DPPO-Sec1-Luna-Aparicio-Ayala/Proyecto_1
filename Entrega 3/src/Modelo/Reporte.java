@@ -1,6 +1,8 @@
 package Modelo;
 
-public class Reporte {
+import java.io.Serializable;
+
+public class Reporte implements Serializable {
 	//ATRIBUTOS//
 	private String reporteString;
 	
