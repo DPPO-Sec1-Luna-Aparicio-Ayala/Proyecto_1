@@ -49,6 +49,7 @@ public class Actividad implements Serializable{
 	}
 	
 	public void setFechaInicio(String nuevaFecha) {
+		this.fechaInicio = nuevaFecha;
 		
 	}
 	

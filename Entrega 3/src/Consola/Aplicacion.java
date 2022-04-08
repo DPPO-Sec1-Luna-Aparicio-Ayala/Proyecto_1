@@ -22,7 +22,6 @@ import Modelo.Proyecto;
 import Modelo.Actividad;
 import Modelo.Cronometro;
 import Modelo.Participante;
-import Modelo.Reporte;
 
 public class Aplicacion implements Serializable {
 	//ATRIBUTOS//
@@ -64,12 +63,6 @@ public class Aplicacion implements Serializable {
 					ejecutarModificarActividad();
 				else if (opcion_seleccionada == 6 && proyectoActual != null)
 					ejecutarMostrarReporte();
-			//	else if (opcion_seleccionada == 8 && proyectoActual != null) // quitar
-			//		ejecutarIniciarTemporizador(actividadActual);
-			//	else if (opcion_seleccionada == 9 && actividadActual != null) // quitar
-			//		ejecutarFinalizarTemporizador();
-			//	else if (opcion_seleccionada == 10 && actividadActual != null) //quitar
-			//		ejecutarPausarTemporizador();
 				else if (opcion_seleccionada == 7)
 				{
 					persistenciaArchivoGuardar();
@@ -92,16 +85,6 @@ public class Aplicacion implements Serializable {
 		}
 	}
 	
-	private void ejecutarPausarTemporizador() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void ejecutarFinalizarTemporizador() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	private void ejecutarIniciarTemporizador(Actividad actividadActual) {
 		
 				int op = Integer.parseInt(input("Para iniciar el cronometro oprima cualquier numero"));
@@ -258,43 +241,6 @@ public class Aplicacion implements Serializable {
 		
 		proyectoActual.generarReporte();
 		
-
-		
-		
-		
-		/*
-		HashMap<String, String> reporteHPersonas = new HashMap<String, String>();
-		for(Proyecto proy: proyectos) {
-
-			ArrayList<Participante> lista_personas = proy.getParticipantes();
-			
-			for (Participante personas:  lista_personas){
-
-				ArrayList<Actividad> lista_actividades = personas.getActividades();
-				double tiempo_tot = 0;
-				for (Actividad act: lista_actividades){
-					
-					tiempo_tot += act.getTiempo();
-					
-				}
-				String nom = personas.getNombre();
-				String corr = personas.getCorreo();
-				
-				String llave = nom+corr;
-				String contenido = "Nombre: " + nom + "\n" + "Correo: " + corr + "\n" + "Tiempo total: " + tiempo_tot;
-				if (reporteHPersonas.containsKey(llave) == false){
-					reporteHPersonas.put(llave, contenido);
-				}
-				else {
-
-				}
-				
-				
-			}
-			
-		}
-		//tiempo total invertido por participante
-		*/
 	}
 	
 	public void ejecutarModificarActividad() {

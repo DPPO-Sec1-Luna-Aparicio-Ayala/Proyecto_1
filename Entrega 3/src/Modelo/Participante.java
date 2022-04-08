@@ -18,10 +18,6 @@ public class Participante implements Serializable{
 	//MÉTODOS//	
 
 	//MÉTODOS//	
-	public void setEsDueño() {
-		
-	}
-	
 	public String getCorreo() {
 		return this.correo;
 	}

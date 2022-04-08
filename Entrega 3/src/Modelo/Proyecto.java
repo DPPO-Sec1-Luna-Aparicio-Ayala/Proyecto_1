@@ -62,23 +62,7 @@ public class Proyecto implements Serializable{
 			
 			
 			
-			/*if(reporteActividad.containsKey(tividad)) {
-				ArrayList<Actividad> tipoActividad = actividades.get(tividad);
-				for(Actividad actual:tipoActividad) {
-				
-				String participant=actual.getResponsable().getNombre();
-				if(reporteActividad.containsKey(participant))	{
-					double tiempoContado= reporteActividad.get(participant);
-					tiempoContado+= actual.getTiempo();
-					reporteActividad.put(participant, tiempoContado);
-				}
-				else {
-					reporteActividad.put(participant, actual.getTiempo());
-				} 
-				
-						
-				}
-			}*/
+	
 		}
 		System.out.println("REPORTE POR TIPO ACTIVIDAD");
 		for(String tipo:reporteActividad.keySet()) {
