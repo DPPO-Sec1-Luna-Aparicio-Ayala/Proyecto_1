@@ -8,27 +8,19 @@ public class Participante implements Serializable{
 	private String correo;
 	private String nombre;
 	private boolean duenio;
-	private ArrayList<Actividad> actividades;
 	
 	public Participante(String mail, String name, boolean owner) {
 		this.correo=mail;
 		this.nombre= name;
 		this.duenio=owner;
-		this.actividades = new ArrayList<Actividad>();
 	}
 	
-	//MÉTODOS//
-	public ArrayList<Actividad> getActividades(){
-		return actividades;
-	}
-	
-	public void setActividades() {
-		
-	}
+	//MÉTODOS//	
 	
 	public void setEsDueño() {
 		
 	}
+	
 	public String getCorreo() {
 		return this.correo;
 	}

@@ -111,4 +111,14 @@ public class Proyecto implements Serializable{
 	public String getFechaFin() {
 		return this.fechaFin;
 	}
+	
+	public void setParticipantes(ArrayList<Participante> miembros) {
+		participantes = miembros;
+		
+	}
+	
+	public void setActividades(Map<String,ArrayList<Actividad>> activs) {
+		actividades = activs;
+		
+	}
 }

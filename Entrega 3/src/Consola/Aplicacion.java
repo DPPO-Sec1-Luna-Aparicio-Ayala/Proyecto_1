@@ -31,9 +31,6 @@ public class Aplicacion implements Serializable {
 	private Actividad actividadActual;
 	private Cronometro cronometro;
 	
-	
-	ArrayList<String> proyectosGuardados = new ArrayList<String>();
-	
 	public void ejecutarAplicacion() throws IOException
 	{
 		System.out.println("GESTOR DE PROYECTOS\n");
@@ -150,45 +147,11 @@ public class Aplicacion implements Serializable {
 	public void persistenciaArchivoGuardar() throws IOException {
 		FileManager fileManager = new FileManager();
 		fileManager.write(proyectos, "appData.txt");
-		/*
-	for (Proyecto proyGuardar: proyectos) {
-	String nomProyecto = proyGuardar.getNombre();
-	proyectosGuardados.add(nomProyecto);
-	FileOutputStream file = new FileOutputStream("C:\\Users\\santi\\Documents\\Poryecto 1 DPOO\\Proyecto_1\\data" + nomProyecto + ".ser"); //lograr poner la ruta del archivo
-	ObjectOutputStream out = new ObjectOutputStream(file); //cambiar nombres si se puede
-	out.writeObject(proyectoActual);
-	out.close();
-	file.close();
-	System.out.println("Informacion del proyecto guardada " + proyGuardar.getNombre()); //pq no carga nada
-	
 	}
-	*/ 
-		/*String nom = "Aplicacion";
-		FileOutputStream file = new FileOutputStream("C:\\Users\\santi\\Documents\\Poryecto 1 DPOO\\Proyecto_1\\data" + nom + ".ser"); //lograr poner la ruta del archivo
-		ObjectOutputStream out = new ObjectOutputStream(file); //cambiar nombres si se puede
-		out.writeObject(this);
-		out.close();
-		file.close();
-		System.out.println("Informacion del proyecto guardada"); //pq no carga nada*/
-	}
-	
-	// TO DO: Cronometro -> Var tiempo -> Funcion Tiempo -> Dos opciones menu de empezar/pausar/continuar cronometro
-	// TO DO: Persistencia -> Hacer opcion de guardar proyectos o que sea automatico al cambiar/cerrar proyecto
-	// TO DO: Persistencia -> Cargar informacion
 	
 	public void persistenciaArchivoCargar() throws IOException, ClassNotFoundException {
-		if (proyectosGuardados != null) {
-			for (String guardados: proyectosGuardados) {
-				String nombre = "data"+ guardados;
-				FileInputStream file = new FileInputStream("C:\\Users\\santi\\Documents\\Poryecto 1 DPOO\\Proyecto_1\\data" + nombre +".ser");
-				ObjectInputStream in = new ObjectInputStream(file);
-				proyectoActual = (Proyecto) in.readObject();
-				proyectos.add(proyectoActual);
-				file.close();
-				in.close();
-		}
-		}
-		System.out.println(proyectos);
+		FileManager fileManager = new FileManager();
+		proyectos = fileManager.read("appData.txt");
 	}
 
 	
@@ -390,6 +353,8 @@ public class Aplicacion implements Serializable {
 	
 	public void prepararAplicacion(){
 		this.proyectos = new ArrayList<Proyecto>();
+		FileManager fileManager = new FileManager();
+		proyectos = fileManager.read("appData.txt");
 	}
 	
 	public static void main(String[] args) throws IOException
