@@ -15,7 +15,18 @@ public class Participante implements Serializable{
 		this.duenio=owner;
 	}
 	
+<<<<<<< HEAD
 	//MÉTODOS//	
+=======
+	//MÉTODOS//
+	public ArrayList<Actividad> getActividades(){
+		return actividades;
+	}
+	
+	public void setActividades(Actividad actividad) {
+		actividades.add(actividad);
+	}
+>>>>>>> b8233ed7db6aab917460472c71cfc3703cf93bbc
 	
 	public void setEsDueño() {
 		

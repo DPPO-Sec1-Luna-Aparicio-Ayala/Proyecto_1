@@ -17,7 +17,7 @@ public class Proyecto implements Serializable{
 	private String reporte;
 	private ArrayList<Participante> participantes;
 	private Map<String,ArrayList<Actividad>> actividades;
-	private Actividad actividadActual;
+	public Actividad actividadActual;
 	
 	//Constructor//
 	public Proyecto (String name, String descrip, String feIni,String feFin, ArrayList<String> typeActi) 
@@ -33,8 +33,103 @@ public class Proyecto implements Serializable{
 	}
 	
 	//MÉTODOS//
-	public String generarReporte() {
-		return null;
+	public void generarReporte() {
+		//ArrayList<HashMap>reportefinal = new ArrayList<HashMap>();
+		HashMap<String,HashMap<String,Double>> reporteActividad = new HashMap<String,HashMap<String,Double>>();
+		for(ArrayList<Actividad>actividadlista: actividades.values()) {
+			for(Actividad actual:actividadlista) {
+				if (reporteActividad.containsKey(actual.getType())) {
+
+					HashMap<String,Double>tiempoParticipantes=reporteActividad.get(actual.getType());// obtiene el mapa de participantes y sus tiempos por actividad
+					String mail= actual.getResponsable().getCorreo();
+					if(tiempoParticipantes.containsKey(mail)) {
+						double tiempoHastaAhora=tiempoParticipantes.get(mail);
+						double tiempoASumar=actual.getTiempo();
+						tiempoHastaAhora+=tiempoASumar;
+						tiempoParticipantes.put(mail, tiempoHastaAhora); 
+					}
+					else {
+						tiempoParticipantes.put(mail, actual.getTiempo());
+						
+					}
+				}
+				else {
+					HashMap<String,Double>tiempoParticipante= new HashMap<String,Double>();
+					tiempoParticipante.put(actual.getResponsable().getCorreo(), actual.getTiempo());
+					reporteActividad.put(actual.getType(), tiempoParticipante);
+				}
+		}
+			
+			
+			
+			/*if(reporteActividad.containsKey(tividad)) {
+				ArrayList<Actividad> tipoActividad = actividades.get(tividad);
+				for(Actividad actual:tipoActividad) {
+				
+				String participant=actual.getResponsable().getNombre();
+				if(reporteActividad.containsKey(participant))	{
+					double tiempoContado= reporteActividad.get(participant);
+					tiempoContado+= actual.getTiempo();
+					reporteActividad.put(participant, tiempoContado);
+				}
+				else {
+					reporteActividad.put(participant, actual.getTiempo());
+				} 
+				
+						
+				}
+			}*/
+		}
+		System.out.println("REPORTE POR TIPO ACTIVIDAD");
+		for(String tipo:reporteActividad.keySet()) {
+			System.out.println("Tipo Atividad: "+ tipo);
+			int count =1;
+			for(String correo:reporteActividad.get(tipo).keySet()) {
+				System.out.println("\n"+count+ ". "+correo+"\tTiempo: "+reporteActividad.get(tipo).get(correo));
+				count+=1;
+			}
+			
+		}
+		// 
+		
+		HashMap<String, String> reporteHPersonas = new HashMap<String, String>();
+		HashMap<String, String> Apoyo = new HashMap<String, String>();
+		for(ArrayList<Actividad> Actividades: actividades.values()) {
+			for(Actividad actual: Actividades) {
+			
+			Participante personas = actual.getResponsable();
+			String nom = personas.getNombre();
+			String corr = personas.getCorreo();
+			double tiempo_tot = actual.getTiempo();
+			
+			String llave = nom+corr;
+			String contenido = "Nombre: " + nom + "\n" + "Correo: " + corr + "\n" + "Tiempo total: " + tiempo_tot + " min";
+			
+			if(reporteHPersonas.containsKey(llave) == false)	{
+				reporteHPersonas.put(llave, contenido);
+				Apoyo.put(llave, ""+tiempo_tot);
+
+			}
+			else {
+				
+				String n = Apoyo.get(llave);
+				double tiempoViejo = Double.parseDouble(n);
+				double tiempoNuevo = tiempoViejo + tiempo_tot;
+				String Ncontenido = "Nombre: " + nom + "\n" + "Correo: " + corr + "\n" + "Tiempo total: " + tiempoNuevo + " min";
+				reporteHPersonas.put(llave, Ncontenido);
+				Apoyo.put(llave, ""+tiempoNuevo);
+			} 
+			
+					
+			}
+		}
+		System.out.println("REPORTE POR PERSONA");
+		for (String msj: reporteHPersonas.values()){
+			System.out.println("\n");
+			System.out.println(msj);
+			System.out.println("\n");
+		}
+		
 		
 	}
 	
@@ -57,6 +152,11 @@ public class Proyecto implements Serializable{
 		System.out.println(fechaI);
 		actividadActual = nuevaActividad;
 	}
+
+	public Actividad getActividadActual(){
+		return this.actividadActual;
+	}
+	
 	
 	public void terminarActividad() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -68,14 +168,19 @@ public class Proyecto implements Serializable{
 	
 	public void modificarActividad(String tipoCambio,Participante newEncargado,String nuevaFechaI,String nuevaFechaF, Actividad actividadModificar) {
 		actividadActual=actividadModificar; 
-		if (tipoCambio.equals("2")|| tipoCambio.equals("3"))
-		actividadActual.setEncargado(newEncargado);
-		if (!nuevaFechaI.equals("MANTENER")) {
-			actividadActual.setFechaInicio(nuevaFechaI);
+		if (tipoCambio.equals("1")|| tipoCambio.equals("3")) {
+			actividadActual.setEncargado(newEncargado);
 		}
-		if (!nuevaFechaF.equals("MANTENER")) {
-			actividadActual.setFechaFin(nuevaFechaF);
+		if (tipoCambio.equals("2")|| tipoCambio.equals("3")) {
+			if(!nuevaFechaI.equals("")) {
+				actividadActual.setFechaInicio(nuevaFechaI);
+			}
+			if(!nuevaFechaF.equals("")) {
+				actividadActual.setFechaFin(nuevaFechaF);
+			}
 		}
+		
+		
 	}
 	
 	public void añadirParticipante(String correo, String nombre,boolean owner) {

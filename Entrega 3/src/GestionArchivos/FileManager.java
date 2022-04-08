@@ -93,11 +93,17 @@ public class FileManager {
 						ww.append("·");
 						
 						ww.append(actActual.getType());
+						ww.append("·");
 						ww.append(",");
 					}
 				}
+<<<<<<< HEAD
 				ww.append(";");
 				ww.append("\n");
+=======
+		ww.append(";");
+		ww.append("\n");
+>>>>>>> b8233ed7db6aab917460472c71cfc3703cf93bbc
 		}
 		
 		ww.close();

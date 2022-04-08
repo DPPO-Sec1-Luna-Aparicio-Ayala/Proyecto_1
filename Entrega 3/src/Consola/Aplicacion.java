@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,8 +30,15 @@ public class Aplicacion implements Serializable {
 	private Proyecto proyectoActual;
 	private Participante participanteActual;
 	private Actividad actividadActual;
-	private Cronometro cronometro;
+	//private Cronometro cronometro;
 	
+<<<<<<< HEAD
+=======
+	Cronometro cronometro = new Cronometro();
+	
+	ArrayList<String> proyectosGuardados = new ArrayList<String>();
+	
+>>>>>>> b8233ed7db6aab917460472c71cfc3703cf93bbc
 	public void ejecutarAplicacion() throws IOException
 	{
 		System.out.println("GESTOR DE PROYECTOS\n");
@@ -52,19 +60,19 @@ public class Aplicacion implements Serializable {
 					ejecutarAñadirParticipante();
 				else if (opcion_seleccionada == 4 && proyectoActual != null)
 					ejecutarNuevaActividad();
+				//else if (opcion_seleccionada == 5 && proyectoActual != null) // quitar
+				//	terminarActividad();
 				else if (opcion_seleccionada == 5 && proyectoActual != null)
-					terminarActividad();
-				else if (opcion_seleccionada == 6 && proyectoActual != null)
 					ejecutarModificarActividad();
-				else if (opcion_seleccionada == 7 && proyectoActual != null)
+				else if (opcion_seleccionada == 6 && proyectoActual != null)
 					ejecutarMostrarReporte();
-				else if (opcion_seleccionada == 8 && proyectoActual != null)
-					ejecutarIniciarTemporizador();
-				else if (opcion_seleccionada == 9 && actividadActual != null)
-					ejecutarFinalizarTemporizador();
-				else if (opcion_seleccionada == 10 && actividadActual != null)
-					ejecutarPausarTemporizador();
-				else if (opcion_seleccionada == 11)
+			//	else if (opcion_seleccionada == 8 && proyectoActual != null) // quitar
+			//		ejecutarIniciarTemporizador(actividadActual);
+			//	else if (opcion_seleccionada == 9 && actividadActual != null) // quitar
+			//		ejecutarFinalizarTemporizador();
+			//	else if (opcion_seleccionada == 10 && actividadActual != null) //quitar
+			//		ejecutarPausarTemporizador();
+				else if (opcion_seleccionada == 7)
 				{
 					persistenciaArchivoGuardar();
 					System.out.println("Saliendo de la aplicación...");
@@ -96,29 +104,23 @@ public class Aplicacion implements Serializable {
 		
 	}
 
-	private void ejecutarIniciarTemporizador() {
-		// TODO Auto-generated method stub
-		int count = 1;
-		for (String actividad: proyectoActual.getActividades().keySet()) {
-			System.out.println(count +". " + actividad);
-			count+=1;
-		}
-		String acti = input("Escriba el titulo de la actividad que desea modificar (tal cual aparece en pantalla)");
+	private void ejecutarIniciarTemporizador(Actividad actividadActual) {
 		
-		if(proyectoActual.getActividades().containsKey(acti)) {
-		
+				int op = Integer.parseInt(input("Para iniciar el cronometro oprima cualquier numero"));
+				
 				cronometro.start();
 				System.out.println("Empezo el Cronometro");
 				System.out.println("\n");
 				boolean prueba = true;
+				long var = 0;
+				
 				while (prueba) {
 				System.out.println("Si desea pausar el cronometro oprima 1");
-				System.out.println("Si desea detener el cronometro oprima 2");
+				System.out.println("Si desea finalizar la actividad oprima 2");
 				int opcion = Integer.parseInt(input("Cuando desee oprima una opcion: "));
-				long var = 0;
 				if (opcion == 1) {
 					cronometro.stop();
-					var = cronometro.getElapsedHours();
+					var = cronometro.getElapsedMinutes();
 					int cont = Integer.parseInt(input("Cuando desee renaudar el cronometro oprima 1"));
 					if (cont == 1) {
 						cronometro.start();
@@ -126,20 +128,21 @@ public class Aplicacion implements Serializable {
 				}
 				else if (opcion == 2) {
 					cronometro.stop();
-					var += cronometro.getElapsedHours();
+					var += cronometro.getElapsedMinutes();
 					prueba = false;
+					terminarActividad();
 				}
 				else { System.out.println("Escribio mal el numero");
 				}
 		}
-				//actividadActual = proyectoActual.getActividades().get(acti);	
-		}
-		else {
-			System.out.println("Escribio mal el título de la actividad, intente de nuevo");
-		}
+		actividadActual.setTiempo(var);
+		System.out.println(proyectoActual.actividadActual.getTiempo() + " min");
+		System.out.println("Ha finalizado el tiempo");
+				
 		
 	}
 
+	//No crear nueva actividad hasta q no termine otra
 	//MÉTODOS//
 
 	
@@ -226,7 +229,11 @@ public class Aplicacion implements Serializable {
 			String numtipo= input("Por favor elija el tipo de actividad a relaizar e ingrese el numero");
 			String tipo = proyectoActual.gettypeActividades().get(Integer.parseInt(numtipo)-1);
 			proyectoActual.nuevaActividad(titulo,descripcion,tipo,participanteActual);
+			actividadActual = proyectoActual.getActividadActual();
+			System.out.println("Esta siendo llevado al cronometro");
+			ejecutarIniciarTemporizador(actividadActual);
 			System.out.println("\n Actividad creada con exito");
+			
 }
 
 	public void terminarActividad() {
@@ -249,11 +256,52 @@ public class Aplicacion implements Serializable {
 	}
 	
 	public void ejecutarMostrarReporte() {
+		//tiempo promedio x tipo de actividad
 		
+		proyectoActual.generarReporte();
+		
+
+		
+		
+		
+		/*
+		HashMap<String, String> reporteHPersonas = new HashMap<String, String>();
+		for(Proyecto proy: proyectos) {
+
+			ArrayList<Participante> lista_personas = proy.getParticipantes();
+			
+			for (Participante personas:  lista_personas){
+
+				ArrayList<Actividad> lista_actividades = personas.getActividades();
+				double tiempo_tot = 0;
+				for (Actividad act: lista_actividades){
+					
+					tiempo_tot += act.getTiempo();
+					
+				}
+				String nom = personas.getNombre();
+				String corr = personas.getCorreo();
+				
+				String llave = nom+corr;
+				String contenido = "Nombre: " + nom + "\n" + "Correo: " + corr + "\n" + "Tiempo total: " + tiempo_tot;
+				if (reporteHPersonas.containsKey(llave) == false){
+					reporteHPersonas.put(llave, contenido);
+				}
+				else {
+
+				}
+				
+				
+			}
+			
+		}
+		//tiempo total invertido por participante
+		*/
 	}
 	
 	public void ejecutarModificarActividad() {
 		int count = 1;
+		boolean b=false;
 		for (String actividad: proyectoActual.getActividades().keySet()) {
 			System.out.println(count +". " + actividad);
 			count+=1;
@@ -266,7 +314,7 @@ public class Aplicacion implements Serializable {
 					String cambio = input("Desea modificar el encargado de la actividad (1) o la hora de realización(2) o (3) para ambas");
 					int count3=1;
 					for (Actividad activity : proyectoActual.getActividades().get(acti)) {
-						System.out.println(count3+". "+activity.getFechaI());
+						System.out.println(count3+". Titulo:"+activity.getTitle()+"\tEncargado: "+activity.getResponsable().getNombre()+" \tFecha: "+activity.getFechaI());
 						count3+=1;
 					}
 					String cualActividad = input("Escoja la actividad a modificar");
@@ -274,6 +322,7 @@ public class Aplicacion implements Serializable {
 					
 		
 					if(cambio.equals("1")) {
+						b=true;
 						int count2= 1;
 						ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();			
 						for (Participante esParte : participantesProyecto) {
@@ -289,6 +338,7 @@ public class Aplicacion implements Serializable {
 						System.out.println("\n El nuevo encargado es: "+ newEncargadoo.getNombre());
 					}
 					if (cambio.equals("2")) {
+						b=true;
 						String nuevaFechaI = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar");
 						String nuevaFechaF = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar"); 
 						proyectoActual.modificarActividad(cambio,participanteActual,nuevaFechaI,nuevaFechaF, actividadAModificar);
@@ -297,6 +347,7 @@ public class Aplicacion implements Serializable {
 					
 					if(cambio.equals("3")) {
 						int count2= 1;
+						b=true;
 						ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();			
 						for (Participante esParte : participantesProyecto) {
 							System.out.println(count2 +". " + esParte.getNombre());
@@ -310,7 +361,7 @@ public class Aplicacion implements Serializable {
 					}
 					
 					
-					else {
+					else if (!b) {
 						System.out.println("La opción ingresada no es válida");
 					}
 		}
@@ -342,13 +393,9 @@ public class Aplicacion implements Serializable {
 		System.out.println("2. Seleccionar proyecto");
 		System.out.println("3. Añadir participante al proyecto");
 		System.out.println("4. Agregar actividad");
-		System.out.println("5. Finalizar una actividad");
-		System.out.println("6. Modificar una actividad");
-		System.out.println("7. Mostrar reporte");
-		System.out.println("8. Manejar cronometro");
-		System.out.println("9. Pausar cronometro");
-		System.out.println("10. Finalizar cronometro");
-		System.out.println("11. Salir de la aplicación"); 
+		System.out.println("5. Modificar una actividad");
+		System.out.println("6. Mostrar reporte");
+		System.out.println("7. Salir de la aplicación"); 
 	}
 	
 	public void prepararAplicacion(){
