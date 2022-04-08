@@ -22,8 +22,8 @@ public class Participante implements Serializable{
 		return actividades;
 	}
 	
-	public void setActividades() {
-		
+	public void setActividades(Actividad actividad) {
+		actividades.add(actividad);
 	}
 	
 	public void setEsDueño() {
