@@ -32,13 +32,11 @@ public class Aplicacion implements Serializable {
 	private Actividad actividadActual;
 	//private Cronometro cronometro;
 	
-<<<<<<< HEAD
-=======
+
 	Cronometro cronometro = new Cronometro();
 	
 	ArrayList<String> proyectosGuardados = new ArrayList<String>();
 	
->>>>>>> b8233ed7db6aab917460472c71cfc3703cf93bbc
 	public void ejecutarAplicacion() throws IOException
 	{
 		System.out.println("GESTOR DE PROYECTOS\n");
@@ -109,7 +107,7 @@ public class Aplicacion implements Serializable {
 				int op = Integer.parseInt(input("Para iniciar el cronometro oprima cualquier numero"));
 				
 				cronometro.start();
-				System.out.println("Empezo el Cronometro");
+				System.out.println("Empezó el Cronómetro");
 				System.out.println("\n");
 				boolean prueba = true;
 				long var = 0;
