@@ -1,52 +1,76 @@
 package GUI;
+import java.awt.BorderLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import javax.swing.JFrame;
 
 import GestionArchivos.FileManager;
-import Modelo.Proyecto;
 import Modelo.Actividad;
 import Modelo.Cronometro;
 import Modelo.Participante;
+import Modelo.Proyecto;
 
-public class Aplicacion implements Serializable {
+public class Aplicacion extends JFrame implements Serializable {
 	//ATRIBUTOS//
 	private ArrayList<Proyecto> proyectos;
 	private Proyecto proyectoActual;
 	private Participante participanteActual;
 	private Actividad actividadActual;
+	private MenuInicial menuInicial;
+	private static final Toolkit pantalla = Toolkit.getDefaultToolkit();
+	private static final Image icono = pantalla.getImage("src/Graficos/check.png");
 	//private Cronometro cronometro;
-	
-
 	Cronometro cronometro = new Cronometro();
-	
 	ArrayList<String> proyectosGuardados = new ArrayList<String>();
 	
-	public void ejecutarAplicacion() throws IOException
-	{
-		System.out.println("GESTOR DE PROYECTOS\n");
-		
-
+	public Aplicacion() throws IOException{
 		prepararAplicacion();
-		boolean continuar = true;
-		while (continuar)
+		menuInicial = new MenuInicial(this);
+		setIconImage(icono);
+		
+		
+		setTitle("Gestor de Proyectos");
+		setSize(900, 700);
+		setResizable(false);	
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		//add(panelSuperior, BorderLayout.NORTH);
+		//add(panelInferior, BorderLayout.SOUTH);
+		add(menuInicial, BorderLayout.CENTER);
+		//add(panelDerecha, BorderLayout.EAST);
+		
+		addWindowListener(new WindowAdapter()
 		{
-			try
+			public void windowClosing(WindowEvent e)
 			{
+				try {
+					persistenciaArchivoGuardar();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedEncodingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		setVisible(true);
+		
+	/*
 				mostrarOpciones();
 				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
 				if (opcion_seleccionada == 1)
@@ -57,17 +81,12 @@ public class Aplicacion implements Serializable {
 					ejecutarAñadirParticipante();
 				else if (opcion_seleccionada == 4 && proyectoActual != null)
 					ejecutarNuevaActividad();
-				//else if (opcion_seleccionada == 5 && proyectoActual != null) // quitar
-				//	terminarActividad();
 				else if (opcion_seleccionada == 5 && proyectoActual != null)
 					ejecutarModificarActividad();
 				else if (opcion_seleccionada == 6 && proyectoActual != null)
 					ejecutarMostrarReporte();
 				else if (opcion_seleccionada == 7)
 				{
-					persistenciaArchivoGuardar();
-					System.out.println("Saliendo de la aplicación...");
-					continuar = false;
 				}
 				else if (proyectoActual == null)
 				{
@@ -76,14 +95,8 @@ public class Aplicacion implements Serializable {
 				else
 				{
 					System.out.println("Por favor seleccione una opción válida.");
-				}
-			}
-			catch (NumberFormatException e)
-			{
-				System.out.println("Debe seleccionar uno de los números de las opciones.");
-			}
+				}*/
 		}
-	}
 	
 	private void ejecutarIniciarTemporizador(Actividad actividadActual) {
 		
@@ -116,6 +129,7 @@ public class Aplicacion implements Serializable {
 				else { System.out.println("Escribio mal el numero");
 				}
 		}
+				
 		actividadActual.setTiempo(var);
 		System.out.println(proyectoActual.actividadActual.getTiempo() + " min");
 		System.out.println("Ha finalizado el tiempo");
@@ -240,7 +254,6 @@ public class Aplicacion implements Serializable {
 		//tiempo promedio x tipo de actividad
 		
 		proyectoActual.generarReporte();
-		
 	}
 	
 	public void ejecutarModificarActividad() {
@@ -310,7 +323,7 @@ public class Aplicacion implements Serializable {
 					}
 		}
 		else {
-			System.out.println("Escribio mal el título de la actividad, intente de nuevo");
+			System.out.println("Escribió mal el título de la actividad, intente de nuevo");
 		}
 		
 	}
@@ -346,13 +359,21 @@ public class Aplicacion implements Serializable {
 		this.proyectos = new ArrayList<Proyecto>();
 		FileManager fileManager = new FileManager();
 		proyectos = fileManager.read("appData.txt");
+		proyectoActual = proyectos.get(0);
 	}
 	
-	public static void main(String[] args) throws IOException
 	
+	public Proyecto darProyectoActual() {
+		return proyectoActual;
+	}
+	
+	public ArrayList<Proyecto> darProyectos(){
+		return proyectos;
+	}
+	
+	public static void main(String[] args) throws IOException	
 	{
-		Aplicacion consola = new Aplicacion();
-		consola.ejecutarAplicacion();
+		new Aplicacion();
 	}
 
 }
