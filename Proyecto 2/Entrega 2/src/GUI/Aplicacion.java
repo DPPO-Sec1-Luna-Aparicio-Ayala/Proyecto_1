@@ -23,7 +23,7 @@ import Modelo.Participante;
 import Modelo.Proyecto;
 import GUI.MenuEscogerProyecto;
 
-public class Aplicacion extends JFrame implements Serializable, ActionListener {
+public class Aplicacion implements Serializable, ActionListener {
 	//ATRIBUTOS//
 	private ArrayList<Proyecto> proyectos;
 	private Proyecto proyectoActual;
@@ -31,7 +31,7 @@ public class Aplicacion extends JFrame implements Serializable, ActionListener {
 	private Actividad actividadActual;
 	private MenuEscogerProyecto menuEscogerProyecto;
 	private static final Toolkit pantalla = Toolkit.getDefaultToolkit();
-	private static final Image icono = pantalla.getImage("src/Graficos/check.png");
+	public static final Image icono = pantalla.getImage("src/Graficos/check.png");
 	//private Cronometro cronometro;
 	Cronometro cronometro = new Cronometro();
 	ArrayList<String> proyectosGuardados = new ArrayList<String>();
@@ -39,39 +39,12 @@ public class Aplicacion extends JFrame implements Serializable, ActionListener {
 	public Aplicacion() throws IOException{
 		prepararAplicacion();
 		menuEscogerProyecto = new MenuEscogerProyecto(this);
-		setIconImage(icono);
-		
-		
-		setTitle("Gestor de Proyectos");
-		setSize(900, 700);
-		setResizable(false);	
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		menuEscogerProyecto.setVisible(true);
 		
 		//add(panelSuperior, BorderLayout.NORTH);
 		//add(panelInferior, BorderLayout.SOUTH);
-		add(menuEscogerProyecto, BorderLayout.CENTER);
 		//add(panelDerecha, BorderLayout.EAST);
 		
-		addWindowListener(new WindowAdapter()
-		{
-			public void windowClosing(WindowEvent e)
-			{
-				try {
-					persistenciaArchivoGuardar();
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (UnsupportedEncodingException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		});
-
-		setVisible(true);
 		
 	/*
 				mostrarOpciones();
@@ -385,6 +358,10 @@ public class Aplicacion extends JFrame implements Serializable, ActionListener {
 		
 		if (fuente == menuEscogerProyecto.getComboProyectos()) {
 			proyectoActual = proyectos.get(menuEscogerProyecto.darIndexProyecto());
+		}
+		
+		if (fuente == menuEscogerProyecto.darBotonNuevo()) {
+			crearProyecto();
 		}
 		
 	}
