@@ -3,6 +3,8 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -10,19 +12,21 @@ import javax.swing.JPanel;
 
 import Modelo.Proyecto;
 
-public class MenuInicial extends JPanel {
+public class MenuEscogerProyecto extends JPanel {
 	private JLabel proyectoActual;
 	private Aplicacion aplicacion;
 	private JComboBox<String> proyectos;
+	private JButton salir;
 	
-	public MenuInicial(Aplicacion app) {
+	public MenuEscogerProyecto(Aplicacion app) {
 		aplicacion = app;
 		BorderLayout bl = new BorderLayout();
         setLayout(bl);
-		proyectoActual = new JLabel("PROYECTO ACTUAL:");
-		proyectoActual.setPreferredSize(new Dimension(150,30));
+		proyectoActual = new JLabel("PROYECTO ACTUAL");
+		proyectoActual.setPreferredSize(new Dimension(300,30));
 		proyectos = new JComboBox<String>();
-		proyectos.setBounds(80,80,320,80);
+		salir = new JButton("Salir de la aplicación");
+		salir.addActionListener(aplicacion);
 		if (aplicacion.darProyectos().size() != 0) {
 			for (Proyecto proyecto : aplicacion.darProyectos()) {
 				proyectos.addItem(proyecto.getNombre());
@@ -33,6 +37,7 @@ public class MenuInicial extends JPanel {
 		
 		add(proyectoActual, bl.NORTH);
 		add(proyectos, bl.CENTER);
+		add(salir, bl.SOUTH);
 	}
 	
 	/*private void actualizarProyectoActual() {
@@ -40,5 +45,13 @@ public class MenuInicial extends JPanel {
 			proyectoActual.setText(aplicacion.darProyectoActual().getNombre());
 		}
 	}*/
+	public JComboBox<String> getComboProyectos(){
+		return proyectos;
+	}
+	
+	public int darIndexProyecto() {
+		int proyectoIndex = proyectos.getSelectedIndex();
+		return proyectoIndex;						
+	}
 
 }

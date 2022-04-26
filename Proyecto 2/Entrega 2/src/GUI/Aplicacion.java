@@ -2,6 +2,8 @@ package GUI;
 import java.awt.BorderLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
@@ -19,14 +21,15 @@ import Modelo.Actividad;
 import Modelo.Cronometro;
 import Modelo.Participante;
 import Modelo.Proyecto;
+import GUI.MenuEscogerProyecto;
 
-public class Aplicacion extends JFrame implements Serializable {
+public class Aplicacion extends JFrame implements Serializable, ActionListener {
 	//ATRIBUTOS//
 	private ArrayList<Proyecto> proyectos;
 	private Proyecto proyectoActual;
 	private Participante participanteActual;
 	private Actividad actividadActual;
-	private MenuInicial menuInicial;
+	private MenuEscogerProyecto menuEscogerProyecto;
 	private static final Toolkit pantalla = Toolkit.getDefaultToolkit();
 	private static final Image icono = pantalla.getImage("src/Graficos/check.png");
 	//private Cronometro cronometro;
@@ -35,7 +38,7 @@ public class Aplicacion extends JFrame implements Serializable {
 	
 	public Aplicacion() throws IOException{
 		prepararAplicacion();
-		menuInicial = new MenuInicial(this);
+		menuEscogerProyecto = new MenuEscogerProyecto(this);
 		setIconImage(icono);
 		
 		
@@ -46,7 +49,7 @@ public class Aplicacion extends JFrame implements Serializable {
 		
 		//add(panelSuperior, BorderLayout.NORTH);
 		//add(panelInferior, BorderLayout.SOUTH);
-		add(menuInicial, BorderLayout.CENTER);
+		add(menuEscogerProyecto, BorderLayout.CENTER);
 		//add(panelDerecha, BorderLayout.EAST);
 		
 		addWindowListener(new WindowAdapter()
@@ -374,6 +377,16 @@ public class Aplicacion extends JFrame implements Serializable {
 	public static void main(String[] args) throws IOException	
 	{
 		new Aplicacion();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object fuente = e.getSource();
+		
+		if (fuente == menuEscogerProyecto.getComboProyectos()) {
+			proyectoActual = proyectos.get(menuEscogerProyecto.darIndexProyecto());
+		}
+		
 	}
 
 }
