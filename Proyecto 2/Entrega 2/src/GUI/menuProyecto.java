@@ -3,11 +3,14 @@ package GUI;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -17,11 +20,16 @@ public class menuProyecto extends JFrame {
 
 	private JPanel contentPane;
 	private Imagenes img;
+	public boolean crearAct;
+	
 
 	/**
 	 * Create the frame.
+	 * @param principal 
+	 * @param escogerActividad 
+	 * @param crearActividad 
 	 */
-	public menuProyecto() {
+	public menuProyecto(VentanaPrincipal principal, CrearActividad crearActividad, EscogerActiAModificar escogerActividad) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 668, 430);
 		contentPane = new JPanel();
@@ -38,10 +46,23 @@ public class menuProyecto extends JFrame {
 		
 		JButton btnNewButton_4 = new JButton("Regresar Inicio");
 		btnNewButton_4.setBounds(372, 328, 105, 23);
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				principal.setVisible(true);
+				setVisible(false);
+			}
+			});
 		contentPane.add(btnNewButton_4);
+		
 		
 		JButton btnNewButton_5 = new JButton("Salir App");
 		btnNewButton_5.setBounds(493, 328, 97, 23);
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				dispose();
+				principal.dispose();
+			}
+			});
 		contentPane.add(btnNewButton_5);
 		
 		/*
@@ -61,11 +82,23 @@ public class menuProyecto extends JFrame {
 		
 		JButton btnNewButton = new JButton("Crear Actividad");
 		btnNewButton.setBounds(11, 8, 171, 57);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				crearActividad.setVisible(true); 
+				setVisible(false);
+			}
+			});
 		panel.add(btnNewButton);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		JButton btnNewButton_6 = new JButton("Modificar Actividad");
 		btnNewButton_6.setBounds(198, 8, 171, 57);
+		btnNewButton_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				escogerActividad.setVisible(true); 
+				setVisible(false);
+			}
+			});
 		panel.add(btnNewButton_6);
 		btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
@@ -84,5 +117,10 @@ public class menuProyecto extends JFrame {
 		lblNewLabel_2.setBounds(10, 230, 152, 121);
 		contentPane.add(lblNewLabel_2);
 	}
+
+	public boolean CrearAct() {
+		return crearAct;
+	}
+	
 
 }

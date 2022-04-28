@@ -41,13 +41,14 @@ public class Aplicacion implements Serializable, ActionListener {
 		prepararAplicacion();
 		principal = new VentanaPrincipal(this);
 		modificar = new ModificarActividad();
-		menuProyecto = new menuProyecto();
+		
 		escogerProyecto = new MenuEscogerProyecto(this);
 		escogerActividad = new EscogerActiAModificar();
 		cronometrar = new CronometrarActividad();
-		crearProyecto = new CrearProyecto();
-		crearActividad = new CrearActividad();
 		
+		crearActividad = new CrearActividad();
+		menuProyecto = new menuProyecto(principal, crearActividad, escogerActividad); //falta la ventana del reporte y de añadir participante
+		crearProyecto = new CrearProyecto(menuProyecto, this);
 		principal.setVisible(true);
 		
 		
@@ -130,21 +131,25 @@ public class Aplicacion implements Serializable, ActionListener {
 		proyectos = fileManager.read("appData.txt");
 	}
 	
-	public void crearProyecto() {
+	public void crearProyecto(String nombre, String descripcion, String fechaI, String fechaF, String ownerName, String ownerMail, String tiposAc) {
+		/*
 		System.out.println("Por favor diligencie los siguientes datos ");
 		String nombre = input("Escriba el nombre de su proyecto");
 		String descripcion = input ("Escriba una descripción para su proyecto");
 		String fechaI= input("Por favor registre la fecha de inicio del proyecto");
 		String fechaF = input ("Por favor registre la fecha final de su proyecto\n(Si aun no lo tiene escriba 0)");
 		String tiposAc = input ("Separando por comas y sin espacios escriba los tipos de actividades que se realizaran en su proyecto ");
+		*/
 		String[] tiposAcList = tiposAc.split(",");
 		ArrayList<String> tiposAcAr = new ArrayList<String>();
 		for (String actividad : tiposAcList)
 		{
 			tiposAcAr.add(actividad);
 		}
+		/*
 		String ownerName = input("Por favor escriba el nombre del dueño del proyecto");
 		String ownerMail = input("Por favor escriba el correo del dueño del proyecto");
+		*/
 		
 		Proyecto newProyect= new Proyecto(nombre,descripcion,fechaI,fechaF,tiposAcAr);
 		this.proyectos.add(newProyect);
@@ -319,6 +324,8 @@ public class Aplicacion implements Serializable, ActionListener {
 	{
 		new Aplicacion();
 	}
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -338,7 +345,11 @@ public class Aplicacion implements Serializable, ActionListener {
 		}
 		
 		else if (fuente == principal.getBtnCrear()) {
-			crearProyecto();
+			crearProyecto = new CrearProyecto(menuProyecto, this);
+			crearProyecto.setVisible(true);
+			principal.setVisible(false);
+			//Hacer un btn de retorno!!!
+			//crearProyecto();
 		}
 		
 		else if (fuente == login.getLogInBtn()) {
@@ -358,6 +369,7 @@ public class Aplicacion implements Serializable, ActionListener {
 				}
 			}
 		}
+		//else if (fuente == menuProyecto.get)
 	}
 
 }
