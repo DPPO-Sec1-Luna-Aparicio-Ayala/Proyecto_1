@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -18,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Graficos.Imagenes;
 import Modelo.Proyecto;
 
 public class MenuEscogerProyecto extends JFrame implements ActionListener{
@@ -28,12 +28,13 @@ public class MenuEscogerProyecto extends JFrame implements ActionListener{
 	private JPanel panel;
 	private JPanel panel2;
 	private JButton nuevo;
+	private Imagenes img;
 	private static final JPanel panelVacio = new JPanel();
 	
 	public MenuEscogerProyecto(Aplicacion app) {
 		aplicacion = app;
 		
-		setIconImage(aplicacion.icono);
+		setIconImage(img.CHECK);
 		setTitle("Gestor de Proyectos");
 		setSize(900, 700);
 		setResizable(false);	

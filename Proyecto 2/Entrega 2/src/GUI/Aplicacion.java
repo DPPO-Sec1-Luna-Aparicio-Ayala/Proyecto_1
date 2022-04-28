@@ -1,27 +1,18 @@
 package GUI;
-import java.awt.BorderLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-
 import GestionArchivos.FileManager;
+import Graficos.Imagenes;
 import Modelo.Actividad;
 import Modelo.Cronometro;
 import Modelo.Participante;
 import Modelo.Proyecto;
-import GUI.MenuEscogerProyecto;
 
 public class Aplicacion implements Serializable, ActionListener {
 	//ATRIBUTOS//
@@ -30,8 +21,7 @@ public class Aplicacion implements Serializable, ActionListener {
 	private Participante participanteActual;
 	private Actividad actividadActual;
 	private MenuEscogerProyecto menuEscogerProyecto;
-	private static final Toolkit pantalla = Toolkit.getDefaultToolkit();
-	public static final Image icono = pantalla.getImage("src/Graficos/check.png");
+	private Imagenes img;
 	//private Cronometro cronometro;
 	Cronometro cronometro = new Cronometro();
 	ArrayList<String> proyectosGuardados = new ArrayList<String>();
