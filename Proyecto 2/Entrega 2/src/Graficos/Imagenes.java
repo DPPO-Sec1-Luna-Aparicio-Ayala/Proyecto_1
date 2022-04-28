@@ -10,4 +10,6 @@ public class Imagenes {
 	public static final Image LOG = tk.getImage("src/Graficos/2721273.png");
 	public static final Image WORKSPACE = tk.getImage("src/Graficos/3380841.png");
 	public static final Image BULB = tk.getImage("src/Graficos/1087815.png");
+	public static final Image WELCOME = tk.getImage("src/Graficos/welcome.png");
+	public static final Image IDEA = tk.getImage("src/Graficos/idea-genial.png");
 }

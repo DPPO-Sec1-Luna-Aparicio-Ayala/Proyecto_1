@@ -1,20 +1,22 @@
 package GUI;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
+
+import Graficos.Imagenes;
 
 public class menuProyecto extends JFrame {
 
 	private JPanel contentPane;
+	private Imagenes img;
 
 	/**
 	 * Launch the application.
@@ -59,8 +61,14 @@ public class menuProyecto extends JFrame {
 		contentPane.add(btnNewButton_5);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
+<<<<<<< HEAD
+		//lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Downloads\\4245516.png"));
+		lblNewLabel_1.setIcon(new ImageIcon(img.WELCOME));
+		lblNewLabel_1.setBounds(22, 190, 140, 233);
+=======
 		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Downloads\\4245516.png"));
 		lblNewLabel_1.setBounds(48, 230, 140, 233);
+>>>>>>> 9236633e5379ea756cba7b0872042014b9346a06
 		contentPane.add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel();
