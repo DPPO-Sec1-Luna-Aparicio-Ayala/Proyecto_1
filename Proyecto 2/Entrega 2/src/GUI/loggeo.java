@@ -49,7 +49,7 @@ public class loggeo extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setForeground(new Color(0, 0, 0));
 		panel.setBackground(new Color(245, 245, 245));
-		panel.setBounds(175, 57, 225, 27);
+		panel.setBounds(175, 21, 225, 27);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -59,7 +59,7 @@ public class loggeo extends JFrame {
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel = new JLabel("Proyecto seleccionado: ");
-		lblNewLabel.setBounds(40, 57, 133, 14);
+		lblNewLabel.setBounds(40, 21, 133, 14);
 		contentPane.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
