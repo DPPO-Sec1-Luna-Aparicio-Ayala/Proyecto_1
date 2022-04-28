@@ -1,22 +1,23 @@
 package GUI;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JEditorPane;
-import javax.swing.JFormattedTextField;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
+
+import Graficos.Imagenes;
 
 public class loggeo extends JFrame {
 
 	private JPanel contentPane;
+	private Imagenes img;
 
 	/**
 	 * Launch the application.
@@ -80,7 +81,8 @@ public class loggeo extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Usuario\\OneDrive - Universidad de los Andes\\Documentos\\3er Semestre\\DPOO\\Proy 1\\Proyecto_DPOO\\Proyecto 2\\Entrega 2\\src\\Graficos\\2721273.png"));
+		//lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Usuario\\OneDrive - Universidad de los Andes\\Documentos\\3er Semestre\\DPOO\\Proy 1\\Proyecto_DPOO\\Proyecto 2\\Entrega 2\\src\\Graficos\\2721273.png"));
+		lblNewLabel_2.setIcon(new ImageIcon(img.LOG));
 		lblNewLabel_2.setBounds(25, 169, 148, 136);
 		contentPane.add(lblNewLabel_2);
 		
