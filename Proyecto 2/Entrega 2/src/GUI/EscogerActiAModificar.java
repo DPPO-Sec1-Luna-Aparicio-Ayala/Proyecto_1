@@ -55,7 +55,7 @@ public class EscogerActiAModificar extends JFrame {
 		contentPane.add(comboBox);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\OneDrive - Universidad de los Andes\\Documentos\\3er Semestre\\DPOO\\Proy 1\\Proyecto_DPOO\\Proyecto 2\\Entrega 2\\src\\Graficos\\modificar.png"));
+		lblNewLabel_1.setIcon(new ImageIcon(ModificarActividad.class.getResource("/Graficos/modificar.png")));
 		lblNewLabel_1.setBounds(206, -208, 522, 500);
 		contentPane.add(lblNewLabel_1);
 		

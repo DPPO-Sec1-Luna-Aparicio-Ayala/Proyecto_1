@@ -1,23 +1,25 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
-import javax.swing.JComboBox;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Graficos.Imagenes;
 
 public class CrearActividad extends JFrame {
 
 	private JPanel contentPane;
+	private Imagenes img;
 
 	/**
 	 * Launch the application.
@@ -48,7 +50,7 @@ public class CrearActividad extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(CrearActividad.class.getResource("/Graficos/idea-genial.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(img.IDEA));
 		lblNewLabel_1.setBounds(-55, 0, 480, 440);
 		contentPane.add(lblNewLabel_1);
 		

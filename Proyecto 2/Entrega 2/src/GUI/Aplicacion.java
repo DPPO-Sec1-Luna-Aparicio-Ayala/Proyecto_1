@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import GestionArchivos.FileManager;
 import Graficos.Imagenes;
 import Modelo.Actividad;
@@ -20,20 +22,33 @@ public class Aplicacion implements Serializable, ActionListener {
 	private Proyecto proyectoActual;
 	private Participante participanteActual;
 	private Actividad actividadActual;
-	private MenuEscogerProyecto menuEscogerProyecto;
-	private Imagenes img;
 	//private Cronometro cronometro;
 	Cronometro cronometro = new Cronometro();
 	ArrayList<String> proyectosGuardados = new ArrayList<String>();
 	
+	//GUI//
+	private VentanaPrincipal principal;
+	private ModificarActividad modificar;
+	private menuProyecto menuProyecto;
+	private MenuEscogerProyecto escogerProyecto;
+	private loggeo login;
+	private EscogerActiAModificar escogerActividad;
+	private CronometrarActividad cronometrar;
+	private CrearProyecto crearProyecto;
+	private CrearActividad crearActividad;
+	
 	public Aplicacion() throws IOException{
 		prepararAplicacion();
-		menuEscogerProyecto = new MenuEscogerProyecto(this);
-		menuEscogerProyecto.setVisible(true);
+		principal = new VentanaPrincipal(this);
+		modificar = new ModificarActividad();
+		menuProyecto = new menuProyecto();
+		escogerProyecto = new MenuEscogerProyecto(this);
+		escogerActividad = new EscogerActiAModificar();
+		cronometrar = new CronometrarActividad();
+		crearProyecto = new CrearProyecto();
+		crearActividad = new CrearActividad();
 		
-		//add(panelSuperior, BorderLayout.NORTH);
-		//add(panelInferior, BorderLayout.SOUTH);
-		//add(panelDerecha, BorderLayout.EAST);
+		principal.setVisible(true);
 		
 		
 	/*
@@ -105,9 +120,6 @@ public class Aplicacion implements Serializable, ActionListener {
 
 	//No crear nueva actividad hasta q no termine otra
 	//MÉTODOS//
-
-	
-	
 	public void persistenciaArchivoGuardar() throws IOException {
 		FileManager fileManager = new FileManager();
 		fileManager.write(proyectos, "appData.txt");
@@ -116,40 +128,6 @@ public class Aplicacion implements Serializable, ActionListener {
 	public void persistenciaArchivoCargar() throws IOException, ClassNotFoundException {
 		FileManager fileManager = new FileManager();
 		proyectos = fileManager.read("appData.txt");
-	}
-
-	
-	public void escogerProyecto() {
-		
-		if (proyectos.isEmpty()) {
-			System.out.println("No hay proyectos registrados.");
-		}
-		else {
-			int h = 1;
-			for (Proyecto proyectoActual : proyectos) {
-				System.out.println(h + ". " + proyectoActual.getNombre());
-				h ++;
-			}
-			
-			String p = input("Por favor ingrese el número de la opción deseada");
-			int ip = Integer.parseInt(p);
-			
-			Proyecto proyectoElegido = proyectos.get(ip-1);
-			proyectoActual = proyectoElegido;
-			String login = input("Por favor ingrese el correo con el que se registro en este proyecto");
-			ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();
-			for (Participante esParte : participantesProyecto) {
-				String correo = esParte.getCorreo();
-				if (!correo.equals(login)) {
-					System.out.println("Usted no hace parte de este proyecto, intente con otro correo o pida ser añadido");
-				}
-				else {
-					System.out.println("Ha ingresado correctamente al sistema");
-					this.participanteActual=esParte;
-				}
-			}
-		}
-		
 	}
 	
 	public void crearProyecto() {
@@ -346,14 +324,40 @@ public class Aplicacion implements Serializable, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object fuente = e.getSource();
 		
-		if (fuente == menuEscogerProyecto.getComboProyectos()) {
-			proyectoActual = proyectos.get(menuEscogerProyecto.darIndexProyecto());
+		if (fuente == principal.getComboBox()) {
+			proyectoActual = proyectos.get(principal.darIndexProyecto());
 		}
 		
-		if (fuente == menuEscogerProyecto.darBotonNuevo()) {
+		else if (fuente == principal.getBtnLogin()) {
+			if (proyectos.size()!=0) {
+				login = new loggeo(this);
+				login.setVisible(true);
+			} else {
+				JOptionPane.showMessageDialog(principal,"Por favor, cree un proyecto.");			
+			}
+		}
+		
+		else if (fuente == principal.getBtnCrear()) {
 			crearProyecto();
 		}
 		
+		else if (fuente == login.getLogInBtn()) {
+			String email = login.getEmail();
+			ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();
+			for (Participante esParte : participantesProyecto) {
+				String correo = esParte.getCorreo();
+				if (!correo.equals(email)) {
+					JOptionPane.showMessageDialog(principal,"Usted no hace parte de este proyecto, intente con otro correo o pida ser añadido");
+				}
+				else {
+					JOptionPane.showMessageDialog(principal,"Ha ingresado correctamente al sistema.");
+					this.participanteActual=esParte;
+					login.setVisible(false);
+					principal.setVisible(false);
+					menuProyecto.setVisible(true);
+				}
+			}
+		}
 	}
 
 }

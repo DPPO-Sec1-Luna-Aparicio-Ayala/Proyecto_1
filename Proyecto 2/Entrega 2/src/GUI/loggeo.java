@@ -1,8 +1,9 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,33 +14,25 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Graficos.Imagenes;
+import Modelo.Proyecto;
 
-public class loggeo extends JFrame {
+public class loggeo extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
 	private Imagenes img;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					loggeo frame = new loggeo();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Aplicacion app;
+	private JLabel proyectoActual;
+	private JFormattedTextField frmtdtxtfldExamplehotmailcom;
+	private JButton LogInBtn;
+	private JButton returnBtn;
 
 	/**
 	 * Create the frame.
 	 */
-	public loggeo() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public loggeo(Aplicacion aplicacion) {
+		app = aplicacion;
+		
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 525, 368);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 191, 255));
@@ -54,10 +47,10 @@ public class loggeo extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel_1 = new JLabel("Aqui escribir proyecto actual");
-		lblNewLabel_1.setBackground(new Color(105, 105, 105));
-		lblNewLabel_1.setBounds(10, 11, 174, 14);
-		panel.add(lblNewLabel_1);
+		proyectoActual = new JLabel(app.darProyectoActual().getNombre());
+		proyectoActual.setBackground(new Color(105, 105, 105));
+		proyectoActual.setBounds(10, 11, 174, 14);
+		panel.add(proyectoActual);
 		
 		JLabel lblNewLabel = new JLabel("Proyecto seleccionado: ");
 		lblNewLabel.setBounds(40, 21, 133, 14);
@@ -69,26 +62,45 @@ public class loggeo extends JFrame {
 		lblIngrese.setBounds(247, 109, 243, 14);
 		contentPane.add(lblIngrese);
 		
-		JFormattedTextField frmtdtxtfldExamplehotmailcom = new JFormattedTextField();
+		frmtdtxtfldExamplehotmailcom = new JFormattedTextField();
 		frmtdtxtfldExamplehotmailcom.setForeground(new Color(105, 105, 105));
 		frmtdtxtfldExamplehotmailcom.setText("example@hotmail.com");
 		frmtdtxtfldExamplehotmailcom.setBounds(247, 133, 243, 20);
 		contentPane.add(frmtdtxtfldExamplehotmailcom);
 		
-		JButton btnNewButton = new JButton("Log in");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBounds(247, 164, 107, 34);
-		contentPane.add(btnNewButton);
+		LogInBtn = new JButton("Log in");
+		LogInBtn.setFont(new Font("Tahoma", Font.BOLD, 11));
+		LogInBtn.setBounds(247, 164, 107, 34);
+		LogInBtn.addActionListener(app);
+		contentPane.add(LogInBtn);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
-		//lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\Usuario\\OneDrive - Universidad de los Andes\\Documentos\\3er Semestre\\DPOO\\Proy 1\\Proyecto_DPOO\\Proyecto 2\\Entrega 2\\src\\Graficos\\2721273.png"));
 		lblNewLabel_2.setIcon(new ImageIcon(img.LOG));
 		lblNewLabel_2.setBounds(25, 169, 148, 136);
 		contentPane.add(lblNewLabel_2);
 		
-		JButton btnNewButton_1 = new JButton("Regresar");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton_1.setBounds(175, 282, 89, 23);
-		contentPane.add(btnNewButton_1);
+		returnBtn = new JButton("Regresar");
+		returnBtn.setFont(new Font("Tahoma", Font.BOLD, 11));
+		returnBtn.setBounds(175, 282, 89, 23);
+		returnBtn.addActionListener(this);
+		contentPane.add(returnBtn);
+	}
+	
+	public JButton getLogInBtn() {
+		return LogInBtn;
+	}
+	
+	public String getEmail() {
+		String textoIngresado = frmtdtxtfldExamplehotmailcom.getText();
+		String textoCorregido = textoIngresado.replace(" ", "");
+		return textoCorregido;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource()==returnBtn) {
+			setVisible(false);
+		}
+		
 	}
 }
