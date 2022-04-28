@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.SystemColor;
 import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 public class CrearActividad extends JFrame {
 
@@ -45,36 +47,51 @@ public class CrearActividad extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JFormattedTextField frmtdtxtfldActividad = new JFormattedTextField();
-		frmtdtxtfldActividad.setForeground(new Color(105, 105, 105));
-		frmtdtxtfldActividad.setText("Actividad1...");
-		frmtdtxtfldActividad.setBounds(507, 46, 106, 20);
-		contentPane.add(frmtdtxtfldActividad);
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(CrearActividad.class.getResource("/Graficos/idea-genial.png")));
+		lblNewLabel_1.setBounds(-55, 0, 480, 440);
+		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel = new JLabel("T\u00EDtulo Actividad:");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setBounds(406, 49, 106, 14);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblDescripcin = new JLabel("Descripci\u00F3n:");
-		lblDescripcin.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblDescripcin.setBounds(431, 74, 106, 14);
-		contentPane.add(lblDescripcin);
-		
-		JFormattedTextField frmtdtxtfldRealice = new JFormattedTextField();
-		frmtdtxtfldRealice.setText("Realice...");
-		frmtdtxtfldRealice.setForeground(SystemColor.controlDkShadow);
-		frmtdtxtfldRealice.setBounds(507, 71, 106, 20);
-		contentPane.add(frmtdtxtfldRealice);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(507, 99, 106, 22);
-		contentPane.add(comboBox);
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(419, 0, 262, 391);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
 		JLabel lblTipoActividad = new JLabel("Tipo Actividad:");
+		lblTipoActividad.setBounds(33, 164, 83, 14);
+		panel.add(lblTipoActividad);
 		lblTipoActividad.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTipoActividad.setBounds(418, 103, 106, 14);
-		contentPane.add(lblTipoActividad);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(126, 160, 106, 22);
+		panel.add(comboBox);
+		
+		JFormattedTextField frmtdtxtfldRealice = new JFormattedTextField();
+		frmtdtxtfldRealice.setBounds(126, 118, 106, 20);
+		panel.add(frmtdtxtfldRealice);
+		frmtdtxtfldRealice.setText("Realice...");
+		frmtdtxtfldRealice.setForeground(SystemColor.controlDkShadow);
+		
+		JLabel lblDescripcin = new JLabel("Descripci\u00F3n:");
+		lblDescripcin.setBounds(53, 121, 106, 14);
+		panel.add(lblDescripcin);
+		lblDescripcin.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblNewLabel = new JLabel("T\u00EDtulo Actividad:");
+		lblNewLabel.setBounds(33, 82, 106, 14);
+		panel.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JFormattedTextField frmtdtxtfldActividad = new JFormattedTextField();
+		frmtdtxtfldActividad.setBounds(126, 79, 106, 20);
+		panel.add(frmtdtxtfldActividad);
+		frmtdtxtfldActividad.setForeground(new Color(105, 105, 105));
+		frmtdtxtfldActividad.setText("Actividad1...");
+		
+		JButton btnNewButton = new JButton("Enviar");
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton.setBounds(143, 335, 89, 23);
+		panel.add(btnNewButton);
 	}
-
 }

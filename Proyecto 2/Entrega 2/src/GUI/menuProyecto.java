@@ -61,9 +61,14 @@ public class menuProyecto extends JFrame {
 		contentPane.add(btnNewButton_5);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
+<<<<<<< HEAD
 		//lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Downloads\\4245516.png"));
 		lblNewLabel_1.setIcon(new ImageIcon(img.WELCOME));
 		lblNewLabel_1.setBounds(22, 190, 140, 233);
+=======
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\Downloads\\4245516.png"));
+		lblNewLabel_1.setBounds(48, 230, 140, 233);
+>>>>>>> 9236633e5379ea756cba7b0872042014b9346a06
 		contentPane.add(lblNewLabel_1);
 		
 		JPanel panel = new JPanel();
@@ -91,6 +96,11 @@ public class menuProyecto extends JFrame {
 		btnNewButton_6_1_1.setBounds(197, 72, 171, 57);
 		panel.add(btnNewButton_6_1_1);
 		btnNewButton_6_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(menuProyecto.class.getResource("/Graficos/4245516.png")));
+		lblNewLabel_2.setBounds(10, 230, 152, 121);
+		contentPane.add(lblNewLabel_2);
 	}
 
 }
