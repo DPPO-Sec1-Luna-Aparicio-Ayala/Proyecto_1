@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,19 +14,27 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Graficos.Imagenes;
+import Modelo.Participante;
 
 public class CrearActividad extends JFrame {
 
 	private JPanel contentPane;
 	private Imagenes img;
+	private ArrayList<String> ListaTipos;
+	private Participante participanteActual;
+	private JFrame presente; 
+	
 
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,11 +47,18 @@ public class CrearActividad extends JFrame {
 			}
 		});
 	}
-
+	*/
 	/**
 	 * Create the frame.
+	 * @param cronometrar 
+	 * @param aplicacion 
 	 */
-	public CrearActividad() {
+	public CrearActividad(CronometrarActividad cronometrar, Aplicacion aplicacion) {
+		
+		presente = new JFrame();
+		ListaTipos = aplicacion.darProyectoActual().gettypeActividades();
+		participanteActual = aplicacion.getParticipante();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 697, 430);
 		contentPane = new JPanel();
@@ -67,13 +85,27 @@ public class CrearActividad extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(126, 160, 106, 22);
+		for (String tipo : ListaTipos) 
+		{ 
+			comboBox.addItem(tipo);
+		}
+		//comboBox.addItemListener(this);
 		panel.add(comboBox);
 		
+		/*
 		JFormattedTextField frmtdtxtfldRealice = new JFormattedTextField();
 		frmtdtxtfldRealice.setBounds(126, 118, 106, 20);
 		panel.add(frmtdtxtfldRealice);
 		frmtdtxtfldRealice.setText("Realice...");
 		frmtdtxtfldRealice.setForeground(SystemColor.controlDkShadow);
+		//Corregir esto y hacer el if para cuando las boxes esten vacias
+		//usar el ejemplo de tipos actividad (Jlabel 5 en Crear Proyecto)
+		*/
+		
+		JTextField frmtdtxtfldRealice = new JTextField();
+		frmtdtxtfldRealice.setColumns(10);
+		frmtdtxtfldRealice.setBounds(126, 118, 106, 20);
+		panel.add(frmtdtxtfldRealice);
 		
 		JLabel lblDescripcin = new JLabel("Descripci\u00F3n:");
 		lblDescripcin.setBounds(53, 121, 106, 14);
@@ -85,15 +117,37 @@ public class CrearActividad extends JFrame {
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
+		/*
 		JFormattedTextField frmtdtxtfldActividad = new JFormattedTextField();
 		frmtdtxtfldActividad.setBounds(126, 79, 106, 20);
 		panel.add(frmtdtxtfldActividad);
 		frmtdtxtfldActividad.setForeground(new Color(105, 105, 105));
 		frmtdtxtfldActividad.setText("Actividad1...");
+		*/
+		
+		JTextField frmtdtxtfldActividad = new JTextField();
+		frmtdtxtfldActividad.setColumns(10);
+		frmtdtxtfldActividad.setBounds(126, 79, 106, 20);
+		panel.add(frmtdtxtfldActividad);
 		
 		JButton btnNewButton = new JButton("Enviar");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.setBounds(143, 335, 89, 23);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (frmtdtxtfldActividad.getText().equals("") || frmtdtxtfldRealice.getText().equals("")) {
+					JOptionPane.showMessageDialog(presente,"Hay una o mas casillas que siguen en blanco, rellene todas por favor");
+				}
+				else {
+				String tipo = (String)comboBox.getSelectedItem();
+				String titulo = frmtdtxtfldRealice.getText();
+				String descripcion = frmtdtxtfldActividad.getText();
+				aplicacion.ejecutarNuevaActividad(titulo, descripcion, tipo, participanteActual);
+				setVisible(false); //recibir los inputs
+				cronometrar.setVisible(true);
+				}
+			}
+			});
 		panel.add(btnNewButton);
 	}
 }

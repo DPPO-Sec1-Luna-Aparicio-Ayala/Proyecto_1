@@ -46,8 +46,8 @@ public class Aplicacion implements Serializable, ActionListener {
 		escogerActividad = new EscogerActiAModificar();
 		cronometrar = new CronometrarActividad();
 		
-		crearActividad = new CrearActividad();
-		menuProyecto = new menuProyecto(principal, crearActividad, escogerActividad); //falta la ventana del reporte y de añadir participante
+		crearActividad = new CrearActividad(cronometrar, this);
+		menuProyecto = new menuProyecto(principal, crearActividad, escogerActividad, this); //falta la ventana del reporte y de añadir participante
 		crearProyecto = new CrearProyecto(menuProyecto, this);
 		principal.setVisible(true);
 		
@@ -157,9 +157,9 @@ public class Aplicacion implements Serializable, ActionListener {
 		System.out.println("\n Su proyecto ha sido creado con exitó!");
 	}
 	
-	public void ejecutarNuevaActividad() {
+	public void ejecutarNuevaActividad(String titulo, String descripcion, String tipo, Participante participante) {
 		
-		
+			/*
 			System.out.println("Por favor diligencie los siguientes datos ");
 			String titulo = input("Escriba el titulo de su actividad");
 			String descripcion = input ("Escriba una descripción para su actividad");
@@ -170,13 +170,17 @@ public class Aplicacion implements Serializable, ActionListener {
 				count+=1;	
 			}
 			
+			
 			String numtipo= input("Por favor elija el tipo de actividad a relaizar e ingrese el numero");
 			String tipo = proyectoActual.gettypeActividades().get(Integer.parseInt(numtipo)-1);
-			proyectoActual.nuevaActividad(titulo,descripcion,tipo,participanteActual);
+			*/
+			proyectoActual.nuevaActividad(titulo,descripcion,tipo, participante);
 			actividadActual = proyectoActual.getActividadActual();
-			System.out.println("Esta siendo llevado al cronometro");
+			System.out.println("Se creo con exito");
+			/*
 			ejecutarIniciarTemporizador(actividadActual);
 			System.out.println("\n Actividad creada con exito");
+			*/
 			
 }
 
@@ -319,6 +323,11 @@ public class Aplicacion implements Serializable, ActionListener {
 	public ArrayList<Proyecto> darProyectos(){
 		return proyectos;
 	}
+	
+	public  Participante getParticipante() {
+		return this.participanteActual;
+	}
+	
 	
 	public static void main(String[] args) throws IOException	
 	{

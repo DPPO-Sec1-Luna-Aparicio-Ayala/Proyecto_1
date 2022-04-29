@@ -13,8 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.Border;
+import javax.swing.BorderFactory;
 
 import Graficos.Imagenes;
+import Modelo.Proyecto;
 
 public class menuProyecto extends JFrame {
 
@@ -28,8 +31,9 @@ public class menuProyecto extends JFrame {
 	 * @param principal 
 	 * @param escogerActividad 
 	 * @param crearActividad 
+	 * @param aplicacion 
 	 */
-	public menuProyecto(VentanaPrincipal principal, CrearActividad crearActividad, EscogerActiAModificar escogerActividad) {
+	public menuProyecto(VentanaPrincipal principal, CrearActividad crearActividad, EscogerActiAModificar escogerActividad, Aplicacion aplicacion) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 668, 430);
 		contentPane = new JPanel();
@@ -43,6 +47,14 @@ public class menuProyecto extends JFrame {
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
 		lblNewLabel.setBounds(303, 34, 97, 42);
 		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_Proy = new JLabel("Proyecto Actual: " + aplicacion.darProyectoActual().getNombre());
+		lblNewLabel_Proy.setForeground(new Color(255, 255, 255));
+		lblNewLabel_Proy.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_Proy.setBounds(210, 260, 280, 40);
+		Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
+        lblNewLabel_Proy.setBorder(border);
+		contentPane.add(lblNewLabel_Proy);
 		
 		JButton btnNewButton_4 = new JButton("Regresar Inicio");
 		btnNewButton_4.setBounds(372, 328, 105, 23);
