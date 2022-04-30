@@ -26,6 +26,15 @@ public class Aplicacion implements Serializable, ActionListener {
 	Cronometro cronometro = new Cronometro();
 	ArrayList<String> proyectosGuardados = new ArrayList<String>();
 	
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//cambiar muchas de las visiblidades a solo funciones con la aplicacion para evitar tanto enlace de que todos se tengan como parametros
+	//!!!!!!!!!!!!!!!!!!!!!!
+	//!!!!!!!!!!!!!!!!!!!!!
+	//"""""""""""""""""""""
+	
+	
+	
 	//GUI//
 	private VentanaPrincipal principal;
 	private ModificarActividad modificar;
@@ -44,7 +53,7 @@ public class Aplicacion implements Serializable, ActionListener {
 		
 		escogerProyecto = new MenuEscogerProyecto(this);
 		escogerActividad = new EscogerActiAModificar();
-		cronometrar = new CronometrarActividad();
+		cronometrar = new CronometrarActividad(this);
 		
 		crearActividad = new CrearActividad(cronometrar, this);
 		menuProyecto = new menuProyecto(principal, crearActividad, escogerActividad, this); //falta la ventana del reporte y de añadir participante
@@ -79,6 +88,39 @@ public class Aplicacion implements Serializable, ActionListener {
 					System.out.println("Por favor seleccione una opción válida.");
 				}*/
 		}
+	
+	long tiempo = 0;
+	//boolean primera = false;
+	
+	public void IniciarTemporizador() {
+		
+		cronometro.start();
+		tiempo = 0;
+		//primera = true;
+		
+	}
+	
+	public void PausarTemporizador() {
+		
+		cronometro.stop();
+		tiempo += cronometro.getElapsedSeconds();
+		
+	}
+	
+	public long FinalizarTemporizador() {
+		
+		cronometro.stop();
+		tiempo += cronometro.getElapsedSeconds();
+		actividadActual.setTiempo(tiempo);
+		System.out.println(proyectoActual.actividadActual.getTiempo() + " seg");
+		System.out.println("Ha finalizado el tiempo");
+		long devolver = tiempo;
+		tiempo = 0;
+		return devolver;
+		
+	}
+	
+	
 	
 	private void ejecutarIniciarTemporizador(Actividad actividadActual) {
 		
@@ -322,6 +364,10 @@ public class Aplicacion implements Serializable, ActionListener {
 	
 	public ArrayList<Proyecto> darProyectos(){
 		return proyectos;
+	}
+	
+	public void VisibleMenuAct() {
+		menuProyecto.setVisible(true);
 	}
 	
 	public  Participante getParticipante() {
