@@ -1,3 +1,0 @@
-MINECRAFT;Servidor para jugar minecraft;07/04/2022;0;construir,minar,cultivar,cazar,explorar,;Juan David Aparicio·j.apariciog@uniandes.edu.co·false·,;hacer casa·construir una casa bien bonita·07-04-2022 23:10:04·0·Juan David Aparicio#j.apariciog@uniandes.edu.co#false·construir·,;
-Lolsito;Depresión en forma de juego;11/11/2017;0;perder,ganar,;Juan David Aparicio·j.apariciog@uniandes.edu.co·false·,;perder torneo·xdddd·07-04-2022 23:11:39·07-04-2022 23:11:42·Juan David Aparicio#j.apariciog@uniandes.edu.co#false·perder·,;
-maincra;jugar maincra;10/04/2022;0;construir,cavar,minar,;Juan David·j.apariciog@uniandes.edu.co·false·,;;

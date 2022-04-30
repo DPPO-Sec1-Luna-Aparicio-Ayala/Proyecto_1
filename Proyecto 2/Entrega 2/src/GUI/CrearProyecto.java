@@ -55,11 +55,11 @@ public class CrearProyecto extends JFrame {
 	 * @param menuProyecto 
 	 * @param aplicacion 
 	 */
-	public CrearProyecto(menuProyecto menuProyecto, Aplicacion aplicacion) {
+	public CrearProyecto(Aplicacion aplicacion) {
 		
 		presente = new JFrame();
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 824, 474);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -193,7 +193,7 @@ public class CrearProyecto extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (textField.getText().equals("") || textField_1.getText().equals("") || textField_2.getText().equals("") || textField_3.getText().equals("") || textField_4.getText().equals("") || txtS.getText().equals("") || textField_5.getText().equals("ej:diseño,codigo,pruebas")) {
-					JOptionPane.showMessageDialog(presente,"Hay una o mas casillas que siguen en blanco, rellene todas por favor");
+					JOptionPane.showMessageDialog(presente,"Hay una o mas casillas que siguen en blanco. Complete todas, por favor.");
 				}
 				else {
 				String nombreProyecto = txtS.getText();
@@ -213,7 +213,7 @@ public class CrearProyecto extends JFrame {
 				
 				setVisible(false);
 				aplicacion.crearProyecto(nombreProyecto, descripcionProyecto, fechaIProyecto, fechaFProyecto, nombreAdmin, correoAdmin, tiposProyecto);
-				menuProyecto.setVisible(true);
+				aplicacion.darMenuProyecto().setVisible(true);
 				}
 			}
 		});

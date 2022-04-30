@@ -5,6 +5,11 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -71,8 +76,14 @@ public class menuProyecto extends JFrame {
 		btnNewButton_5.setBounds(493, 328, 97, 23);
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				dispose();
-				principal.dispose();
+				try {
+					aplicacion.persistenciaArchivoGuardar();
+					System.exit(EXIT_ON_CLOSE);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 			}
 			});
 		contentPane.add(btnNewButton_5);
@@ -128,6 +139,25 @@ public class menuProyecto extends JFrame {
 		lblNewLabel_2.setIcon(new ImageIcon(img.WELCOME));
 		lblNewLabel_2.setBounds(10, 230, 152, 121);
 		contentPane.add(lblNewLabel_2);
+		
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				try {
+					aplicacion.persistenciaArchivoGuardar();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedEncodingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 
 	public boolean CrearAct() {

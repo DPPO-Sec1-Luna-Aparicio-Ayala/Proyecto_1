@@ -57,7 +57,7 @@ public class Aplicacion implements Serializable, ActionListener {
 		
 		crearActividad = new CrearActividad(cronometrar, this);
 		menuProyecto = new menuProyecto(principal, crearActividad, escogerActividad, this); //falta la ventana del reporte y de añadir participante
-		crearProyecto = new CrearProyecto(menuProyecto, this);
+		crearProyecto = new CrearProyecto(this);
 		principal.setVisible(true);
 		
 		
@@ -174,29 +174,16 @@ public class Aplicacion implements Serializable, ActionListener {
 	}
 	
 	public void crearProyecto(String nombre, String descripcion, String fechaI, String fechaF, String ownerName, String ownerMail, String tiposAc) {
-		/*
-		System.out.println("Por favor diligencie los siguientes datos ");
-		String nombre = input("Escriba el nombre de su proyecto");
-		String descripcion = input ("Escriba una descripción para su proyecto");
-		String fechaI= input("Por favor registre la fecha de inicio del proyecto");
-		String fechaF = input ("Por favor registre la fecha final de su proyecto\n(Si aun no lo tiene escriba 0)");
-		String tiposAc = input ("Separando por comas y sin espacios escriba los tipos de actividades que se realizaran en su proyecto ");
-		*/
 		String[] tiposAcList = tiposAc.split(",");
 		ArrayList<String> tiposAcAr = new ArrayList<String>();
 		for (String actividad : tiposAcList)
 		{
 			tiposAcAr.add(actividad);
-		}
-		/*
-		String ownerName = input("Por favor escriba el nombre del dueño del proyecto");
-		String ownerMail = input("Por favor escriba el correo del dueño del proyecto");
-		*/
-		
+		}		
 		Proyecto newProyect= new Proyecto(nombre,descripcion,fechaI,fechaF,tiposAcAr);
 		this.proyectos.add(newProyect);
 		newProyect.añadirParticipante(ownerMail, ownerName, true);
-		System.out.println("\n Su proyecto ha sido creado con exitó!");
+		JOptionPane.showMessageDialog(principal,"¡El proyecto ha sido creado con éxito!");	
 	}
 	
 	public void ejecutarNuevaActividad(String titulo, String descripcion, String tipo, Participante participante) {
@@ -374,6 +361,10 @@ public class Aplicacion implements Serializable, ActionListener {
 		return this.participanteActual;
 	}
 	
+	public menuProyecto darMenuProyecto() {
+		return menuProyecto;
+	}
+	
 	
 	public static void main(String[] args) throws IOException	
 	{
@@ -400,7 +391,7 @@ public class Aplicacion implements Serializable, ActionListener {
 		}
 		
 		else if (fuente == principal.getBtnCrear()) {
-			crearProyecto = new CrearProyecto(menuProyecto, this);
+			crearProyecto = new CrearProyecto(this);
 			crearProyecto.setVisible(true);
 			principal.setVisible(false);
 			//Hacer un btn de retorno!!!
@@ -410,6 +401,29 @@ public class Aplicacion implements Serializable, ActionListener {
 		else if (fuente == login.getLogInBtn()) {
 			String email = login.getEmail();
 			ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();
+			boolean encontrado = false;
+			int h = 0;
+			
+			while (encontrado == false && h<participantesProyecto.size()) {
+				Participante actual = participantesProyecto.get(h);
+				String correo = actual.getCorreo();
+				if (correo.equals(email)) {
+					JOptionPane.showMessageDialog(principal,"Ha ingresado correctamente al sistema.");
+					participanteActual=actual;
+					login.setVisible(false);
+					principal.setVisible(false);
+					menuProyecto.setVisible(true);
+					encontrado = true;
+				} else {
+					h++;
+				}
+				
+				}
+			
+			if (encontrado == false) {
+				JOptionPane.showMessageDialog(principal,"Usted no hace parte de este proyecto, intente con otro correo o pida ser añadido");
+			}
+			/*
 			for (Participante esParte : participantesProyecto) {
 				String correo = esParte.getCorreo();
 				if (!correo.equals(email)) {
@@ -417,12 +431,12 @@ public class Aplicacion implements Serializable, ActionListener {
 				}
 				else {
 					JOptionPane.showMessageDialog(principal,"Ha ingresado correctamente al sistema.");
-					this.participanteActual=esParte;
+					participanteActual=esParte;
 					login.setVisible(false);
 					principal.setVisible(false);
 					menuProyecto.setVisible(true);
 				}
-			}
+			}*/
 		}
 		//else if (fuente == menuProyecto.get)
 	}
