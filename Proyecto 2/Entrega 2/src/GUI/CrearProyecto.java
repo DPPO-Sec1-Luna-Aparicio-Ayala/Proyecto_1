@@ -29,7 +29,7 @@ public class CrearProyecto extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtExamplegmailcom;
 	private JTextField textField_5;
 	private Imagenes img;
 	private JFrame presente; 
@@ -60,7 +60,7 @@ public class CrearProyecto extends JFrame {
 		presente = new JFrame();
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		setBounds(100, 100, 824, 474);
+		setBounds(100, 100, 824, 443);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -77,6 +77,8 @@ public class CrearProyecto extends JFrame {
 		panel.add(lblNewLabel);
 		
 		txtS = new JTextField();
+		txtS.setText("Proyecto1");
+		txtS.setForeground(new Color(119, 136, 153));
 		txtS.setBounds(180, 75, 180, 20);
 		panel.add(txtS);
 		txtS.setColumns(10);
@@ -94,7 +96,7 @@ public class CrearProyecto extends JFrame {
 		*/
 		
 		textField = new JFormattedTextField();
-		textField.setForeground(new Color(20, 20, 20));
+		textField.setForeground(new Color(112, 128, 144));
 		//sacar la fecha
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		LocalDateTime date = LocalDateTime.now();
@@ -108,6 +110,8 @@ public class CrearProyecto extends JFrame {
 		
 		
 		textField_1 = new JTextField();
+		textField_1.setForeground(new Color(112, 128, 144));
+		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		textField_1.setBounds(180, 103, 180, 20); //descripcion
 		textField_1.setColumns(10);
 		panel.add(textField_1);
@@ -139,7 +143,7 @@ public class CrearProyecto extends JFrame {
 		
 		
 		textField_5 = new JFormattedTextField();
-		textField_5.setForeground(new Color(20, 20, 20));
+		textField_5.setForeground(new Color(105, 105, 105));
 		textField_5.setBounds(180, 187, 180, 20);
 		textField_5.setColumns(10);
 		panel.add(textField_5);
@@ -177,14 +181,16 @@ public class CrearProyecto extends JFrame {
 		textField_3.setBounds(180, 215, 180, 20);
 		panel.add(textField_3);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(180, 240, 180, 20);
-		panel.add(textField_4);
+		txtExamplegmailcom = new JTextField();
+		txtExamplegmailcom.setText("example@gmail.com");
+		txtExamplegmailcom.setForeground(new Color(119, 136, 153));
+		txtExamplegmailcom.setColumns(10);
+		txtExamplegmailcom.setBounds(180, 240, 180, 20);
+		panel.add(txtExamplegmailcom);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
 		//lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\OneDrive - Universidad de los Andes\\Documentos\\3er Semestre\\DPOO\\Proy 1\\Proyecto_DPOO\\Proyecto 2\\Entrega 2\\src\\Graficos\\3380841.png"));
-		lblNewLabel_1.setIcon(new ImageIcon(img.WORKSPACE));
+		lblNewLabel_1.setIcon(new ImageIcon(CrearProyecto.class.getResource("/Graficos/3380841.png")));
 		lblNewLabel_1.setBounds(380, 0, 408, 466);
 		panel.add(lblNewLabel_1);
 		
@@ -192,7 +198,7 @@ public class CrearProyecto extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textField.getText().equals("") || textField_1.getText().equals("") || textField_2.getText().equals("") || textField_3.getText().equals("") || textField_4.getText().equals("") || txtS.getText().equals("") || textField_5.getText().equals("ej:diseño,codigo,pruebas")) {
+				if (textField.getText().equals("") || textField_1.getText().equals("") || textField_2.getText().equals("") || textField_3.getText().equals("") || txtExamplegmailcom.getText().equals("") || txtS.getText().equals("") || textField_5.getText().equals("ej:diseño,codigo,pruebas")) {
 					JOptionPane.showMessageDialog(presente,"Hay una o mas casillas que siguen en blanco. Complete todas, por favor.");
 				}
 				else {
@@ -201,15 +207,11 @@ public class CrearProyecto extends JFrame {
 				String fechaIProyecto = textField.getText();
 				String fechaFProyecto = textField_2.getText();
 				String nombreAdmin = textField_3.getText();
-				String correoAdmin = textField_4.getText();
+				String correoAdmin = txtExamplegmailcom.getText();
 				String tiposProyecto = textField_5.getText();				
 				
 				
-				//falta meter los tipos
-				//llenar automatico con el login?
-				//apenas lleguen los tipos usarlos
-				//funcion de crear proyecto
-				// al cerrar verificar el dispose
+				
 				
 				setVisible(false);
 				aplicacion.crearProyecto(nombreProyecto, descripcionProyecto, fechaIProyecto, fechaFProyecto, nombreAdmin, correoAdmin, tiposProyecto);
@@ -220,7 +222,18 @@ public class CrearProyecto extends JFrame {
 			}
 		});
 		btnNewButton.setBackground(new Color(255, 245, 238));
-		btnNewButton.setBounds(146, 279, 118, 23);
+		btnNewButton.setBounds(180, 287, 156, 23);
 		panel.add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Regresar");
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton_1.setBounds(31, 360, 89, 23);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				aplicacion.VisiblePrincipal(true);
+				setVisible(false);
+			}
+			});
+		panel.add(btnNewButton_1);
 	}
 }

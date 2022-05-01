@@ -48,9 +48,9 @@ public class VentanaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon(img.BULB));
-		lblNewLabel.setBounds(371, 0, 347, 420);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/Graficos/1087815.png")));
+		lblNewLabel.setBounds(343, 0, 365, 420);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Escoger proyecto:");

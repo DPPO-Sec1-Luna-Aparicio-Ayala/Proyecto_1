@@ -36,6 +36,8 @@ public class Aplicacion implements Serializable, ActionListener {
 	private CronometrarActividad cronometrar;
 	private CrearProyecto crearProyecto;
 	private CrearActividad crearActividad;
+	private añadirParticipante añadirParticipante; 
+	private generarReporte generarReporte;
 	
 	//CONSTANTES//
 	public static final int PAUSADO = 1;
@@ -178,7 +180,16 @@ public class Aplicacion implements Serializable, ActionListener {
 	}
 	
 	
-	public void ejecutarModificarActividad(Actividad actividadAModificar,String[] modificaciones, boolean[] cambiaron) {		/*	
+	public void ejecutarModificarActividad(Actividad actividadAModificar,String[] modificaciones, boolean[] cambiaron,Modelo.Participante acargo) {		
+		
+		if(cambiaron[0]||cambiaron[1])
+		{
+		
+		}
+		
+		/*	
+				
+				
 				if(cambiaron[0]) {
 						int count2= 1;
 						/*
@@ -281,7 +292,9 @@ public class Aplicacion implements Serializable, ActionListener {
 				String correo = actual.getCorreo();
 				if (correo.equals(email)) {
 					JOptionPane.showMessageDialog(principal,"Ha ingresado correctamente al sistema.");
+					
 					participanteActual=actual;
+					JOptionPane.showMessageDialog(principal,"El participante actual es"+participanteActual.getNombre());
 					login.setVisible(false);
 					principal.setVisible(false);
 					setMenuProyecto();
@@ -296,7 +309,7 @@ public class Aplicacion implements Serializable, ActionListener {
 			if (encontrado == false) {
 				JOptionPane.showMessageDialog(principal,"Usted no hace parte de este proyecto, intente con otro correo o pida ser añadido");
 			}
-			JOptionPane.showMessageDialog(principal,"El participante actual es"+participanteActual.getNombre());
+			
 		}
 	}
 	
@@ -339,8 +352,15 @@ public class Aplicacion implements Serializable, ActionListener {
 	}
 	
 	public void setMenuProyecto() {
-		menuProyecto = new menuProyecto(this); //falta la ventana del reporte y de añadir participante
+		menuProyecto = new menuProyecto(this); 
 
+	}
+	public void setAñadirParticipante() {
+		añadirParticipante= new añadirParticipante(this);
+	}
+	
+	public void setGenerarReporte () {
+		generarReporte = new generarReporte(this);
 	}
 	
 	public void setActividadModificar(String param) {

@@ -73,6 +73,12 @@ public class EscogerActiAModificar extends JFrame {
 		JButton btnNewButton_1 = new JButton("Regresar");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton_1.setBounds(121, 216, 105, 23);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				app.VisibleMenuAct(true);
+				setVisible(false);
+			}
+			});
 		contentPane.add(btnNewButton_1);
 	}
 }
