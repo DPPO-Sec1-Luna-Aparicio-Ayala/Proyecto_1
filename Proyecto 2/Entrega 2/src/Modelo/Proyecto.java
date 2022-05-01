@@ -150,19 +150,30 @@ public class Proyecto implements Serializable{
 		System.out.println(fechaF);
 	}
 	
-	public void modificarActividad(String tipoCambio,Participante newEncargado,String nuevaFechaI,String nuevaFechaF, Actividad actividadModificar) {
+	public void modificarActividad(Participante newEncargado,String nuevaFechaI,String nuevaFechaF, Actividad actividadModificar) {
 		actividadActual=actividadModificar; 
-		if (tipoCambio.equals("1")|| tipoCambio.equals("3")) {
+		if (tipoCambio == 1|| tipoCambio == 5) {
 			actividadActual.setEncargado(newEncargado);
 		}
-		if (tipoCambio.equals("2")|| tipoCambio.equals("3")) {
+		if (tipoCambio == 2|| tipoCambio == 5) {
 			if(!nuevaFechaI.equals("")) {
 				actividadActual.setFechaInicio(nuevaFechaI);
+			}
+		}
+		if (tipoCambio == 3|| tipoCambio == 5) {
+			if(!nuevaFechaF.equals("")) {
+				actividadActual.setFechaFin(nuevaFechaF);
+			}
+		}
+		if (tipoCambio == 4|| tipoCambio == 5) {
+			if(!nuevaFechaI.equals("")) {
+				actividadActual.setFechaInicio(nuevaFechaI);	
 			}
 			if(!nuevaFechaF.equals("")) {
 				actividadActual.setFechaFin(nuevaFechaF);
 			}
 		}
+		
 		
 		
 	}

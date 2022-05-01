@@ -37,7 +37,9 @@ public class VentanaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaPrincipal(Aplicacion appl) {
+		setIconImage(img.BULB);
 		app = appl;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 734, 454);
 		contentPane = new JPanel();

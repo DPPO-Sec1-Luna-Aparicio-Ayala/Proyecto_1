@@ -1,43 +1,34 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JComboBox;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Graficos.Imagenes;
+import Modelo.Actividad;
 
 public class EscogerActiAModificar extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					EscogerActiAModificar frame = new EscogerActiAModificar();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private Imagenes img;
+	private String actividadSeleccionada;
+	
 	/**
 	 * Create the frame.
 	 */
-	public EscogerActiAModificar() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public EscogerActiAModificar(Aplicacion app) {
+		setIconImage(img.BULB);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 518, 342);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 206, 209));
@@ -52,6 +43,14 @@ public class EscogerActiAModificar extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(10, 119, 227, 32);
+		for (String act : app.darProyectoActual().getActividades().keySet()) {
+			comboBox.addItem(act);		
+		}
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				actividadSeleccionada = (String) comboBox.getSelectedItem();
+			}
+			});
 		contentPane.add(comboBox);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
@@ -62,6 +61,13 @@ public class EscogerActiAModificar extends JFrame {
 		JButton btnNewButton = new JButton("Seleccionar");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.setBounds(10, 216, 101, 23);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				setVisible(false);
+				app.setActividadModificar(comboBox.getSelectedItem().toString());
+				app.VisibleModificarActividad(true);
+			}
+			});
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Regresar");

@@ -22,44 +22,28 @@ import javax.swing.border.EmptyBorder;
 import Graficos.Imagenes;
 import Modelo.Participante;
 
-public class CrearActividad extends JFrame {
+public class CrearActividad extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private Imagenes img;
 	private ArrayList<String> ListaTipos;
 	private Participante participanteActual;
 	private JFrame presente; 
+	private String tipoSeleccionado;
+	private JComboBox tiposActividad;
 	
-
-	/**
-	 * Launch the application.
-	 */
-	/*
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CrearActividad frame = new CrearActividad();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
 	/**
 	 * Create the frame.
 	 * @param cronometrar 
 	 * @param aplicacion 
 	 */
-	public CrearActividad(CronometrarActividad cronometrar, Aplicacion aplicacion) {
-		
+	public CrearActividad(Aplicacion app) {
+		setIconImage(img.BULB);
 		presente = new JFrame();
-		ListaTipos = aplicacion.darProyectoActual().gettypeActividades();
-		participanteActual = aplicacion.getParticipante();
+		ListaTipos = app.darProyectoActual().gettypeActividades();
+		participanteActual = app.getParticipante();
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 697, 430);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 191, 255));
@@ -83,14 +67,14 @@ public class CrearActividad extends JFrame {
 		panel.add(lblTipoActividad);
 		lblTipoActividad.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(126, 160, 106, 22);
+		tiposActividad = new JComboBox();
+		tiposActividad.setBounds(126, 160, 106, 22);
 		for (String tipo : ListaTipos) 
 		{ 
-			comboBox.addItem(tipo);
+			tiposActividad.addItem(tipo);
 		}
-		//comboBox.addItemListener(this);
-		panel.add(comboBox);
+		tiposActividad.addActionListener(this);
+		panel.add(tiposActividad);
 		
 		/*
 		JFormattedTextField frmtdtxtfldRealice = new JFormattedTextField();
@@ -139,15 +123,20 @@ public class CrearActividad extends JFrame {
 					JOptionPane.showMessageDialog(presente,"Hay una o mas casillas que siguen en blanco, rellene todas por favor");
 				}
 				else {
-				String tipo = (String)comboBox.getSelectedItem();
+				String tipo = (String)tiposActividad.getSelectedItem();
 				String titulo = frmtdtxtfldRealice.getText();
 				String descripcion = frmtdtxtfldActividad.getText();
-				aplicacion.ejecutarNuevaActividad(titulo, descripcion, tipo, participanteActual);
+				app.ejecutarNuevaActividad(titulo, descripcion, tipo, participanteActual);
 				setVisible(false); //recibir los inputs
-				cronometrar.setVisible(true);
+				app.getCronometro().setVisible(true);
 				}
 			}
 			});
 		panel.add(btnNewButton);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		tipoSeleccionado = tiposActividad.getSelectedItem().toString();
 	}
 }

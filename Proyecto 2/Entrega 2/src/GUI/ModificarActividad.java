@@ -1,20 +1,24 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JLabel;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import Graficos.Imagenes;
+import Modelo.Actividad;
 
 public class ModificarActividad extends JFrame {
-
+	private Imagenes img;
 	private JPanel contentPane;
 	private JTextField txtDejarEnBlanco;
 	private JTextField textField;
@@ -24,28 +28,21 @@ public class ModificarActividad extends JFrame {
 	private JLabel lblNewLabel_1_1_3;
 	private JButton btnNewButton;
 	private JLabel lblNewLabel_2;
+	private String aModificar;
+	private int modificaciones;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ModificarActividad frame = new ModificarActividad();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	public static final int ENCARGADO = 1;
+	public static final int FECHA_INICIO = 2;
+	public static final int FECHA_FIN = 3;
+	public static final int FECHAS = 4;
+	public static final int TODO = 5;
 
 	/**
 	 * Create the frame.
 	 */
-	public ModificarActividad() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public ModificarActividad(Aplicacion app) {
+		setIconImage(img.BULB);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 552, 471);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 206, 209));
@@ -115,15 +112,32 @@ public class ModificarActividad extends JFrame {
 		lblNewLabel_1_1_3.setBounds(84, 311, 165, 14);
 		contentPane.add(lblNewLabel_1_1_3);
 		
+		String[] cambios = {txtDejarEnBlanco.getText(), textField.getText(), textField_1.getText(), textField_2.getText()};
+		boolean cmb1 = (!cambios[0].equals("Dejar en blanco si no realizara cambios") && !cambios[0].equals(""));
+		boolean cmb2 = (!cambios[0].equals("Dejar en blanco si no realizara cambios") && !cambios[0].equals(""));
+		boolean cmb3 = (!cambios[0].equals("Dejar en blanco si no realizara cambios") && !cambios[0].equals(""));
+		boolean cmb4 = (!cambios[0].equals("Dejar en blanco si no realizara cambios") && !cambios[0].equals(""));
+		boolean[] seCambia = {cmb1, cmb2, cmb3, cmb4};
+		
 		btnNewButton = new JButton("Enviar");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBounds(84, 387, 111, 14);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				Actividad actividadAModificar = app.darProyectoActual().getActividades().get(aModificar).get(0);
+				app.ejecutarModificarActividad(actividadAModificar, cambios, seCambia);
+			}
+			});
 		contentPane.add(btnNewButton);
 		
 		lblNewLabel_2 = new JLabel("New label");
 		lblNewLabel_2.setIcon(new ImageIcon(ModificarActividad.class.getResource("/Graficos/enviar-mensaje.png")));
 		lblNewLabel_2.setBounds(221, -20, 315, 564);
 		contentPane.add(lblNewLabel_2);
+	}
+	
+	public void setNombreActividad(String param) {
+		aModificar = param;
 	}
 }

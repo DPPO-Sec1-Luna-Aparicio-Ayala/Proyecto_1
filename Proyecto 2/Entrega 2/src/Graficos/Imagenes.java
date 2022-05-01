@@ -12,4 +12,5 @@ public class Imagenes {
 	public static final Image BULB = tk.getImage("src/Graficos/1087815.png");
 	public static final Image WELCOME = tk.getImage("src/Graficos/welcome.png");
 	public static final Image IDEA = tk.getImage("src/Graficos/idea-genial.png");
+	public static final Image CRONOMETRO = tk.getImage("src/Graficos/cronometro.png");
 }

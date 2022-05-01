@@ -56,7 +56,7 @@ public class CrearProyecto extends JFrame {
 	 * @param aplicacion 
 	 */
 	public CrearProyecto(Aplicacion aplicacion) {
-		
+		setIconImage(img.BULB);
 		presente = new JFrame();
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -213,6 +213,8 @@ public class CrearProyecto extends JFrame {
 				
 				setVisible(false);
 				aplicacion.crearProyecto(nombreProyecto, descripcionProyecto, fechaIProyecto, fechaFProyecto, nombreAdmin, correoAdmin, tiposProyecto);
+				aplicacion.actualizarProyActual();
+				aplicacion.setMenuProyecto();
 				aplicacion.darMenuProyecto().setVisible(true);
 				}
 			}

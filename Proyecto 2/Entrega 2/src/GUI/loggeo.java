@@ -30,6 +30,7 @@ public class loggeo extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public loggeo(Aplicacion aplicacion) {
+		setIconImage(img.BULB);
 		app = aplicacion;
 		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);

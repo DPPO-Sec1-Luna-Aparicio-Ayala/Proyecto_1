@@ -38,7 +38,8 @@ public class menuProyecto extends JFrame {
 	 * @param crearActividad 
 	 * @param aplicacion 
 	 */
-	public menuProyecto(VentanaPrincipal principal, CrearActividad crearActividad, EscogerActiAModificar escogerActividad, Aplicacion aplicacion) {
+	public menuProyecto(Aplicacion app) {
+		setIconImage(img.BULB);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 668, 430);
 		contentPane = new JPanel();
@@ -53,7 +54,7 @@ public class menuProyecto extends JFrame {
 		lblNewLabel.setBounds(303, 34, 97, 42);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_Proy = new JLabel("Proyecto Actual: " + aplicacion.darProyectoActual().getNombre());
+		JLabel lblNewLabel_Proy = new JLabel("Proyecto Actual: " + app.darProyectoActual().getNombre());
 		lblNewLabel_Proy.setForeground(new Color(255, 255, 255));
 		lblNewLabel_Proy.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_Proy.setBounds(210, 260, 280, 40);
@@ -61,23 +62,23 @@ public class menuProyecto extends JFrame {
         lblNewLabel_Proy.setBorder(border);
 		contentPane.add(lblNewLabel_Proy);
 		
-		JButton btnNewButton_4 = new JButton("Regresar Inicio");
+		JButton btnNewButton_4 = new JButton("Atrás.");
 		btnNewButton_4.setBounds(372, 328, 105, 23);
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				principal.setVisible(true);
+				app.VisiblePrincipal(true);
 				setVisible(false);
 			}
 			});
 		contentPane.add(btnNewButton_4);
 		
 		
-		JButton btnNewButton_5 = new JButton("Salir App");
+		JButton btnNewButton_5 = new JButton("Salir.");
 		btnNewButton_5.setBounds(493, 328, 97, 23);
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				try {
-					aplicacion.persistenciaArchivoGuardar();
+					app.persistenciaArchivoGuardar();
 					System.exit(EXIT_ON_CLOSE);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
@@ -107,7 +108,8 @@ public class menuProyecto extends JFrame {
 		btnNewButton.setBounds(11, 8, 171, 57);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				crearActividad.setVisible(true); 
+				app.setCrearActividad();
+				app.VisibleCrearActividad(true);
 				setVisible(false);
 			}
 			});
@@ -118,9 +120,14 @@ public class menuProyecto extends JFrame {
 		btnNewButton_6.setBounds(198, 8, 171, 57);
 		btnNewButton_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				escogerActividad.setVisible(true); 
-				setVisible(false);
-			}
+				if(app.darProyectoActual().getActividades().size() != 0) {
+					app.setEscogerActividad();
+					app.VisibleEscogerActividad(true); 
+					setVisible(false);
+				} else {
+					JOptionPane.showMessageDialog(contentPane,"Primero cree una actividad.");	
+				}
+			} 
 			});
 		panel.add(btnNewButton_6);
 		btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -145,7 +152,7 @@ public class menuProyecto extends JFrame {
 			public void windowClosing(WindowEvent e)
 			{
 				try {
-					aplicacion.persistenciaArchivoGuardar();
+					app.persistenciaArchivoGuardar();
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

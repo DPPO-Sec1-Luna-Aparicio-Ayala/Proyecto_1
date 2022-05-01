@@ -1,26 +1,26 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import Graficos.Imagenes;
 
 public class CronometrarActividad extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame presente; 
+	private Imagenes img;
+	private Aplicacion app;
 
 	/**
 	 * Launch the application.
@@ -44,7 +44,8 @@ public class CronometrarActividad extends JFrame {
 	 * @param aplicacion 
 	 */
 	public CronometrarActividad(Aplicacion aplicacion) {
-		
+		app = aplicacion;
+		setIconImage(img.CRONOMETRO);
 		presente = new JFrame();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -65,8 +66,12 @@ public class CronometrarActividad extends JFrame {
 		btnNewButton.setBounds(43, 60, 186, 47);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				aplicacion.IniciarTemporizador();
-				JOptionPane.showMessageDialog(presente,"El tiempo esta corriendo");
+				if(app.estaCronometrando() == app.PAUSADO || app.estaCronometrando() == app.APAGADO) {
+					app.IniciarTemporizador();
+					JOptionPane.showMessageDialog(presente,"El tiempo está corriendo.");
+				} else {
+					JOptionPane.showMessageDialog(presente,"El cronómetro ya está corriendo.");
+				}
 			}
 			});
 		contentPane.add(btnNewButton);
@@ -76,8 +81,15 @@ public class CronometrarActividad extends JFrame {
 		btnNewButton_1.setBounds(43, 133, 186, 47);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				aplicacion.PausarTemporizador();
-				JOptionPane.showMessageDialog(presente,"Ha pausado el tiempo, oprima INICIAR CRONOMETRO para reanudarlo");
+				if (app.estaCronometrando() == app.CRONOMETRANDO) {
+					app.PausarTemporizador();
+					JOptionPane.showMessageDialog(presente,"Ha pausado el tiempo, oprima INICIAR CRONOMETRO para reanudarlo");
+				} else if (app.estaCronometrando() == app.APAGADO){
+					JOptionPane.showMessageDialog(presente,"Primero inicie el cronómetro.");
+				} else if (app.estaCronometrando() == app.PAUSADO){
+					JOptionPane.showMessageDialog(presente,"El tiempo ya está pausado.");
+				}
+				
 			}
 			});
 		contentPane.add(btnNewButton_1);
@@ -87,18 +99,21 @@ public class CronometrarActividad extends JFrame {
 		btnNewButton_2.setBounds(43, 206, 186, 47);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				long tiempo = aplicacion.FinalizarTemporizador();
-				JOptionPane.showMessageDialog(presente,"Ha finalizado el tiempo, ha trabajado: " + String.valueOf(tiempo) + " segundos");
-				setVisible(false);
-				aplicacion.VisibleMenuAct();
+				if(app.estaCronometrando() == app.PAUSADO || app.estaCronometrando() == app.CRONOMETRANDO) {
+					long tiempo = aplicacion.FinalizarTemporizador();
+					JOptionPane.showMessageDialog(presente,"Ha finalizado el tiempo. a trabajado: " + String.valueOf(tiempo) + " segundos");
+					setVisible(false);
+					aplicacion.VisibleMenuAct(true);
+				} else {
+					JOptionPane.showMessageDialog(presente,"Primero inicie el cronómetro.");
+				}
 				
 			}
 			});
 		contentPane.add(btnNewButton_2);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\Usuario\\OneDrive - Universidad de los Andes\\Documentos\\3er Semestre\\DPOO\\Proy 1\\Proyecto_DPOO\\Proyecto 2\\Entrega 2\\src\\Graficos\\cronometro.png"));
+		lblNewLabel_1.setIcon(new ImageIcon(img.CRONOMETRO));
 		lblNewLabel_1.setBounds(220, 0, 343, 370);
 		contentPane.add(lblNewLabel_1);
 	}

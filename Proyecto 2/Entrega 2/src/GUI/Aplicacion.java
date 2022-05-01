@@ -25,75 +25,42 @@ public class Aplicacion implements Serializable, ActionListener {
 	//private Cronometro cronometro;
 	Cronometro cronometro = new Cronometro();
 	ArrayList<String> proyectosGuardados = new ArrayList<String>();
-	
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	//cambiar muchas de las visiblidades a solo funciones con la aplicacion para evitar tanto enlace de que todos se tengan como parametros
-	//!!!!!!!!!!!!!!!!!!!!!!
-	//!!!!!!!!!!!!!!!!!!!!!
-	//"""""""""""""""""""""
-	
-	
+	private int cronometrando;
 	
 	//GUI//
 	private VentanaPrincipal principal;
 	private ModificarActividad modificar;
 	private menuProyecto menuProyecto;
-	private MenuEscogerProyecto escogerProyecto;
 	private loggeo login;
 	private EscogerActiAModificar escogerActividad;
 	private CronometrarActividad cronometrar;
 	private CrearProyecto crearProyecto;
 	private CrearActividad crearActividad;
 	
+	//CONSTANTES//
+	public static final int PAUSADO = 1;
+	public static final int APAGADO = 0;
+	public static final int CRONOMETRANDO = 2;
+	
 	public Aplicacion() throws IOException{
 		prepararAplicacion();
+		cronometrando = APAGADO;
+		
 		principal = new VentanaPrincipal(this);
-		modificar = new ModificarActividad();
-		
-		escogerProyecto = new MenuEscogerProyecto(this);
-		escogerActividad = new EscogerActiAModificar();
-		cronometrar = new CronometrarActividad(this);
-		
-		crearActividad = new CrearActividad(cronometrar, this);
-		menuProyecto = new menuProyecto(principal, crearActividad, escogerActividad, this); //falta la ventana del reporte y de añadir participante
-		crearProyecto = new CrearProyecto(this);
 		principal.setVisible(true);
 		
+		modificar = new ModificarActividad(this);
 		
-	/*
-				mostrarOpciones();
-				int opcion_seleccionada = Integer.parseInt(input("Por favor seleccione una opción"));
-				if (opcion_seleccionada == 1)
-					crearProyecto();
-				else if (opcion_seleccionada == 2)
-					escogerProyecto();
-				else if (opcion_seleccionada == 3 && proyectoActual != null)
-					ejecutarAñadirParticipante();
-				else if (opcion_seleccionada == 4 && proyectoActual != null)
-					ejecutarNuevaActividad();
-				else if (opcion_seleccionada == 5 && proyectoActual != null)
-					ejecutarModificarActividad();
-				else if (opcion_seleccionada == 6 && proyectoActual != null)
-					ejecutarMostrarReporte();
-				else if (opcion_seleccionada == 7)
-				{
-				}
-				else if (proyectoActual == null)
-				{
-					System.out.println("Para poder ejecutar esta opción primero debe escoger un proyecto");
-				}
-				else
-				{
-					System.out.println("Por favor seleccione una opción válida.");
-				}*/
+		cronometrar = new CronometrarActividad(this);
+		
+		crearProyecto = new CrearProyecto(this);
 		}
 	
 	long tiempo = 0;
 	//boolean primera = false;
 	
 	public void IniciarTemporizador() {
-		
+		cronometrando = CRONOMETRANDO;
 		cronometro.start();
 		tiempo = 0;
 		//primera = true;
@@ -101,29 +68,25 @@ public class Aplicacion implements Serializable, ActionListener {
 	}
 	
 	public void PausarTemporizador() {
-		
+		cronometrando = PAUSADO;
 		cronometro.stop();
 		tiempo += cronometro.getElapsedSeconds();
 		
 	}
 	
 	public long FinalizarTemporizador() {
-		
+		cronometrando = APAGADO;
 		cronometro.stop();
 		tiempo += cronometro.getElapsedSeconds();
 		actividadActual.setTiempo(tiempo);
-		System.out.println(proyectoActual.actividadActual.getTiempo() + " seg");
-		System.out.println("Ha finalizado el tiempo");
 		long devolver = tiempo;
 		tiempo = 0;
 		return devolver;
 		
 	}
 	
-	
-	
-	private void ejecutarIniciarTemporizador(Actividad actividadActual) {
-		
+	/*private void ejecutarIniciarTemporizador(Actividad actividadActual) {
+			
 				int op = Integer.parseInt(input("Para iniciar el cronometro oprima cualquier numero"));
 				
 				cronometro.start();
@@ -155,11 +118,8 @@ public class Aplicacion implements Serializable, ActionListener {
 		}
 				
 		actividadActual.setTiempo(var);
-		System.out.println(proyectoActual.actividadActual.getTiempo() + " min");
-		System.out.println("Ha finalizado el tiempo");
-				
-		
-	}
+		JOptionPane.showMessageDialog(principal,proyectoActual.actividadActual.getTiempo() + " min"+"\nHa finalizado el tiempo.");	
+	}*/
 
 	//No crear nueva actividad hasta q no termine otra
 	//MÉTODOS//
@@ -187,30 +147,9 @@ public class Aplicacion implements Serializable, ActionListener {
 	}
 	
 	public void ejecutarNuevaActividad(String titulo, String descripcion, String tipo, Participante participante) {
-		
-			/*
-			System.out.println("Por favor diligencie los siguientes datos ");
-			String titulo = input("Escriba el titulo de su actividad");
-			String descripcion = input ("Escriba una descripción para su actividad");
-	
-			int count=1;
-			for(String actividad : proyectoActual.gettypeActividades()) {
-				System.out.println(count + ". "+actividad);
-				count+=1;	
-			}
-			
-			
-			String numtipo= input("Por favor elija el tipo de actividad a relaizar e ingrese el numero");
-			String tipo = proyectoActual.gettypeActividades().get(Integer.parseInt(numtipo)-1);
-			*/
 			proyectoActual.nuevaActividad(titulo,descripcion,tipo, participante);
 			actividadActual = proyectoActual.getActividadActual();
-			System.out.println("Se creo con exito");
-			/*
-			ejecutarIniciarTemporizador(actividadActual);
-			System.out.println("\n Actividad creada con exito");
-			*/
-			
+			JOptionPane.showMessageDialog(principal,"La actividad se creó con éxito.");				
 }
 
 	public void terminarActividad() {
@@ -220,7 +159,7 @@ public class Aplicacion implements Serializable, ActionListener {
 	}
 	
 	public void ejecutarAñadirParticipante() {
-		
+		/*
 		System.out.println("Por favor diligencie los siguientes datos ");
 		String correo = input ("Diligencie su correo");
 		String nombre = input("Escriba su nombre");
@@ -229,7 +168,7 @@ public class Aplicacion implements Serializable, ActionListener {
 		{
 			owner = true;
 		}
-		proyectoActual.añadirParticipante(correo,nombre,owner);
+		proyectoActual.añadirParticipante(correo,nombre,owner);*/
 	}
 	
 	public void ejecutarMostrarReporte() {
@@ -238,31 +177,11 @@ public class Aplicacion implements Serializable, ActionListener {
 		proyectoActual.generarReporte();
 	}
 	
-	public void ejecutarModificarActividad() {
-		int count = 1;
-		boolean b=false;
-		for (String actividad: proyectoActual.getActividades().keySet()) {
-			System.out.println(count +". " + actividad);
-			count+=1;
-		}
-		String acti = input("Escriba el titulo de la actividad que desea modificar (tal cual aparece en pantalla)");
-		
-		if(proyectoActual.getActividades().containsKey(acti)) {
-					
-					System.out.println("\n Escriba el numero de la acción que desea hacer");
-					String cambio = input("Desea modificar el encargado de la actividad (1) o la hora de realización(2) o (3) para ambas");
-					int count3=1;
-					for (Actividad activity : proyectoActual.getActividades().get(acti)) {
-						System.out.println(count3+". Titulo:"+activity.getTitle()+"\tEncargado: "+activity.getResponsable().getNombre()+" \tFecha: "+activity.getFechaI());
-						count3+=1;
-					}
-					String cualActividad = input("Escoja la actividad a modificar");
-					Actividad actividadAModificar = proyectoActual.getActividades().get(acti).get(Integer.parseInt(cualActividad)-1);
-					
-		
-					if(cambio.equals("1")) {
-						b=true;
+	
+	public void ejecutarModificarActividad(Actividad actividadAModificar,String[] modificaciones, boolean[] cambiaron) {		/*	
+				if(cambiaron[0]) {
 						int count2= 1;
+						/*
 						ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();			
 						for (Participante esParte : participantesProyecto) {
 							System.out.println(count2 +". " + esParte.getNombre());
@@ -271,108 +190,62 @@ public class Aplicacion implements Serializable, ActionListener {
 						String newEncargado =  input("Seleccione la persona que desea poner a cargo (escriba solo el numero)\n Si la persona no se encuentra en la lista añadalo como participante");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
 						Participante newEncargadoo = proyectoActual.getParticipantes().get(Integer.parseInt(newEncargado)-1);
 						
+						Participante newEncargadoo = new Participante(cambios[3], cambios[2], true);
 						proyectoActual.modificarActividad(cambio, newEncargadoo,"","", actividadAModificar);
 						
-						
-						System.out.println("\n El nuevo encargado es: "+ newEncargadoo.getNombre());
+						JOptionPane.showMessageDialog(principal," El nuevo encargado es: "+ newEncargadoo.getNombre());
 					}
-					if (cambio.equals("2")) {
-						b=true;
-						String nuevaFechaI = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar");
-						String nuevaFechaF = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar"); 
-						proyectoActual.modificarActividad(cambio,participanteActual,nuevaFechaI,nuevaFechaF, actividadAModificar);
-						System.out.println("\n Las nuevas fechas son: \n Fecha inicio: "+ nuevaFechaI+"\n Fecha fin: "+ nuevaFechaF);
+					if (cambio == 2) {
+
+						String nuevaFechaI = cambios[0];
+						proyectoActual.modificarActividad(cambio,participanteActual,nuevaFechaI,"", actividadAModificar);
+						JOptionPane.showMessageDialog(principal,"La nueva fecha de inicio es "+nuevaFechaI);
 					}
 					
-					if(cambio.equals("3")) {
+					if (cambio == 3) {
+						String nuevaFechaF = cambios[1]; 
+						proyectoActual.modificarActividad(cambio,participanteActual,"",nuevaFechaF, actividadAModificar);
+						JOptionPane.showMessageDialog(principal,"La nueva fecha de finalización es "+nuevaFechaF);
+					}
+					
+					if(cambio == 4) {
 						int count2= 1;
-						b=true;
 						ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();			
 						for (Participante esParte : participantesProyecto) {
 							System.out.println(count2 +". " + esParte.getNombre());
 							count2+=1;	
 						}
-						String newEncargado =  input("Seleccione la persona que desea poner a cargo (escriba solo el numero)\n Si la persona no se encuentra en la lista añadalo como participante");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
-						Participante newEncargadoo = proyectoActual.getParticipantes().get(Integer.parseInt(newEncargado)-1);
-						String nuevaFechaI = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar");
-						String nuevaFechaF = input("Diligencia la fecha de inicio de su actividad, use este formato  06-04-2022 21:38 \n o escriba MANTENER si no desea modificar"); 
-						System.out.println("\n El nuevo encargado es: "+ newEncargadoo.getNombre() +"\n Las nuevas fechas son: \n Fecha inicio: "+ nuevaFechaI+"\n Fecha fin: "+ nuevaFechaF);
+						Participante newEncargadoo = new Participante(cambios[3], cambios[2], true);
+						String nuevaFechaI = cambios[0];
+						String nuevaFechaF = cambios[1];
+						
+						JOptionPane.showMessageDialog(principal,"\nEl nuevo encargado es: "+ newEncargadoo.getNombre() +"\nLas nuevas fechas son:\nFecha inicio: "+ nuevaFechaI+"\nFecha fin: "+ nuevaFechaF);
 					}
-					
-					
-					else if (!b) {
-						System.out.println("La opción ingresada no es válida");
-					}
-		}
-		else {
-			System.out.println("Escribió mal el título de la actividad, intente de nuevo");
+		*/}
+		
+
+	
+	//Cambiar visibilidad de las ventanas
+		public void VisibleMenuAct(boolean o) {
+			menuProyecto.setVisible(o);
 		}
 		
-	}
-	
-	private String input(String mensaje) {
-		try
-		{
-			System.out.print(mensaje + ": ");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-			return reader.readLine();
+		public void VisiblePrincipal(boolean o) {
+			principal.setVisible(o);
 		}
-		catch (IOException e)
-		{
-			System.out.println("Error leyendo de la consola");
-			e.printStackTrace();
+		
+		public void VisibleCrearActividad(boolean o) {
+			crearActividad.setVisible(o);
 		}
-		return null;
-	}
-	
-	public void mostrarOpciones()
-	{
-		System.out.println("\nOpciones de la aplicación\n");
-		System.out.println("1. Crear nuevo proyecto");
-		System.out.println("2. Seleccionar proyecto");
-		System.out.println("3. Añadir participante al proyecto");
-		System.out.println("4. Agregar actividad");
-		System.out.println("5. Modificar una actividad");
-		System.out.println("6. Mostrar reporte");
-		System.out.println("7. Salir de la aplicación"); 
-	}
-	
-	public void prepararAplicacion(){
-		this.proyectos = new ArrayList<Proyecto>();
-		FileManager fileManager = new FileManager();
-		proyectos = fileManager.read("appData.txt");
-		proyectoActual = proyectos.get(0);
-	}
-	
-	
-	public Proyecto darProyectoActual() {
-		return proyectoActual;
-	}
-	
-	public ArrayList<Proyecto> darProyectos(){
-		return proyectos;
-	}
-	
-	public void VisibleMenuAct() {
-		menuProyecto.setVisible(true);
-	}
-	
-	public  Participante getParticipante() {
-		return this.participanteActual;
-	}
-	
-	public menuProyecto darMenuProyecto() {
-		return menuProyecto;
-	}
-	
-	
-	public static void main(String[] args) throws IOException	
-	{
-		new Aplicacion();
-	}
-	
-	
-
+		
+		public void VisibleEscogerActividad(boolean o) {
+			escogerActividad.setVisible(o);
+		}
+		
+		public void VisibleModificarActividad(boolean o) {
+			modificar.setVisible(o);
+		}
+		
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object fuente = e.getSource();
@@ -395,7 +268,6 @@ public class Aplicacion implements Serializable, ActionListener {
 			crearProyecto.setVisible(true);
 			principal.setVisible(false);
 			//Hacer un btn de retorno!!!
-			//crearProyecto();
 		}
 		
 		else if (fuente == login.getLogInBtn()) {
@@ -412,6 +284,7 @@ public class Aplicacion implements Serializable, ActionListener {
 					participanteActual=actual;
 					login.setVisible(false);
 					principal.setVisible(false);
+					setMenuProyecto();
 					menuProyecto.setVisible(true);
 					encontrado = true;
 				} else {
@@ -423,22 +296,69 @@ public class Aplicacion implements Serializable, ActionListener {
 			if (encontrado == false) {
 				JOptionPane.showMessageDialog(principal,"Usted no hace parte de este proyecto, intente con otro correo o pida ser añadido");
 			}
-			/*
-			for (Participante esParte : participantesProyecto) {
-				String correo = esParte.getCorreo();
-				if (!correo.equals(email)) {
-					JOptionPane.showMessageDialog(principal,"Usted no hace parte de este proyecto, intente con otro correo o pida ser añadido");
-				}
-				else {
-					JOptionPane.showMessageDialog(principal,"Ha ingresado correctamente al sistema.");
-					participanteActual=esParte;
-					login.setVisible(false);
-					principal.setVisible(false);
-					menuProyecto.setVisible(true);
-				}
-			}*/
+			JOptionPane.showMessageDialog(principal,"El participante actual es"+participanteActual.getNombre());
 		}
-		//else if (fuente == menuProyecto.get)
+	}
+	
+
+	public void actualizarProyActual(){
+		proyectoActual = proyectos.get(0);
+	}
+	
+	
+	public Proyecto darProyectoActual() {
+		return proyectoActual;
+	}
+	
+	public ArrayList<Proyecto> darProyectos(){
+		return proyectos;
+	}
+	
+	public  Participante getParticipante() {
+		return participanteActual;
+	}
+	
+	public menuProyecto darMenuProyecto() {
+		return menuProyecto;
+	}
+	
+	public CronometrarActividad getCronometro() {
+		return cronometrar;
+	}
+	
+	public int estaCronometrando() {
+		return cronometrando;
+	}
+	
+	public void setCrearActividad() {
+		crearActividad = new CrearActividad(this);
+	}
+	
+	public void setEscogerActividad() {
+		escogerActividad = new EscogerActiAModificar(this);
+	}
+	
+	public void setMenuProyecto() {
+		menuProyecto = new menuProyecto(this); //falta la ventana del reporte y de añadir participante
+
+	}
+	
+	public void setActividadModificar(String param) {
+		modificar.setNombreActividad(param);
+	}
+	
+	public void prepararAplicacion(){
+		this.proyectos = new ArrayList<Proyecto>();
+		FileManager fileManager = new FileManager();
+		proyectos = fileManager.read("appData.txt");
+		if (proyectos.size() != 0){
+			proyectoActual = proyectos.get(0);
+		}
+	}
+	
+	public static void main(String[] args) throws IOException	
+	{
+		new Aplicacion();
 	}
 
 }
