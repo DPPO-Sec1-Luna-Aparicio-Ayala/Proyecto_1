@@ -112,9 +112,9 @@ public class CronometrarActividad extends JFrame {
 			});
 		contentPane.add(btnNewButton_2);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(img.CRONOMETRO));
-		lblNewLabel_1.setBounds(220, 0, 343, 370);
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(CronometrarActividad.class.getResource("/Graficos/cronometro.png")));
+		lblNewLabel_1.setBounds(169, 0, 394, 448);
 		contentPane.add(lblNewLabel_1);
 	}
 
