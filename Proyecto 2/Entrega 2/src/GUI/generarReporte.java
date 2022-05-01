@@ -1,7 +1,7 @@
 package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.HashMap;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -12,6 +12,8 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 
@@ -23,8 +25,10 @@ public class generarReporte extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @param reporteHPersonas 
+	 * @param reporteActividad 
 	 */
-	public generarReporte(Aplicacion aplicacion) {
+	public generarReporte(Aplicacion aplicacion, HashMap<String, HashMap<String, Double>> reporteActividad, HashMap<String, String> reporteHPersonas) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 576, 428);
 		contentPane = new JPanel();
@@ -33,15 +37,48 @@ public class generarReporte extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Generar Reporte");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBounds(53, 171, 201, 68);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
-				app.ejecutarMostrarReporte();
-			} 
-			});
-		contentPane.add(btnNewButton);
+		JLabel lblNewLabel_2 = new JLabel("Reporte por actividades, desplegar por favor");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_2.setBounds(38, 70, 176, 22);
+		contentPane.add(lblNewLabel_2);
+		
+		JComboBox tiposActividad = new JComboBox();
+		tiposActividad.setBounds(40, 90, 400, 25);
+		
+		//System.out.println("REPORTE POR TIPO ACTIVIDAD"); pasar a label
+		for(String tipo:reporteActividad.keySet()) {
+			//System.out.println("Tipo Atividad: "+ tipo);
+			int count =1;
+			for(String correo:reporteActividad.get(tipo).keySet()) {
+				//System.out.println("\n"+count+ ". "+correo+"\tTiempo: "+reporteActividad.get(tipo).get(correo));
+				String combo = "Tipo Actividad: " + tipo + " " +count+ ". "+correo+"\tTiempo: "+reporteActividad.get(tipo).get(correo);
+				tiposActividad.addItem(combo);
+				count+=1;
+			}
+		}
+		
+		//tiposActividad.addActionListener(this);
+		contentPane.add(tiposActividad);
+		
+		JLabel lblNewLabel_3 = new JLabel("Reporte por personas, desplegar por favor");
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_3.setBounds(38, 130, 176, 22);
+		contentPane.add(lblNewLabel_3);
+		
+		JComboBox Personas = new JComboBox();
+		Personas.setBounds(40, 150, 400, 25);
+		
+		System.out.println("REPORTE POR PERSONA"); // pasar a label
+		for (String msj: reporteHPersonas.values()){
+			
+			Personas.addItem(msj);
+			
+		}
+		
+		//tiposActividad.addActionListener(this);
+		contentPane.add(Personas);
+		
+		
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(generarReporte.class.getResource("/Graficos/report.png")));

@@ -120,7 +120,7 @@ public class Proyecto implements Serializable{
 	
 	*/
 
-	public void generarReporte() {
+	public HashMap<String,HashMap<String,Double>> generarReporteTipoActividad() {
 		//ArrayList<HashMap>reportefinal = new ArrayList<HashMap>();
 		HashMap<String,HashMap<String,Double>> reporteActividad = new HashMap<String,HashMap<String,Double>>();
 		for(ArrayList<Actividad>actividadlista: actividades.values()) {
@@ -151,17 +151,49 @@ public class Proyecto implements Serializable{
 			
 	
 		}
-		System.out.println("REPORTE POR TIPO ACTIVIDAD");
-		for(String tipo:reporteActividad.keySet()) {
-			System.out.println("Tipo Atividad: "+ tipo);
-			int count =1;
-			for(String correo:reporteActividad.get(tipo).keySet()) {
-				System.out.println("\n"+count+ ". "+correo+"\tTiempo: "+reporteActividad.get(tipo).get(correo));
-				count+=1;
-			}
-			
-		}
+		
+		return reporteActividad;
+	}
+	
+	
+	public HashMap<String,String> generarReportePersonas(){
+	HashMap<String, String> reporteHPersonas = new HashMap<String, String>();
+	HashMap<String, String> Apoyo = new HashMap<String, String>();
+	for(ArrayList<Actividad> Actividades: actividades.values()) {
+		for(Actividad actual: Actividades) {
+		
+		Participante personas = actual.getResponsable();
+		String nom = personas.getNombre();
+		String corr = personas.getCorreo();
+		double tiempo_tot = actual.getTiempo();
+		
+		String llave = nom+corr;
+		String contenido = "Nombre: " + nom + "\n" + "Correo: " + corr + "\n" + "Tiempo total: " + tiempo_tot + " min";
+		
+		if(reporteHPersonas.containsKey(llave) == false)	{
+			reporteHPersonas.put(llave, contenido);
+			Apoyo.put(llave, ""+tiempo_tot);
 
+		}
+		else {
+			
+			String n = Apoyo.get(llave);
+			double tiempoViejo = Double.parseDouble(n);
+			double tiempoNuevo = tiempoViejo + tiempo_tot;
+			String Ncontenido = "Nombre: " + nom + "\n" + "Correo: " + corr + "\n" + "Tiempo total: " + tiempoNuevo + " min";
+			reporteHPersonas.put(llave, Ncontenido);
+			Apoyo.put(llave, ""+tiempoNuevo);
+		} 
+		
+				
+		}
+	}
+	
+	return  reporteHPersonas;
+	
+	
+}
+	
 	public void nuevaActividad(String titulo, String descripcionActividad, String tipo, Participante encargado) {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");

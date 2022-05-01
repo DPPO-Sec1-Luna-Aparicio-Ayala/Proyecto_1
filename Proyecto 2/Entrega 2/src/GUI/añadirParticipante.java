@@ -9,8 +9,14 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 
 public class añadirParticipante extends JFrame {
@@ -24,6 +30,7 @@ public class añadirParticipante extends JFrame {
 	 * Create the frame.
 	 */
 	public añadirParticipante(Aplicacion aplicacion) {
+		app=aplicacion;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 529, 346);
 		contentPane = new JPanel();
@@ -65,5 +72,29 @@ public class añadirParticipante extends JFrame {
 		lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel_2_1.setBounds(309, 140, 94, 14);
 		contentPane.add(lblNewLabel_2_1);
+		
+		JButton btnNewButton = new JButton("Añadir");
+		btnNewButton.setBounds(307, 220, 135, 30);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (txtPepito.getText().equals("") || txtExamplegmailcom.getText().equals("")) {
+					JOptionPane.showMessageDialog(contentPane,"Hay una o mas casillas que siguen en blanco, rellene todas por favor");
+				}
+				else {
+			
+				String nombre = txtPepito.getText();
+				String correo = txtExamplegmailcom.getText();
+				if(!app.darProyectoActual().getParticipantes().isEmpty()){
+					app.ejecutarAñadirParticipante(nombre,correo,false);
+					setVisible(false); 
+					app.VisibleMenuAct(true);
+					JOptionPane.showMessageDialog(contentPane,"Se ha añadido a "+nombre+" como participante!");
+				}
+				
+				}
+			}
+			});
+		contentPane.add(btnNewButton);
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 	}
 }

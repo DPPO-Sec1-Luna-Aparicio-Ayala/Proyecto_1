@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
@@ -56,6 +57,8 @@ public class Aplicacion implements Serializable, ActionListener {
 		cronometrar = new CronometrarActividad(this);
 		
 		crearProyecto = new CrearProyecto(this);
+		
+		generarReporte = new generarReporte(this, null, null);
 		}
 	
 	long tiempo = 0;
@@ -160,76 +163,27 @@ public class Aplicacion implements Serializable, ActionListener {
 	
 	}
 	
-	public void ejecutarAñadirParticipante() {
-		/*
-		System.out.println("Por favor diligencie los siguientes datos ");
-		String correo = input ("Diligencie su correo");
-		String nombre = input("Escriba su nombre");
-		boolean owner= false;
-		if (proyectoActual.getParticipantes().isEmpty())
-		{
-			owner = true;
-		}
-		proyectoActual.añadirParticipante(correo,nombre,owner);*/
+	public void ejecutarAñadirParticipante(String nombre,String correo,boolean owner) {
+		proyectoActual.añadirParticipante(nombre, correo, owner);
 	}
 	
-	public void ejecutarMostrarReporte() {
+	public HashMap<String,HashMap<String,Double>> ejecutarMostrarReporteActividad() {
 		//tiempo promedio x tipo de actividad
 		
-		proyectoActual.generarReporte();
+		return proyectoActual.generarReporteTipoActividad();
+	}
+	
+	public HashMap<String, String> ejecutarMostrarReportePersonas() {
+		//tiempo promedio x tipo de actividad
+		
+		return proyectoActual.generarReportePersonas();
 	}
 	
 	
 	public void ejecutarModificarActividad(Actividad actividadAModificar,String[] modificaciones, boolean[] cambiaron,Modelo.Participante acargo) {		
 		proyectoActual.modificarActividad(actividadAModificar,modificaciones,cambiaron,acargo);
-		
-		
-		/*	
-				
-				
-				if(cambiaron[0]) {
-						int count2= 1;
-						/*
-						ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();			
-						for (Participante esParte : participantesProyecto) {
-							System.out.println(count2 +". " + esParte.getNombre());
-							count2+=1;	
-						}
-						String newEncargado =  input("Seleccione la persona que desea poner a cargo (escriba solo el numero)\n Si la persona no se encuentra en la lista añadalo como participante");//VALIDAR SI EL NOMBRE HACE PARTE DE LOS PARTICIPANTES DEL PROYECTO
-						Participante newEncargadoo = proyectoActual.getParticipantes().get(Integer.parseInt(newEncargado)-1);
-						
-						Participante newEncargadoo = new Participante(cambios[3], cambios[2], true);
-						proyectoActual.modificarActividad(cambio, newEncargadoo,"","", actividadAModificar);
-						
-						JOptionPane.showMessageDialog(principal," El nuevo encargado es: "+ newEncargadoo.getNombre());
-					}
-					if (cambio == 2) {
 
-						String nuevaFechaI = cambios[0];
-						proyectoActual.modificarActividad(cambio,participanteActual,nuevaFechaI,"", actividadAModificar);
-						JOptionPane.showMessageDialog(principal,"La nueva fecha de inicio es "+nuevaFechaI);
-					}
-					
-					if (cambio == 3) {
-						String nuevaFechaF = cambios[1]; 
-						proyectoActual.modificarActividad(cambio,participanteActual,"",nuevaFechaF, actividadAModificar);
-						JOptionPane.showMessageDialog(principal,"La nueva fecha de finalización es "+nuevaFechaF);
-					}
-					
-					if(cambio == 4) {
-						int count2= 1;
-						ArrayList<Participante> participantesProyecto = proyectoActual.getParticipantes();			
-						for (Participante esParte : participantesProyecto) {
-							System.out.println(count2 +". " + esParte.getNombre());
-							count2+=1;	
-						}
-						Participante newEncargadoo = new Participante(cambios[3], cambios[2], true);
-						String nuevaFechaI = cambios[0];
-						String nuevaFechaF = cambios[1];
-						
-						JOptionPane.showMessageDialog(principal,"\nEl nuevo encargado es: "+ newEncargadoo.getNombre() +"\nLas nuevas fechas son:\nFecha inicio: "+ nuevaFechaI+"\nFecha fin: "+ nuevaFechaF);
-					}
-		*/}
+		}
 		
 
 	
@@ -256,6 +210,10 @@ public class Aplicacion implements Serializable, ActionListener {
 
 		public void VisibleGenerarReporte(boolean o) {
 			generarReporte.setVisible(o);
+		}
+		
+		public void VisibleAñadirParticipante(boolean o) {
+			añadirParticipante.setVisible(o);
 		}
 		
 	@Override
@@ -360,8 +318,8 @@ public class Aplicacion implements Serializable, ActionListener {
 		añadirParticipante= new añadirParticipante(this);
 	}
 	
-	public void setGenerarReporte () {
-		generarReporte = new generarReporte(this);
+	public void setGenerarReporte (HashMap<String, HashMap<String, Double>> reporteActividad, HashMap<String, String> reporteHPersonas) {
+		generarReporte = new generarReporte(this, reporteActividad,  reporteHPersonas);
 	}
 	
 	public void setActividadModificar(String param) {

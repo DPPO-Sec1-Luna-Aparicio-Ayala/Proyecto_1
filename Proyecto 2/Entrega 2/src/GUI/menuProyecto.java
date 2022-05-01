@@ -10,6 +10,7 @@ import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -113,6 +114,7 @@ public class menuProyecto extends JFrame {
 				app.setCrearActividad();
 				app.VisibleCrearActividad(true);
 				setVisible(false);
+				
 			}
 			});
 		panel.add(btnNewButton);
@@ -136,6 +138,13 @@ public class menuProyecto extends JFrame {
 		
 		JButton btnNewButton_6_1 = new JButton("A\u00F1adir Participante");
 		btnNewButton_6_1.setBounds(12, 72, 171, 57);
+		btnNewButton_6_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				app.setAñadirParticipante();
+				app.VisibleAñadirParticipante(true);
+				setVisible(false);
+			}
+			});
 		panel.add(btnNewButton_6_1);
 		btnNewButton_6_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
@@ -143,7 +152,11 @@ public class menuProyecto extends JFrame {
 		btnNewButton_6_1_1.setBounds(197, 72, 171, 57);
 		btnNewButton_6_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-					app.setGenerarReporte();
+					
+					HashMap<String,HashMap<String,Double>> reporteActividad = app.ejecutarMostrarReporteActividad();
+					HashMap<String, String> reporteHPersonas = app.ejecutarMostrarReportePersonas();
+					
+					app.setGenerarReporte(reporteActividad, reporteHPersonas);
 					app.VisibleGenerarReporte(true); //Verificar si reporte si queda visible
 					setVisible(false);
 			} 
