@@ -181,11 +181,8 @@ public class Aplicacion implements Serializable, ActionListener {
 	
 	
 	public void ejecutarModificarActividad(Actividad actividadAModificar,String[] modificaciones, boolean[] cambiaron,Modelo.Participante acargo) {		
+		proyectoActual.modificarActividad(actividadAModificar,modificaciones,cambiaron,acargo);
 		
-		if(cambiaron[0]||cambiaron[1])
-		{
-		
-		}
 		
 		/*	
 				
@@ -255,6 +252,10 @@ public class Aplicacion implements Serializable, ActionListener {
 		
 		public void VisibleModificarActividad(boolean o) {
 			modificar.setVisible(o);
+		}
+
+		public void VisibleGenerarReporte(boolean o) {
+			generarReporte.setVisible(o);
 		}
 		
 	@Override

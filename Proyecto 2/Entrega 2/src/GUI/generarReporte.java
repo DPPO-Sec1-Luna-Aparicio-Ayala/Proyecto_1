@@ -1,4 +1,6 @@
 package GUI;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -11,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 
 public class generarReporte extends JFrame {
 
@@ -33,6 +36,11 @@ public class generarReporte extends JFrame {
 		JButton btnNewButton = new JButton("Generar Reporte");
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.setBounds(53, 171, 201, 68);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				app.ejecutarMostrarReporte();
+			} 
+			});
 		contentPane.add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("");

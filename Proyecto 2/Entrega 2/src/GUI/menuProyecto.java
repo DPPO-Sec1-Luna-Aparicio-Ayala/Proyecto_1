@@ -62,7 +62,8 @@ public class menuProyecto extends JFrame {
         lblNewLabel_Proy.setBorder(border);
 		contentPane.add(lblNewLabel_Proy);
 		
-		JButton btnNewButton_4 = new JButton("Atrás.");
+		JButton btnNewButton_4 = new JButton("Atr\u00E1s");
+		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton_4.setBounds(372, 328, 105, 23);
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
@@ -73,7 +74,8 @@ public class menuProyecto extends JFrame {
 		contentPane.add(btnNewButton_4);
 		
 		
-		JButton btnNewButton_5 = new JButton("Salir.");
+		JButton btnNewButton_5 = new JButton("Salir");
+		btnNewButton_5.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton_5.setBounds(493, 328, 97, 23);
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
@@ -139,6 +141,13 @@ public class menuProyecto extends JFrame {
 		
 		JButton btnNewButton_6_1_1 = new JButton("Generar Reporte");
 		btnNewButton_6_1_1.setBounds(197, 72, 171, 57);
+		btnNewButton_6_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+					app.setGenerarReporte();
+					app.VisibleGenerarReporte(true); //Verificar si reporte si queda visible
+					setVisible(false);
+			} 
+			});
 		panel.add(btnNewButton_6_1_1);
 		btnNewButton_6_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		

@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -92,10 +93,12 @@ public class ModificarActividad extends JFrame {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				encargado = (String) comboBox.getSelectedItem();
+				
 				for (Modelo.Participante parti: app.darProyectoActual().getParticipantes()) {
 					if (parti.getNombre().equals(encargado)) {
 						Modelo.Participante acargo = parti;
 					}
+
 				}
 			}
 			});
@@ -111,9 +114,18 @@ public class ModificarActividad extends JFrame {
 		btnNewButton.setForeground(new Color(0, 0, 0));
 		btnNewButton.setBounds(84, 387, 111, 14);
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
-				Actividad actividadAModificar = app.darProyectoActual().getActividades().get(aModificar).get(0);
-				app.ejecutarModificarActividad(actividadAModificar, cambiosfecha, seCambiafecha,acargo);
+			public void actionPerformed(ActionEvent e) {
+				if(encargado!=null) {
+					Actividad actividadAModificar = app.darProyectoActual().getActividades().get(aModificar).get(0);
+					app.ejecutarModificarActividad(actividadAModificar, cambiosfecha, seCambiafecha,acargo);
+					setVisible(false);
+					JOptionPane.showMessageDialog(contentPane,"La actividad se modifico con éxito. El encargado es: "+encargado);
+					}
+				else {
+					JOptionPane.showMessageDialog(contentPane,"Por favor elija un encargado");
+				}
+				
+				
 			}
 			});
 		contentPane.add(btnNewButton);

@@ -33,6 +33,7 @@ public class Proyecto implements Serializable{
 	}
 	
 	//MÉTODOS//
+	/*
 	public void generarReporte() {
 		//ArrayList<HashMap>reportefinal = new ArrayList<HashMap>();
 		HashMap<String,HashMap<String,Double>> reporteActividad = new HashMap<String,HashMap<String,Double>>();
@@ -117,6 +118,50 @@ public class Proyecto implements Serializable{
 		
 	}
 	
+	*/
+
+	public void generarReporte() {
+		//ArrayList<HashMap>reportefinal = new ArrayList<HashMap>();
+		HashMap<String,HashMap<String,Double>> reporteActividad = new HashMap<String,HashMap<String,Double>>();
+		for(ArrayList<Actividad>actividadlista: actividades.values()) {
+			for(Actividad actual:actividadlista) {
+				if (reporteActividad.containsKey(actual.getType())) {
+
+					HashMap<String,Double>tiempoParticipantes=reporteActividad.get(actual.getType());// obtiene el mapa de participantes y sus tiempos por actividad
+					String mail= actual.getResponsable().getCorreo();
+					if(tiempoParticipantes.containsKey(mail)) {
+						double tiempoHastaAhora=tiempoParticipantes.get(mail);
+						double tiempoASumar=actual.getTiempo();
+						tiempoHastaAhora+=tiempoASumar;
+						tiempoParticipantes.put(mail, tiempoHastaAhora); 
+					}
+					else {
+						tiempoParticipantes.put(mail, actual.getTiempo());
+						
+					}
+				}
+				else {
+					HashMap<String,Double>tiempoParticipante= new HashMap<String,Double>();
+					tiempoParticipante.put(actual.getResponsable().getCorreo(), actual.getTiempo());
+					reporteActividad.put(actual.getType(), tiempoParticipante);
+				}
+		}
+			
+			
+			
+	
+		}
+		System.out.println("REPORTE POR TIPO ACTIVIDAD");
+		for(String tipo:reporteActividad.keySet()) {
+			System.out.println("Tipo Atividad: "+ tipo);
+			int count =1;
+			for(String correo:reporteActividad.get(tipo).keySet()) {
+				System.out.println("\n"+count+ ". "+correo+"\tTiempo: "+reporteActividad.get(tipo).get(correo));
+				count+=1;
+			}
+			
+		}
+
 	public void nuevaActividad(String titulo, String descripcionActividad, String tipo, Participante encargado) {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -150,31 +195,16 @@ public class Proyecto implements Serializable{
 		System.out.println(fechaF);
 	}
 	
-	public void modificarActividad(Participante newEncargado,String nuevaFechaI,String nuevaFechaF, Actividad actividadModificar) {
-		actividadActual=actividadModificar; 
-		if (tipoCambio == 1|| tipoCambio == 5) {
-			actividadActual.setEncargado(newEncargado);
-		}
-		if (tipoCambio == 2|| tipoCambio == 5) {
-			if(!nuevaFechaI.equals("")) {
-				actividadActual.setFechaInicio(nuevaFechaI);
-			}
-		}
-		if (tipoCambio == 3|| tipoCambio == 5) {
-			if(!nuevaFechaF.equals("")) {
-				actividadActual.setFechaFin(nuevaFechaF);
-			}
-		}
-		if (tipoCambio == 4|| tipoCambio == 5) {
-			if(!nuevaFechaI.equals("")) {
-				actividadActual.setFechaInicio(nuevaFechaI);	
-			}
-			if(!nuevaFechaF.equals("")) {
-				actividadActual.setFechaFin(nuevaFechaF);
-			}
-		}
+	public void modificarActividad(Actividad actividadAModificar,String[] modificaciones, boolean[] cambiaron,Modelo.Participante acargo) {
+		actividadActual=actividadAModificar; 
 		
-		
+		if(cambiaron[0]) {
+			actividadActual.setFechaInicio(modificaciones[0]);
+		}
+		if(cambiaron[1]) {
+			actividadActual.setFechaFin(modificaciones[1]);
+		}
+		actividadActual.setEncargado(acargo);
 		
 	}
 	
