@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>672</x>
+      <y>264</y>
+      <w>168</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Coordinator&gt;&gt;
+Aplicacion
+Package: GUI
+--
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>672</x>
+      <y>464</y>
+      <w>184</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Structurer&gt;&gt;
+Proyecto
+Package: Modelo
+--
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>392</x>
+      <y>464</y>
+      <w>168</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Information holder&gt;&gt;
+Participante
+Package: Modelo
+--
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>952</x>
+      <y>440</y>
+      <w>168</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Information holder&gt;&gt;
+Actividad
+Package: Modelo
+--
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>552</x>
+      <y>536</y>
+      <w>136</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=participantes\n0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>808</x>
+      <y>408</y>
+      <w>96</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=proyectoActual\n0..1</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>688</x>
+      <y>408</y>
+      <w>72</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=proyectos\n0..n</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>848</x>
+      <y>520</y>
+      <w>120</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=actividades\n0..n</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>464</x>
+      <y>544</y>
+      <w>648</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=actividades\n0..n</panel_attributes>
+    <additional_attributes>720.0;10.0;720.0;110.0;10.0;110.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1136</x>
+      <y>464</y>
+      <w>168</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Service provider&gt;&gt;
+Package: GestionArchivos
+--
+
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>832</x>
+      <y>384</y>
+      <w>472</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+fileManager</panel_attributes>
+    <additional_attributes>500.0;100.0;500.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
