@@ -48,7 +48,7 @@ public class CronometrarActividad extends JFrame {
 		setIconImage(img.CRONOMETRO);
 		presente = new JFrame();
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); //Si falla poner exit
 		setBounds(100, 100, 579, 374);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 206, 209));
@@ -103,6 +103,7 @@ public class CronometrarActividad extends JFrame {
 					long tiempo = aplicacion.FinalizarTemporizador();
 					JOptionPane.showMessageDialog(presente,"Ha finalizado el tiempo. a trabajado: " + String.valueOf(tiempo) + " segundos");
 					setVisible(false);
+					aplicacion.terminarActividad();
 					aplicacion.VisibleMenuAct(true);
 				} else {
 					JOptionPane.showMessageDialog(presente,"Primero inicie el cronómetro.");

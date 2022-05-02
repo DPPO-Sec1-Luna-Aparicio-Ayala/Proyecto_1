@@ -29,7 +29,7 @@ public class generarReporte extends JFrame {
 	 * @param reporteActividad 
 	 */
 	public generarReporte(Aplicacion aplicacion, HashMap<String, HashMap<String, Double>> reporteActividad, HashMap<String, String> reporteHPersonas) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); //Si falla poner exit
 		setBounds(100, 100, 576, 428);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));
@@ -60,11 +60,6 @@ public class generarReporte extends JFrame {
 		//tiposActividad.addActionListener(this);
 		contentPane.add(tiposActividad);
 		
-		JLabel lblNewLabel_3 = new JLabel("Reporte por personas, desplegar por favor");
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_3.setBounds(38, 130, 176, 22);
-		contentPane.add(lblNewLabel_3);
-		
 		JComboBox Personas = new JComboBox();
 		Personas.setBounds(40, 150, 400, 25);
 		
@@ -78,16 +73,26 @@ public class generarReporte extends JFrame {
 		//tiposActividad.addActionListener(this);
 		contentPane.add(Personas);
 		
+		JLabel lblNewLabel_1 = new JLabel("Generador de Reportes!");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1.setBounds(38, 52, 176, 22);
+		contentPane.add(lblNewLabel_1);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(39, 124, 244, 15);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel_3 = new JLabel("Reporte por personas, desplegar por favor");
+		lblNewLabel_3.setBounds(0, 0, 240, 14);
+		panel.add(lblNewLabel_3);
+		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
 		
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(generarReporte.class.getResource("/Graficos/report.png")));
 		lblNewLabel.setBounds(111, 24, 467, 474);
 		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("Generador de Reportes!");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(38, 52, 176, 22);
-		contentPane.add(lblNewLabel_1);
 	}
 }

@@ -31,7 +31,7 @@ public class añadirParticipante extends JFrame {
 	 */
 	public añadirParticipante(Aplicacion aplicacion) {
 		app=aplicacion;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.H_IDEON_CLOSE);
 		setBounds(100, 100, 529, 346);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 206, 209));
