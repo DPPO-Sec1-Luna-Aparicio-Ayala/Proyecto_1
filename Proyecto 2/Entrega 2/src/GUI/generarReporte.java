@@ -1,34 +1,28 @@
 package GUI;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
+import Graficos.Imagenes;
 
 public class generarReporte extends JFrame {
 
 	private JPanel contentPane;
 	private Aplicacion app;
+	private Imagenes img;
 	
 
 	/**
@@ -37,6 +31,7 @@ public class generarReporte extends JFrame {
 	 * @param reporteActividad 
 	 */
 	public generarReporte(Aplicacion aplicacion, HashMap<String, HashMap<String, Double>> reporteActividad, HashMap<String, String> reporteHPersonas) {
+		setIconImage(img.BULB);
 		app = aplicacion;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); //Si falla poner exit
 		setBounds(100, 100, 600, 700);
@@ -173,62 +168,63 @@ public class generarReporte extends JFrame {
 
             g.setColor(new Color(255,0,0));
             g.fillArc(100,350,200,200,0,grados1);
-            g.fillRect(350,270,20,20);
+            g.fillRect(350,283,20,10);
             g.drawString("Enero", 400, 290);            
 
             g.setColor(new Color(0,128,0));
             g.fillArc(100,350,200,200,grados1,grados2);
-            g.fillRect(350,310,20,20);
+            g.fillRect(350,313,20,10);
             g.drawString("Febrero", 400, 320);            
 
             g.setColor(new Color(0,0,255));
             g.fillArc(100,350,200,200,grados1+grados2,grados3);
-            g.fillRect(350,340,20,20);
+            g.fillRect(350,343,20,10);
             g.drawString("Marzo", 400, 350);
             
             g.setColor(new Color(0,255,0));
             g.fillArc(100,350,200,200,grados1+grados2+grados3,grados4);
-            g.fillRect(350,370,20,20);
+            g.fillRect(350,373,20,10);
             g.drawString("Abril", 400, 380);
             
             g.setColor(new Color(20,20,20));
             g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4,grados5);
-            g.fillRect(350,400,20,20);
-            g.drawString("Mayo", 400, 410); 
+            g.fillRect(350,400,20,10);
+            g.drawString("Mayo", 400, 410);
+             
             
             g.setColor(new Color(100,20,20));
             g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5,grados6);
-            g.fillRect(350,430,20,20);
+            g.fillRect(350,433,20,10);
             g.drawString("Junio", 400, 440);
             
             g.setColor(new Color(20,100,20));
             g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6,grados7);
-            g.fillRect(350,480,20,20);
+            g.fillRect(350,463,20,10);
             g.drawString("Julio", 400, 470);
             
             g.setColor(new Color(20,20,100));
             g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6+grados7,grados8);
-            g.fillRect(350,510,20,20);
+            g.fillRect(350, 493,20,10);
             g.drawString("Agosto", 400, 500);
             
             g.setColor(new Color(100,100,100));
             g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6+grados7+grados8,grados9);
-            g.fillRect(350,540,20,20);
+            g.fillRect(350,523,20,10);
             g.drawString("Septiembre", 400, 530);
             
-            g.setColor(new Color(200,200,200));
+            g.setColor(new Color(255,128,0));
             g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6+grados7+grados8+grados9,grados10);
-            g.fillRect(350,570,20,20);
+            g.fillRect(350,553,20,10);
             g.drawString("Octubre", 400, 560);
             
-            g.setColor(new Color(255,255,255));
+            g.setColor(new Color(215,175,55));
             g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6+grados7+grados8+grados9+grados10,grados11);
-            g.fillRect(350,600,20,20);
+            g.fillRect(350,583,20,10);
             g.drawString("Noviembre", 400, 590);
             
             g.setColor(new Color(255,0,255));
             g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6+grados7+grados8+grados9+grados10+grados11,grados12);
-            g.fillRect(350,630,20,20);
+            g.fillRect(350,613,20,10);
             g.drawString("Diciembre", 400, 620);
             
         }

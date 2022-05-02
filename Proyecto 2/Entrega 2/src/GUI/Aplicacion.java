@@ -56,8 +56,6 @@ public class Aplicacion implements Serializable, ActionListener {
 		
 		crearProyecto = new CrearProyecto(this);
 		
-		generarReporte = new generarReporte(this, null, null);
-		
 		
 		}
 	

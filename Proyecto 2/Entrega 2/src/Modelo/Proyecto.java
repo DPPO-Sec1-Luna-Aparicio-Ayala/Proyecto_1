@@ -206,7 +206,6 @@ public class Proyecto implements Serializable{
 				grafico.put(String.valueOf(i), 0);
 			}
 		}
-		System.out.println(grafico);
 		
 		for(ArrayList<Actividad> Actividades: actividades.values()) {
 			for(Actividad actual: Actividades) {
@@ -223,8 +222,6 @@ public class Proyecto implements Serializable{
 			
 			value1 = value1 += 1;
 
-			
-			System.out.println(mesI + value1 );
 			
 			
 			grafico.put(llave1, value1);
