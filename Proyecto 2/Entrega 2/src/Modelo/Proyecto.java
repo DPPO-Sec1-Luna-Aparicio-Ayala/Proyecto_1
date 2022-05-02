@@ -193,7 +193,53 @@ public class Proyecto implements Serializable{
 	
 	
 }
+
+	public HashMap<String, Integer> generarGrafico(){
+		HashMap<String, Integer> grafico= new HashMap<String, Integer>();
+		for (int i = 1; i<13; i++){
+			if (i<10) {
+				String var = String.valueOf(i);
+				var = "0"+var;
+				grafico.put(var, 0);
+			}
+			else {
+				grafico.put(String.valueOf(i), 0);
+			}
+		}
+		System.out.println(grafico);
+		
+		for(ArrayList<Actividad> Actividades: actividades.values()) {
+			for(Actividad actual: Actividades) {
+			
+			String mesI = actual.getFechaI();
+			
+			mesI = mesI.substring(3,5);
+		
+			String llave1 = mesI;
+
+			
+			Integer value1 = grafico.get(llave1);
+
+			
+			value1 = value1 += 1;
+
+			
+			System.out.println(mesI + value1 );
+			
+			
+			grafico.put(llave1, value1);
+
+
+			}
+			
+		}
+		return grafico;
+			}
 	
+			
+			
+		
+
 	public void nuevaActividad(String titulo, String descripcionActividad, String tipo, Participante encargado) {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");

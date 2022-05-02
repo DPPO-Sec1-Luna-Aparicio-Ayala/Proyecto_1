@@ -92,6 +92,13 @@ public class Aplicacion implements Serializable, ActionListener {
 		
 	}
 	
+	public HashMap<String, Integer> generarGrafico(){
+		
+		HashMap<String, Integer> grafico = proyectoActual.generarGrafico();
+		return grafico;
+		
+	}
+	
 	/*private void ejecutarIniciarTemporizador(Actividad actividadActual) {
 			
 				int op = Integer.parseInt(input("Para iniciar el cronometro oprima cualquier numero"));
