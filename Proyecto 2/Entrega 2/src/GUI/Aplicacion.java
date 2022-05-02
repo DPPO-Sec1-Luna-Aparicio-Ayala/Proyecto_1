@@ -54,8 +54,6 @@ public class Aplicacion implements Serializable, ActionListener {
 		
 		modificar = new ModificarActividad(this);
 		
-		cronometrar = new CronometrarActividad(this);
-		
 		crearProyecto = new CrearProyecto(this);
 		
 		generarReporte = new generarReporte(this, null, null);
@@ -172,8 +170,8 @@ public class Aplicacion implements Serializable, ActionListener {
 	
 	}
 	
-	public void ejecutarAñadirParticipante(String nombre,String correo,boolean owner) {
-		proyectoActual.añadirParticipante(nombre, correo, owner);
+	public void ejecutarAñadirParticipante(String correo,String nombre,boolean owner) {
+		proyectoActual.añadirParticipante(correo, nombre, owner);
 	}
 	
 	public HashMap<String,HashMap<String,Double>> ejecutarMostrarReporteActividad() {
@@ -262,7 +260,7 @@ public class Aplicacion implements Serializable, ActionListener {
 					JOptionPane.showMessageDialog(principal,"Ha ingresado correctamente al sistema.");
 					
 					participanteActual=actual;
-					JOptionPane.showMessageDialog(principal,"El participante actual es"+participanteActual.getNombre());
+					JOptionPane.showMessageDialog(principal,"El participante actual es "+participanteActual.getNombre());
 					login.setVisible(false);
 					principal.setVisible(false);
 					setMenuProyecto();
@@ -319,10 +317,18 @@ public class Aplicacion implements Serializable, ActionListener {
 		escogerActividad = new EscogerActiAModificar(this);
 	}
 	
+	public void setModificarActividad() {
+		modificar = new ModificarActividad(this);
+	}
+	
 	public void setMenuProyecto() {
 		menuProyecto = new menuProyecto(this); 
-
 	}
+		
+	public void setCronometro() {
+		cronometrar = new CronometrarActividad(this);
+	}
+	
 	public void setAñadirParticipante() {
 		añadirParticipante= new añadirParticipante(this);
 	}

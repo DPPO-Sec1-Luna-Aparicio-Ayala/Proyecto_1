@@ -142,7 +142,6 @@ public class menuProyecto extends JFrame {
 			public void actionPerformed(ActionEvent e) {	
 				app.setAñadirParticipante();
 				app.VisibleAñadirParticipante(true);
-				setVisible(false);
 			}
 			});
 		panel.add(btnNewButton_6_1);

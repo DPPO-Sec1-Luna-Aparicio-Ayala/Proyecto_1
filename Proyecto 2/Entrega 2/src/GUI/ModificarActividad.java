@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,6 +32,7 @@ public class ModificarActividad extends JFrame {
 	private int modificaciones;
 	private String encargado;
 	private Modelo.Participante acargo;
+	private Aplicacion app;
 
 	public static final int ENCARGADO = 1;
 	public static final int FECHA_INICIO = 2;
@@ -40,7 +43,8 @@ public class ModificarActividad extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ModificarActividad(Aplicacion app) {
+	public ModificarActividad(Aplicacion aplicacion) {
+		app = aplicacion;
 		setIconImage(img.BULB);
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 552, 471);
@@ -96,7 +100,7 @@ public class ModificarActividad extends JFrame {
 				
 				for (Modelo.Participante parti: app.darProyectoActual().getParticipantes()) {
 					if (parti.getNombre().equals(encargado)) {
-						Modelo.Participante acargo = parti;
+						acargo = parti;
 					}
 
 				}
@@ -119,6 +123,7 @@ public class ModificarActividad extends JFrame {
 					Actividad actividadAModificar = app.darProyectoActual().getActividades().get(aModificar).get(0);
 					app.ejecutarModificarActividad(actividadAModificar, cambiosfecha, seCambiafecha,acargo);
 					setVisible(false);
+					app.VisibleMenuAct(true);
 					JOptionPane.showMessageDialog(contentPane,"La actividad se modifico con éxito. El encargado es: "+encargado);
 					}
 				else {
@@ -135,10 +140,17 @@ public class ModificarActividad extends JFrame {
 		lblNewLabel_2.setBounds(221, -20, 315, 564);
 		contentPane.add(lblNewLabel_2);
 		
-		
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				app.VisibleMenuAct(true);
+			}
+		});
 	}
 	
 	public void setNombreActividad(String param) {
 		aModificar = param;
 	}
+	
 }

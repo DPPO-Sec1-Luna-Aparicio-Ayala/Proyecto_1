@@ -1,6 +1,11 @@
 package GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -118,6 +123,14 @@ public class generarReporte extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(generarReporte.class.getResource("/Graficos/report.png")));
 		lblNewLabel.setBounds(111, 24, 467, 474);
 		contentPane.add(lblNewLabel);
+		
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				app.VisibleMenuAct(true);
+			}
+		});
         
 	}
 	

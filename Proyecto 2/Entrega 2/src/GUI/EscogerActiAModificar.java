@@ -64,6 +64,7 @@ public class EscogerActiAModificar extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				setVisible(false);
+				app.setModificarActividad();
 				app.setActividadModificar(comboBox.getSelectedItem().toString());
 				app.VisibleModificarActividad(true);
 			}

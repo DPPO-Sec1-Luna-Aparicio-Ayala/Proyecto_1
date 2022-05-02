@@ -16,6 +16,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JTextField;
 
@@ -85,7 +87,7 @@ public class añadirParticipante extends JFrame {
 				String nombre = txtPepito.getText();
 				String correo = txtExamplegmailcom.getText();
 				if(!app.darProyectoActual().getParticipantes().isEmpty()){
-					app.ejecutarAñadirParticipante(nombre,correo,false);
+					app.ejecutarAñadirParticipante(correo,nombre,false);
 					setVisible(false); 
 					app.VisibleMenuAct(true);
 					JOptionPane.showMessageDialog(contentPane,"Se ha añadido a "+nombre+" como participante!");
@@ -96,5 +98,13 @@ public class añadirParticipante extends JFrame {
 			});
 		contentPane.add(btnNewButton);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		addWindowListener(new WindowAdapter()
+		{
+			public void windowClosing(WindowEvent e)
+			{
+				app.VisibleMenuAct(true);
+			}
+		});
 	}
 }

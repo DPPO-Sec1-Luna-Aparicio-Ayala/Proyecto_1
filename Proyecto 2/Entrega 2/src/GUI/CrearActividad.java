@@ -123,9 +123,10 @@ public class CrearActividad extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(presente,"Hay una o mas casillas que siguen en blanco, rellene todas por favor");
 				}
 				else {
-				String tipo = (String)tiposActividad.getSelectedItem();
+				String tipo = tiposActividad.getSelectedItem().toString();
 				String titulo = frmtdtxtfldRealice.getText();
 				String descripcion = frmtdtxtfldActividad.getText();
+				app.setCronometro();
 				app.ejecutarNuevaActividad(titulo, descripcion, tipo, participanteActual);
 				setVisible(false); //recibir los inputs
 				app.getCronometro().setVisible(true);

@@ -1,2 +1,1 @@
-Minecraft;Jugar minecraft;30-04-2022;01-04-2022;minar,cazar,luchar,explorar,;Juan·j.apariciog@uniandes.edu.co·false·,;Ir a matar zombies al bosque·Matar zombies·30-04-2022 20:08:12·0·Juan#j.apariciog@uniandes.edu.co#false·luchar·,;
-cooking recipes;hacer recetas de cocina;01-05-2022;02-05-2022;diseño,codigo,pruebas,;cami·cami@gmail.com·false·,;;
+Pruebas;Proyecto para probar cosas;01-05-2022;15-04-2022;diseño,codigo,pruebas,documentos,;Juan David·j.apariciog@uniandes.edu.co·true·,Pepito·pepito@gmail.com·false·,;Espero que no explote el programa·Ojala no explote·01-05-2022 22:10:49·01-05-2022 22:12:03·Pepito#pepito@gmail.com#false·pruebas·,;
