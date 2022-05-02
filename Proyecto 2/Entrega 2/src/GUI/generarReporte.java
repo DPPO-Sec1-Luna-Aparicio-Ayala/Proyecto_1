@@ -67,7 +67,6 @@ public class generarReporte extends JFrame {
 		JComboBox Personas = new JComboBox();
 		Personas.setBounds(40, 150, 400, 25);
 		
-		System.out.println("REPORTE POR PERSONA"); // pasar a label
 		for (String msj: reporteHPersonas.values()){
 			
 			Personas.addItem(msj);
