@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>15</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1230</x>
+      <y>1410</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Coordinator&gt;&gt;
+Aplicacion
+Package: GUI
+--
+
+--
++escogerProyecto()
++crearProyecto()
++nuevaActividad()
++terminarActividad()
++añadirParticipante()
++mostrarReporte()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1230</x>
+      <y>1785</y>
+      <w>345</w>
+      <h>435</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Structurer&gt;&gt;
+Proyecto
+Package: Modelo
+--
+-nombre: String
+-descripcion: String
+-fechaInicio: String
+-fechaFin: String
+-tiposActividad: ArrayList&lt;String&gt;
+-tiposTareas: ArrayList&lt;String&gt;
+--
++mostrarReporte()
++nuevaActividad()
++modificarActividad()
++añadirParticipante()
++generarReporte()
++getParticipantes()
++getActividades()
++getTiposTarea()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>705</x>
+      <y>1785</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Information holder&gt;&gt;
+Participante
+Package: Modelo
+--
+-correo: String
+-nombre: String
+-dueño: boolean
+--
++getActividades()
++setActividades()
++setEsDueño()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1755</x>
+      <y>1740</y>
+      <w>315</w>
+      <h>510</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Information holder&gt;&gt;
+Actividad
+Package: Modelo
+--
+-titulo: String
+-descripcion: String
+-tipo: String
+-fecha: String
+-horaInicio: String
+-horaFin: String
+-responsable: Participante
+-tiempo: double
+-tarea: Tarea
+-paquete: Paquete
+-final: boolean
+--
++getTiempo()
++getResponsable()
++setTiempo()
++setHoraInicio()
++setHoraFin()
++setTarea()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1005</x>
+      <y>1920</y>
+      <w>255</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=participantes\n0..n</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1485</x>
+      <y>1680</y>
+      <w>180</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=proyectoActual\n0..1</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1260</x>
+      <y>1680</y>
+      <w>135</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=proyectos\n0..n</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1560</x>
+      <y>1890</y>
+      <w>225</w>
+      <h>75</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=actividades\n0..n</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>840</x>
+      <y>2055</y>
+      <w>945</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=actividades\n0..n</panel_attributes>
+    <additional_attributes>610.0;70.0;560.0;70.0;560.0;140.0;10.0;140.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>2280</x>
+      <y>1770</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Service provider&gt;&gt;
+Package: GestionArchivos
+--
+
+--
++write()
++read()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1200</x>
+      <y>0</y>
+      <w>315</w>
+      <h>345</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Information holder&gt;&gt;
+Imagenes
+Package: Graficos
+--
+-Image CHECK
+-Image LIST
+-Image LOG
+-Image WORKSPACE
+-Image BULB
+-Image WELCOME
+-Image IDEA
+-Image CRONOMETRO
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>780</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interfacer&gt;&gt;
+VentanaPrincipal
+Package: GUI
+--
+-JPanel: contentPane
+-JComboBox: proyectos
+-JButton loginBtn
+-JButton crearBtn
+--
++darIndexProyecto()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>975</x>
+      <y>780</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interfacer&gt;&gt;
+CrearActividad
+Package: GUI
+--
+-JPanel: contentPane
+-ArrayList&lt;String&gt;: ListaTipos
+-JFrame: presente
+-String: tipoSeleccionado
+-JComboBox: tiposActividad
+--
++actionPerformed()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1350</x>
+      <y>780</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interfacer&gt;&gt;
+CrearProyecto
+Package: GUI
+--
+-JPanel: contentPane
+-JTextField: txtS
+-JTextField: textField
+-JTextField: textField_1
+-JTextField: textField_2
+-JTextField: textField 3
+-JTextField: txtExamplegmailcom
+-JFrame: presente
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1740</x>
+      <y>780</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interfacer&gt;&gt;
+CronometrarActividad
+Package: GUI
+--
+-JPanel contentPane
+-JFrame presente
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>1095</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interfacer&gt;&gt;
+EscogerActiAModificar
+Package::GUI
+--
+-JPanel: contentPane
+-String: actividadSeleccionada
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>975</x>
+      <y>1095</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interfacer&gt;&gt;
+loggeo
+Package: GUI
+--
+-Jpanel: contentPane
+-JLabel: proyectoActual
+-JFormattedTextField: frmtdtxtfldExamplehotmailcom
+-JButton: LogInBtn
+-JButton: returnBtn
+--
++getEmail()
++actionPerformed()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1350</x>
+      <y>1095</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interfacer&gt;&gt;
+menuProyecto
+Package: GUI
+--
+-JPanel: contentPane
+-boolean: crearAct
+--
++CrearAct()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1770</x>
+      <y>1095</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interfacer&gt;&gt;
+ModificarActividad
+Package: GUI
+--
+-JPanel: contentPane
+-JTextField: txtDejarEnBlanco
+-JTextField: textField
+-JButton: btnNewButton
+-JLabel: lblNewLabel_2
+-String: aModificar
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>435</x>
+      <y>180</y>
+      <w>795</w>
+      <h>750</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+img</panel_attributes>
+    <additional_attributes>510.0;10.0;10.0;10.0;10.0;480.0;110.0;480.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>435</x>
+      <y>930</y>
+      <w>825</w>
+      <h>660</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+app</panel_attributes>
+    <additional_attributes>530.0;420.0;10.0;420.0;10.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1275</x>
+      <y>330</y>
+      <w>105</w>
+      <h>540</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+img</panel_attributes>
+    <additional_attributes>30.0;10.0;30.0;340.0;10.0;340.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>735</y>
+      <w>930</w>
+      <h>1080</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+participanteActual</panel_attributes>
+    <additional_attributes>370.0;700.0;370.0;580.0;10.0;580.0;10.0;10.0;600.0;10.0;600.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>540</x>
+      <y>1050</y>
+      <w>720</w>
+      <h>510</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+app</panel_attributes>
+    <additional_attributes>460.0;320.0;10.0;320.0;10.0;20.0;400.0;20.0;400.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1335</x>
+      <y>330</y>
+      <w>75</w>
+      <h>615</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+img</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;390.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>1050</y>
+      <w>750</w>
+      <h>480</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+aplicacion</panel_attributes>
+    <additional_attributes>30.0;300.0;420.0;300.0;420.0;20.0;10.0;20.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1530</x>
+      <y>1635</y>
+      <w>1065</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+fileManager</panel_attributes>
+    <additional_attributes>620.0;90.0;620.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>270</y>
+      <w>435</w>
+      <h>540</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+img</panel_attributes>
+    <additional_attributes>10.0;20.0;270.0;20.0;270.0;340.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1530</x>
+      <y>810</y>
+      <w>855</w>
+      <h>750</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+app</panel_attributes>
+    <additional_attributes>10.0;480.0;530.0;480.0;530.0;10.0;350.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>615</x>
+      <y>1365</y>
+      <w>645</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+app</panel_attributes>
+    <additional_attributes>410.0;90.0;10.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>900</x>
+      <y>105</y>
+      <w>330</w>
+      <h>1065</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+img</panel_attributes>
+    <additional_attributes>200.0;10.0;20.0;10.0;20.0;690.0;10.0;690.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1275</x>
+      <y>330</y>
+      <w>90</w>
+      <h>840</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+img</panel_attributes>
+    <additional_attributes>20.0;10.0;20.0;540.0;10.0;540.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1125</x>
+      <y>1365</y>
+      <w>135</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+app</panel_attributes>
+    <additional_attributes>70.0;70.0;10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1410</x>
+      <y>1365</y>
+      <w>270</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+app</panel_attributes>
+    <additional_attributes>90.0;70.0;140.0;70.0;140.0;20.0;10.0;20.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>90</y>
+      <w>255</w>
+      <h>1140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+img</panel_attributes>
+    <additional_attributes>10.0;10.0;130.0;10.0;130.0;740.0;110.0;740.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>765</x>
+      <y>1125</y>
+      <w>1500</w>
+      <h>1230</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+encargado</panel_attributes>
+    <additional_attributes>10.0;630.0;10.0;800.0;980.0;800.0;980.0;10.0;880.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1500</x>
+      <y>180</y>
+      <w>780</w>
+      <h>960</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+img</panel_attributes>
+    <additional_attributes>10.0;10.0;480.0;10.0;480.0;620.0;390.0;620.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1530</x>
+      <y>1365</y>
+      <w>420</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+app</panel_attributes>
+    <additional_attributes>10.0;130.0;260.0;130.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>975</x>
+      <y>405</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interfacer&gt;&gt;
+generarReporte
+Package: GUI
+--
+-JPanel contentPane
+--
++paint()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>570</x>
+      <y>405</y>
+      <w>315</w>
+      <h>285</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Interfacer&gt;&gt;
+añadirParticipante
+Package: GUI
+--
+-JPanel: contentPane
+-JTextField: txtPepito
+-JTextField: txtExamplegmailcom
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>315</y>
+      <w>1080</w>
+      <h>1350</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+app</panel_attributes>
+    <additional_attributes>700.0;880.0;10.0;880.0;10.0;10.0;370.0;10.0;370.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1125</x>
+      <y>255</y>
+      <w>105</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+img</panel_attributes>
+    <additional_attributes>50.0;20.0;10.0;20.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>135</x>
+      <y>345</y>
+      <w>1125</w>
+      <h>1380</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+app</panel_attributes>
+    <additional_attributes>730.0;900.0;20.0;900.0;10.0;10.0;620.0;10.0;620.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>255</x>
+      <y>1815</y>
+      <w>315</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Information holder&gt;&gt;
+WBS
+--
+
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>1920</y>
+      <w>105</w>
+      <h>135</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+objects
+0...n</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>195</x>
+      <y>2190</y>
+      <w>210</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;10.0;120.0;30.0;10.0;30.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>195</x>
+      <y>2025</y>
+      <w>285</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>/WBSobject/
+--
+-esPaquete: boolean
+-nombre: String
+-descripcion: String
+--
++getNombre()
++getDescripcion()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>405</x>
+      <y>2190</y>
+      <w>195</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;110.0;30.0;110.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>405</x>
+      <y>2250</y>
+      <w>315</w>
+      <h>315</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Information holder&gt;&gt;
+Tarea
+--
+-nombre: String
+-descripcion: String
+-tipo: String
+-tiempoEstimado: double
+-fechaEstimada: String
+--
++getTipo()
++getTiempo()
++getFecha()
++actualizarTiempo()
++anadirActividad()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>2250</y>
+      <w>315</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Information holder&gt;&gt;
+Paquete
+--
+-nombre: String
+-descripcion: String
+--
++getTareas()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>555</x>
+      <y>1725</y>
+      <w>705</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+wbs</panel_attributes>
+    <additional_attributes>10.0;80.0;50.0;80.0;50.0;20.0;410.0;20.0;410.0;70.0;450.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>0</x>
+      <y>2025</y>
+      <w>225</w>
+      <h>465</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=objects\n0..n</panel_attributes>
+    <additional_attributes>130.0;10.0;10.0;10.0;10.0;290.0;40.0;290.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>705</x>
+      <y>2235</y>
+      <w>1215</w>
+      <h>165</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=actividades\n0..n</panel_attributes>
+    <additional_attributes>720.0;10.0;720.0;90.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>705</x>
+      <y>2055</y>
+      <w>360</w>
+      <h>420</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=responsables\n1..n</panel_attributes>
+    <additional_attributes>140.0;10.0;140.0;260.0;10.0;260.0</additional_attributes>
+  </element>
+</diagram>
