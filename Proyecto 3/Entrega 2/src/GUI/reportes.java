@@ -18,7 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 import Graficos.Imagenes;
 
-public class generarReporte extends JFrame {
+public class reportes extends JFrame {
 
 	private JPanel contentPane;
 	private Aplicacion app;
@@ -30,24 +30,16 @@ public class generarReporte extends JFrame {
 	 * @param reporteHPersonas 
 	 * @param reporteActividad 
 	 */
-	public generarReporte(Aplicacion aplicacion, HashMap<String, HashMap<String, Double>> reporteActividad, HashMap<String, String> reporteHPersonas) {
+	public reportes(Aplicacion aplicacion, HashMap<String, HashMap<String, Double>> reporteActividad, HashMap<String, String> reporteHPersonas) {
 		setIconImage(img.BULB);
 		app = aplicacion;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); //Si falla poner exit
-		setBounds(100, 100, 600, 700);
+		setBounds(100, 100, 600, 563);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 153));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel lblNewLabel_2 = new JLabel("Reporte por actividades, desplegar por favor");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_2.setBounds(38, 70, 176, 22);
-		contentPane.add(lblNewLabel_2);
-		
-		JComboBox tiposActividad = new JComboBox();
-		tiposActividad.setBounds(40, 90, 400, 25);
 		
 		//System.out.println("REPORTE POR TIPO ACTIVIDAD"); pasar a label
 		for(String tipo:reporteActividad.keySet()) {
@@ -61,62 +53,50 @@ public class generarReporte extends JFrame {
 			}
 		}
 		
-		//tiposActividad.addActionListener(this);
-		contentPane.add(tiposActividad);
-		
-		JComboBox Personas = new JComboBox();
-		Personas.setBounds(40, 150, 400, 25);
-		
 		for (String msj: reporteHPersonas.values()){
 			
 			Personas.addItem(msj);
 			
 		}
 		
-		//tiposActividad.addActionListener(this);
-		contentPane.add(Personas);
+		JButton btnReporteMensual = new JButton("Reporte Mensual");
+		btnReporteMensual.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnReporteMensual.setBounds(26, 346, 171, 57);
+		contentPane.add(btnReporteMensual);
+		
+		JButton btnSumUpProyecto = new JButton("Sum Up Proyecto");
+		btnSumUpProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnSumUpProyecto.setBounds(26, 278, 171, 57);
+		contentPane.add(btnSumUpProyecto);
+		
+		JButton btnRendimientoEquipo = new JButton("Rendimiento Equipo");
+		btnRendimientoEquipo.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnRendimientoEquipo.setBounds(26, 210, 171, 57);
+		contentPane.add(btnRendimientoEquipo);
+		
+		JButton btnCalidadPlaneacin = new JButton("Calidad Planeaci\u00F3n");
+		btnCalidadPlaneacin.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnCalidadPlaneacin.setBounds(26, 143, 171, 57);
+		contentPane.add(btnCalidadPlaneacin);
+		
+		JButton btnAvanceProyecto = new JButton("Avance Proyecto");
+		btnAvanceProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnAvanceProyecto.setBounds(26, 77, 171, 57);
+		contentPane.add(btnAvanceProyecto);
 		
 		JLabel lblNewLabel_1 = new JLabel("Generador de Reportes!");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(38, 52, 176, 22);
+		lblNewLabel_1.setBounds(21, 24, 176, 22);
 		contentPane.add(lblNewLabel_1);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(39, 124, 244, 15);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel_3 = new JLabel("Reporte por personas, desplegar por favor");
-		lblNewLabel_3.setBounds(0, 0, 240, 14);
-		panel.add(lblNewLabel_3);
-		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		
-		
-		
-		
-		
-		JButton btnGraficar = new JButton("Graficar");
-		btnGraficar.setBounds(40, 200, 200, 25);
-        btnGraficar.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                
-            	
-            	aplicacion.generarGrafico();
-            	
-            	repaint();
-            }
-        });
-        contentPane.add(btnGraficar);
-        
-        JPanel panel22 = new JPanel();
-		panel22.setBounds(39, 230, 500, 400);
-		contentPane.add(panel22);
-		panel22.setLayout(null);
         
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(generarReporte.class.getResource("/Graficos/report.png")));
+		lblNewLabel.setIcon(new ImageIcon(reportes.class.getResource("/Graficos/report.png")));
 		lblNewLabel.setBounds(111, 24, 467, 474);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("Regresar");
+		btnNewButton.setBounds(26, 426, 89, 23);
+		contentPane.add(btnNewButton);
 		
 		addWindowListener(new WindowAdapter()
 		{

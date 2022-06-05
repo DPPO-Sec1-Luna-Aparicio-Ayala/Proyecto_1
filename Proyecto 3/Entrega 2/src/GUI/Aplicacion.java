@@ -38,7 +38,7 @@ public class Aplicacion implements Serializable, ActionListener {
 	private CrearProyecto crearProyecto;
 	private CrearActividad crearActividad;
 	private añadirParticipante añadirParticipante; 
-	private generarReporte generarReporte;
+	private ReporteMensual generarReporte;
 	private crearAñadirPaquete crearAñandirPaquete;
 	
 	//CONSTANTES//
@@ -343,7 +343,7 @@ public class Aplicacion implements Serializable, ActionListener {
 	}
 	
 	public void setGenerarReporte (HashMap<String, HashMap<String, Double>> reporteActividad, HashMap<String, String> reporteHPersonas) {
-		generarReporte = new generarReporte(this, reporteActividad,  reporteHPersonas);
+		generarReporte = new ReporteMensual(this, reporteActividad,  reporteHPersonas);
 	}
 	
 	public void setActividadModificar(String param) {

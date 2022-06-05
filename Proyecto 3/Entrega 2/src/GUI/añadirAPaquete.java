@@ -13,6 +13,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
 
 public class añadirAPaquete extends JFrame {
 
@@ -40,39 +41,52 @@ public class añadirAPaquete extends JFrame {
 	 */
 	public añadirAPaquete() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 352);
+		setBounds(100, 100, 508, 447);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 191, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblAadirAPaquete = new JLabel("A\u00F1adir a Paquete!");
-		lblAadirAPaquete.setForeground(Color.BLACK);
-		lblAadirAPaquete.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblAadirAPaquete.setBackground(Color.BLACK);
-		lblAadirAPaquete.setBounds(69, 11, 175, 22);
-		contentPane.add(lblAadirAPaquete);
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 44, 195, 16);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
 		lblNewLabel = new JLabel("Paquete Actual:");
+		lblNewLabel.setBounds(0, 0, 89, 14);
+		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel.setBounds(24, 58, 91, 14);
-		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Crear Actividad");
+		JLabel lblAadirAPaquete = new JLabel("A\u00F1adir a Paquete!");
+		lblAadirAPaquete.setBounds(10, 11, 175, 22);
+		lblAadirAPaquete.setForeground(Color.WHITE);
+		lblAadirAPaquete.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblAadirAPaquete.setBackground(Color.BLACK);
+		contentPane.add(lblAadirAPaquete);
+		
+		JButton btnNewButton = new JButton("A\u00F1adir Tarea");
+		btnNewButton.setBounds(14, 87, 171, 57);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBounds(134, 87, 171, 57);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("Crear Actividad");
+		JButton btnNewButton_1 = new JButton("A\u00F1adir Paquete");
+		btnNewButton_1.setBounds(14, 153, 171, 57);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton_1.setBounds(134, 155, 171, 57);
 		contentPane.add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Crear Actividad");
+		JButton btnNewButton_2 = new JButton("Escoger Paquete");
+		btnNewButton_2.setBounds(14, 221, 171, 57);
 		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton_2.setBounds(134, 221, 171, 57);
 		contentPane.add(btnNewButton_2);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setBounds(125, 0, 384, 459);
+		lblNewLabel_1.setIcon(new ImageIcon(añadirAPaquete.class.getResource("/Graficos/open-box.png")));
+		contentPane.add(lblNewLabel_1);
+		
+		JButton btnNewButton_3 = new JButton("Regresar");
+		btnNewButton_3.setBounds(26, 356, 89, 23);
+		contentPane.add(btnNewButton_3);
 	}
-
 }
