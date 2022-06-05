@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import Graficos.Imagenes;
+import java.awt.SystemColor;
 
 public class CrearProyecto extends JFrame {
 
@@ -28,7 +29,7 @@ public class CrearProyecto extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtCamila;
 	private JTextField txtExamplegmailcom;
 	private JTextField textField_5;
 	private Imagenes img;
@@ -159,7 +160,7 @@ public class CrearProyecto extends JFrame {
 		    }
 		});
 		
-		JLabel tiposProyecto = new JLabel("Tipos del Proyecto:");
+		JLabel tiposProyecto = new JLabel("Tipos actividades:");
 		tiposProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		tiposProyecto.setBounds(70, 190, 147, 14);
 		panel.add(tiposProyecto);
@@ -168,24 +169,26 @@ public class CrearProyecto extends JFrame {
 		
 		JLabel lblNombreAdminProyecto = new JLabel("Nombre admin:");
 		lblNombreAdminProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNombreAdminProyecto.setBounds(93, 218, 147, 14);
+		lblNombreAdminProyecto.setBounds(93, 253, 147, 14);
 		panel.add(lblNombreAdminProyecto);
 		
 		JLabel lblCorreoAdmin = new JLabel("Correo admin:");
 		lblCorreoAdmin.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblCorreoAdmin.setBounds(98, 240, 147, 14);
+		lblCorreoAdmin.setBounds(93, 281, 147, 14);
 		panel.add(lblCorreoAdmin);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(180, 215, 180, 20);
-		panel.add(textField_3);
+		txtCamila = new JTextField();
+		txtCamila.setForeground(new Color(128, 128, 128));
+		txtCamila.setText("camila");
+		txtCamila.setColumns(10);
+		txtCamila.setBounds(180, 250, 180, 20);
+		panel.add(txtCamila);
 		
 		txtExamplegmailcom = new JTextField();
 		txtExamplegmailcom.setText("example@gmail.com");
 		txtExamplegmailcom.setForeground(new Color(119, 136, 153));
 		txtExamplegmailcom.setColumns(10);
-		txtExamplegmailcom.setBounds(180, 240, 180, 20);
+		txtExamplegmailcom.setBounds(180, 278, 180, 20);
 		panel.add(txtExamplegmailcom);
 		
 		JLabel lblNewLabel_1 = new JLabel("");
@@ -198,7 +201,7 @@ public class CrearProyecto extends JFrame {
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textField.getText().equals("") || textField_1.getText().equals("") || textField_2.getText().equals("") || textField_3.getText().equals("") || txtExamplegmailcom.getText().equals("") || txtS.getText().equals("") || textField_5.getText().equals("ej:diseño,codigo,pruebas")) {
+				if (textField.getText().equals("") || textField_1.getText().equals("") || textField_2.getText().equals("") || txtCamila.getText().equals("") || txtExamplegmailcom.getText().equals("") || txtS.getText().equals("") || textField_5.getText().equals("ej:diseño,codigo,pruebas")) {
 					JOptionPane.showMessageDialog(presente,"Hay una o mas casillas que siguen en blanco. Complete todas, por favor.");
 				}
 				else {
@@ -206,7 +209,7 @@ public class CrearProyecto extends JFrame {
 				String descripcionProyecto = textField_1.getText();
 				String fechaIProyecto = textField.getText();
 				String fechaFProyecto = textField_2.getText();
-				String nombreAdmin = textField_3.getText();
+				String nombreAdmin = txtCamila.getText();
 				String correoAdmin = txtExamplegmailcom.getText();
 				String tiposProyecto = textField_5.getText();				
 				
@@ -222,7 +225,7 @@ public class CrearProyecto extends JFrame {
 			}
 		});
 		btnNewButton.setBackground(new Color(255, 245, 238));
-		btnNewButton.setBounds(180, 287, 156, 23);
+		btnNewButton.setBounds(180, 309, 156, 23);
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Regresar");
@@ -235,5 +238,17 @@ public class CrearProyecto extends JFrame {
 			}
 			});
 		panel.add(btnNewButton_1);
+		
+		JFormattedTextField textField_5_1 = new JFormattedTextField();
+		textField_5_1.setText("ej:dise\u00F1o,codigo,pruebas");
+		textField_5_1.setForeground(SystemColor.controlDkShadow);
+		textField_5_1.setColumns(10);
+		textField_5_1.setBounds(180, 218, 180, 24);
+		panel.add(textField_5_1);
+		
+		JLabel lblTiposTareas = new JLabel("Tipos tareas:");
+		lblTiposTareas.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTiposTareas.setBounds(93, 223, 147, 14);
+		panel.add(lblTiposTareas);
 	}
 }

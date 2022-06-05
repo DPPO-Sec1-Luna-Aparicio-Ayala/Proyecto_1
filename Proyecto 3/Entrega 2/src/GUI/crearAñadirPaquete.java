@@ -82,6 +82,10 @@ public class crearAñadirPaquete {
 		lblS.setFont(new Font("Tahoma", Font.BOLD, 87));
 		lblS.setBounds(326, 187, 313, 74);
 		frame.getContentPane().add(lblS);
+		
+		JButton btnModificarPaqueteExistente_1 = new JButton("Regresar");
+		btnModificarPaqueteExistente_1.setBounds(317, 306, 103, 23);
+		frame.getContentPane().add(btnModificarPaqueteExistente_1);
 		frame.setBounds(100, 100, 450, 379);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

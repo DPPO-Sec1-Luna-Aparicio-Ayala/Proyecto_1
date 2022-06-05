@@ -52,13 +52,13 @@ public class menuProyecto extends JFrame {
 		JLabel lblNewLabel = new JLabel("MEN\u00DA");
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 21));
-		lblNewLabel.setBounds(303, 34, 97, 42);
+		lblNewLabel.setBounds(291, 11, 97, 42);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_Proy = new JLabel("Proyecto Actual: " + app.darProyectoActual().getNombre());
 		lblNewLabel_Proy.setForeground(new Color(255, 255, 255));
 		lblNewLabel_Proy.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_Proy.setBounds(210, 260, 280, 40);
+		lblNewLabel_Proy.setBounds(197, 279, 280, 40);
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 3);
         lblNewLabel_Proy.setBorder(border);
 		contentPane.add(lblNewLabel_Proy);
@@ -102,8 +102,8 @@ public class menuProyecto extends JFrame {
 		contentPane.add(lblNewLabel_1);*/
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 0, 0));
-		panel.setBounds(157, 114, 378, 140);
+		panel.setBackground(new Color(25, 25, 112));
+		panel.setBounds(150, 49, 378, 210);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -162,6 +162,11 @@ public class menuProyecto extends JFrame {
 			});
 		panel.add(btnNewButton_6_1_1);
 		btnNewButton_6_1_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		JButton btnEditarWbs = new JButton("Editar WBS");
+		btnEditarWbs.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnEditarWbs.setBounds(107, 140, 171, 57);
+		panel.add(btnEditarWbs);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setIcon(new ImageIcon(img.WELCOME));
