@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-public class WBS {
+public class añadirPaquete {
 
 	private JFrame frame;
 
@@ -15,7 +15,7 @@ public class WBS {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					WBS window = new WBS();
+					añadirPaquete window = new añadirPaquete();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -27,7 +27,7 @@ public class WBS {
 	/**
 	 * Create the application.
 	 */
-	public WBS() {
+	public añadirPaquete() {
 		initialize();
 	}
 
