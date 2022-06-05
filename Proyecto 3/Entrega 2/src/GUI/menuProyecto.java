@@ -169,7 +169,8 @@ public class menuProyecto extends JFrame {
 		btnEditarWbs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 				
-					app.VisibleCrearAñadirPaquete(true); //CAMBIAR LUEGO POR WBS PRINCIPAL
+					app.setCrearAñadirPaquete();
+					app.VisibleCrearAñadirPaquete(true); 
 					setVisible(false);
 			} 
 			});

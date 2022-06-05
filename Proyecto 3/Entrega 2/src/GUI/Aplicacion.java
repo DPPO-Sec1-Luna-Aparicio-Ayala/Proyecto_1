@@ -318,7 +318,7 @@ public class Aplicacion implements Serializable, ActionListener {
 		crearActividad = new CrearActividad(this);
 	}
 	
-	public void setAñadirPaquete() {
+	public void setCrearAñadirPaquete() {
 		crearAñandirPaquete = new crearAñadirPaquete();
 	}
 	
