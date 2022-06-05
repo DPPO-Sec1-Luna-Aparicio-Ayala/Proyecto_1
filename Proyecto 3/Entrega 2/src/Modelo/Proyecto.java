@@ -18,6 +18,8 @@ public class Proyecto implements Serializable{
 	private ArrayList<Participante> participantes;
 	private Map<String,ArrayList<Actividad>> actividades;
 	public Actividad actividadActual;
+	private WBS wbs; 
+	private Paquete paqueteActual;
 	
 	//Constructor//
 	public Proyecto (String name, String descrip, String feIni,String feFin, ArrayList<String> typeActi) 
@@ -29,6 +31,7 @@ public class Proyecto implements Serializable{
 		this.tiposActividad=typeActi;
 		this.participantes = new ArrayList<Participante>();
 		this.actividades =  new HashMap<String,ArrayList<Actividad>>();
+		this.wbs = new WBS(); 
 		
 	}
 	
@@ -255,6 +258,29 @@ public class Proyecto implements Serializable{
 		}
 		System.out.println(fechaI);
 		actividadActual = nuevaActividad;
+	}
+
+	public void escogerPaqueteActual (Paquete paquete){
+
+		paqueteActual = paquete;
+	}
+
+	public void nuevaTarea(String nombre, String descripcion, Paquete paquete, boolean fin) {
+
+		paquete = paqueteActual;
+		fin = false;
+		Tarea nuevaTarea = new Tarea(nombre, descripcion, paquete, fin);
+		paquete.agregarTareaoPaquete(nuevaTarea);
+		wbs.anadirObjetoWBS(nuevaTarea);
+	}
+
+	public void nuevoPaquete(String nombre, String descripcion, Paquete padre) {
+
+		padre = paqueteActual;
+		Paquete nuevoPaquete = new Paquete(nombre, descripcion, padre);
+		padre.agregarTareaoPaquete(nuevoPaquete);
+		wbs.anadirObjetoWBS(nuevoPaquete);
+
 	}
 
 	public Actividad getActividadActual(){
