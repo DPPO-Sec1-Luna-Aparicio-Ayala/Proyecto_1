@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 
-public class crearAñadirPaquete {
+public class crearAñadirPaquete extends JFrame{
 
 	private JFrame frame;
 
@@ -89,4 +89,6 @@ public class crearAñadirPaquete {
 		frame.setBounds(100, 100, 450, 379);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+
+	
 }

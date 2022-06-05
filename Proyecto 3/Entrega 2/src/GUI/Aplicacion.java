@@ -39,6 +39,7 @@ public class Aplicacion implements Serializable, ActionListener {
 	private CrearActividad crearActividad;
 	private añadirParticipante añadirParticipante; 
 	private generarReporte generarReporte;
+	private crearAñadirPaquete crearAñandirPaquete;
 	
 	//CONSTANTES//
 	public static final int PAUSADO = 1;
@@ -154,6 +155,7 @@ public class Aplicacion implements Serializable, ActionListener {
 		this.proyectos.add(newProyect);
 		newProyect.añadirParticipante(ownerMail, ownerName, true);
 		JOptionPane.showMessageDialog(principal,"¡El proyecto ha sido creado con éxito!");	
+		System.out.print(newProyect.getWBS());
 	}
 	
 	public void ejecutarNuevaActividad(String titulo, String descripcion, String tipo, Participante participante) {
@@ -219,6 +221,11 @@ public class Aplicacion implements Serializable, ActionListener {
 		
 		public void VisibleAñadirParticipante(boolean o) {
 			añadirParticipante.setVisible(o);
+		}
+		
+		public void VisibleCrearAñadirPaquete(boolean o) {
+			crearAñandirPaquete.setVisible(o);
+			
 		}
 		
 	@Override
@@ -311,6 +318,10 @@ public class Aplicacion implements Serializable, ActionListener {
 		crearActividad = new CrearActividad(this);
 	}
 	
+	public void setAñadirPaquete() {
+		crearAñandirPaquete = new crearAñadirPaquete();
+	}
+	
 	public void setEscogerActividad() {
 		escogerActividad = new EscogerActiAModificar(this);
 	}
@@ -352,5 +363,7 @@ public class Aplicacion implements Serializable, ActionListener {
 	{
 		new Aplicacion();
 	}
+
+	
 
 }
