@@ -35,6 +35,9 @@ public class Proyecto implements Serializable{
 		
 	}
 	
+	public WBS getWBS() {
+		return this.wbs;
+	}
 	//MÉTODOS//
 	/*
 	public void generarReporte() {

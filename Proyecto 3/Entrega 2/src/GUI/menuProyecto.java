@@ -166,6 +166,13 @@ public class menuProyecto extends JFrame {
 		JButton btnEditarWbs = new JButton("Editar WBS");
 		btnEditarWbs.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnEditarWbs.setBounds(107, 140, 171, 57);
+		btnEditarWbs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				
+					app.VisibleCrearAñadirPaquete(true); //CAMBIAR LUEGO POR WBS PRINCIPAL
+					setVisible(false);
+			} 
+			});
 		panel.add(btnEditarWbs);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
