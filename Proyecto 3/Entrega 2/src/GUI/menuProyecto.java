@@ -102,8 +102,8 @@ public class menuProyecto extends JFrame {
 		contentPane.add(lblNewLabel_1);*/
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(25, 25, 112));
-		panel.setBounds(150, 49, 378, 210);
+		panel.setBackground(new Color(0, 139, 139));
+		panel.setBounds(152, 58, 378, 210);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
