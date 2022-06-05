@@ -3,31 +3,31 @@ package Modelo;
 import java.util.ArrayList;
 
 public class Paquete extends WorkObject{
-	private ArrayList<Tarea> tareas;
+	private ArrayList<WorkObject> PyT;
 	
 	public Paquete(String nombre, String descripcion, Paquete paquete) {
 		setEsPaquete(true);
-		tareas = new ArrayList<Tarea>();
+		PyT = new ArrayList<WorkObject>();
 		setNombre(nombre);
 		setDescripcion(descripcion);
 		setPadre(paquete);
 	}
 	
 	
-	public void agregarTarea(Tarea t) {
-		tareas.add(t);
+	public void agregarTareaoPaquete(WorkObject t) {
+		PyT.add(t);
 	}
 	
-	public void eliminarTarea(Tarea t) {
-		tareas.remove(t);
+	public void eliminarTareaoPaquete(WorkObject t) {
+		PyT.remove(t);
 	}
 	
-	public void setTareas(ArrayList<Tarea> t) {
-		tareas = t;
+	public void setTareas(ArrayList<WorkObject> t) {
+		PyT = t;
 	}
 	
-	public ArrayList<Tarea> getTareas(){
-		return tareas;
+	public ArrayList<WorkObject> getTareasyPaquetes(){
+		return PyT;
 	}
 	
 }
