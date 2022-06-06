@@ -7,6 +7,7 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -95,8 +96,10 @@ public class CrearActividad extends JFrame implements ActionListener {
 			JOptionPane.showMessageDialog(presente,"Primero cree una tarea, por favor.");
 		}
 		else {
-		for (Tarea tarea : app.getWBS().getTareas()) 
+			Set<String> keys = app.getWBS().getTareas().keySet();
+		for (String key : keys) 
 		{ 
+			Tarea tarea = app.getWBS().getTareas().get(key);
 			tareas.addItem(tarea.getNombre());
 		}}
 		tareas.addActionListener(this);

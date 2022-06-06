@@ -26,23 +26,12 @@ public class añadirTarea extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					añadirTarea frame = new añadirTarea();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the frame.
+	 * @param aplicacion 
 	 */
-	public añadirTarea() {
+	public añadirTarea(Aplicacion aplicacion) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 480, 438);
 		contentPane = new JPanel();

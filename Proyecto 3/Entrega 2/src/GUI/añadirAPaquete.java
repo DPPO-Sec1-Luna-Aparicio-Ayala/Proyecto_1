@@ -12,6 +12,10 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 
@@ -58,16 +62,40 @@ public class añadirAPaquete extends JFrame {
 		JButton btnNewButton = new JButton("A\u00F1adir Tarea");
 		btnNewButton.setBounds(14, 87, 171, 57);
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				
+				app.setCrearAñadirTarea();
+				app.VisibleCrearAñadirTarea(true); 
+				setVisible(false);
+		} 
+		});
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("A\u00F1adir Paquete");
 		btnNewButton_1.setBounds(14, 153, 171, 57);
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				
+				app.setCrearAñadirPaquete();
+				app.VisibleCrearAñadirPaquete(true); 
+				setVisible(false);
+		} 
+		});
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Escoger Paquete");
 		btnNewButton_2.setBounds(14, 221, 171, 57);
 		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				
+				app.setListaPaquetes();
+				app.VisibleListaPaquetes(true); 
+				setVisible(false);
+		} 
+		});
 		contentPane.add(btnNewButton_2);
 		
 		JLabel lblNewLabel_1 = new JLabel("");

@@ -52,6 +52,7 @@ public class Aplicacion implements Serializable, ActionListener {
 	private ReporteEquipo ReporteEquipo;
 	private reportes reportes;
 	private ReporteSumup ReporteSumup;
+	private añadirTarea añadirTarea;
 	
 	//CONSTANTES//
 	public static final int PAUSADO = 1;
@@ -272,6 +273,11 @@ public class Aplicacion implements Serializable, ActionListener {
 		public void ReporteSumup(boolean o) {
 			ReporteSumup.setVisible(o);
 		}
+		
+		public void VisibleCrearAñadirTarea(boolean b) {
+			añadirTarea.setVisible(b);
+			
+		}
 
 		
 	@Override
@@ -396,6 +402,12 @@ public class Aplicacion implements Serializable, ActionListener {
 		ReporteEquipo = new ReporteEquipo(this);
 	}
 	
+	public void setCrearAñadirTarea() {
+		
+		añadirTarea = new añadirTarea(this);
+		
+	}
+	
 	public void setReportes (HashMap<String, HashMap<String, Double>> reporteActividad, HashMap<String, String> reporteHPersonas) {
 		reportes = new reportes(this, reporteActividad,  reporteHPersonas);
 	}
@@ -452,6 +464,10 @@ public class Aplicacion implements Serializable, ActionListener {
 		System.out.print(1);	
 		
 	}
+
+	
+
+	
 
 	
 
