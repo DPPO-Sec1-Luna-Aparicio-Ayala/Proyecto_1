@@ -15,28 +15,14 @@ import javax.swing.ImageIcon;
 public class crearAñadirPaquete extends JFrame{
 
 	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					crearAñadirPaquete window = new crearAñadirPaquete();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Aplicacion app;
 
 	/**
 	 * Create the application.
 	 */
-	public crearAñadirPaquete() {
+	public crearAñadirPaquete(Aplicacion a) {
 		initialize();
+		app = a;
 	}
 
 	/**
@@ -57,12 +43,20 @@ public class crearAñadirPaquete extends JFrame{
 		btnNewButton.setToolTipText("");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				añadirPaquete pop = new añadirPaquete();
+				pop.setFrameVisible(pop);
 			}
 		});
 		btnNewButton.setBounds(0, 194, 126, 23);
 		frame.getContentPane().add(btnNewButton);
 		
 		JButton btnModificarPaqueteExistente = new JButton("Editar paquete");
+		btnModificarPaqueteExistente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listaPaquetes pop = new listaPaquetes();
+				pop.setVisible(true);
+			}
+		});
 		btnModificarPaqueteExistente.setBounds(136, 194, 131, 23);
 		frame.getContentPane().add(btnModificarPaqueteExistente);
 		
@@ -84,11 +78,19 @@ public class crearAñadirPaquete extends JFrame{
 		frame.getContentPane().add(lblS);
 		
 		JButton btnModificarPaqueteExistente_1 = new JButton("Regresar");
+		btnModificarPaqueteExistente_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				app.VisibleMenuAct(true);
+				}
+		});
 		btnModificarPaqueteExistente_1.setBounds(317, 306, 103, 23);
 		frame.getContentPane().add(btnModificarPaqueteExistente_1);
 		frame.setBounds(100, 100, 450, 379);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	}
 
-	
+	public void setFrameVisible(crearAñadirPaquete a) {
+		a.frame.setVisible(true);
+	}
 }

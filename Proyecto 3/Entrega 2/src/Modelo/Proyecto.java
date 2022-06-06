@@ -243,14 +243,14 @@ public class Proyecto implements Serializable{
 			
 		
 
-	public void nuevaActividad(String titulo, String descripcionActividad, String tipo, Participante encargado) {
+	public void nuevaActividad(String titulo, String descripcionActividad, String tipo, Participante encargado, Tarea tarea) {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 		LocalDateTime date = LocalDateTime.now();
 		String fechaI = LocalDateTime.now().format(formatter); //Hora/fecha inicio se autocompleta...  
 		String fechaF = "" ; //Hora/fecha fin se rellenaria al oprimir acabar actividad... 
 		Participante responsable = encargado; 
-		Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable);
+		Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable, tarea);
 		if (actividades.containsKey(nuevaActividad.getTitle())) {
 			actividades.get(nuevaActividad.getTitle()).add(nuevaActividad);
 		}
@@ -354,5 +354,9 @@ public class Proyecto implements Serializable{
 	public void setActividades(Map<String,ArrayList<Actividad>> activs) {
 		actividades = activs;
 		
+	}
+	
+	public void setWBS(WBS w) {
+		wbs = w;
 	}
 }

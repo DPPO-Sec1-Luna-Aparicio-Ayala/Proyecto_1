@@ -1,10 +1,13 @@
 package Modelo;
 
+import java.util.ArrayList;
+
 public class WorkObject {
 	private boolean esPaquete;
 	private String nombre;
 	private String descripcion;
 	private Paquete padre;
+	private ArrayList<String> path;
 	
 	public boolean esPaquete() {
 		return esPaquete;
@@ -30,6 +33,18 @@ public class WorkObject {
 	
 	public Paquete getPadre() {
 		return padre;
+	}
+	
+	public void construirPath(Paquete papa) {
+		if (!papa.equals(null)) {
+			path.add(papa.getNombre());
+			construirPath(papa.getPadre());
+		}
+		
+	}
+	
+	public ArrayList<String> getPath(){
+		return path;
 	}
 	
 }

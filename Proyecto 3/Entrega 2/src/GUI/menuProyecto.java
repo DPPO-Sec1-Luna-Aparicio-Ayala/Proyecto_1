@@ -113,7 +113,6 @@ public class menuProyecto extends JFrame {
 			public void actionPerformed(ActionEvent e) {	
 				app.setCrearActividad();
 				app.VisibleCrearActividad(true);
-				setVisible(false);
 				
 			}
 			});
@@ -127,7 +126,6 @@ public class menuProyecto extends JFrame {
 				if(app.darProyectoActual().getActividades().size() != 0) {
 					app.setEscogerActividad();
 					app.VisibleEscogerActividad(true); 
-					setVisible(false);
 				} else {
 					JOptionPane.showMessageDialog(contentPane,"Primero cree una actividad.");	
 				}

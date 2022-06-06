@@ -5,14 +5,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.JOptionPane;
 
 import Modelo.Actividad;
+import Modelo.Paquete;
 import Modelo.Participante;
 import Modelo.Proyecto;
+import Modelo.Tarea;
+import Modelo.WorkObject;
 
 public class FileManager {
+	private HashMap<String, Tarea> wbsProys;
 	public void write(ArrayList<Proyecto> proyectos, String nombre) {
 	File f;
 	FileWriter writer;
@@ -109,6 +114,87 @@ public class FileManager {
 		JOptionPane.showMessageDialog(null, "Ha sucedido un error: " + e);
 	}
 }
+	
+	public void writeWBS(String nombre, ArrayList<Proyecto> proyectos) {
+		File f;
+		FileWriter writer;
+		BufferedWriter bw;
+		PrintWriter ww;
+		
+		try {
+			f = new File(nombre);
+			writer = new FileWriter(f);
+			bw = new BufferedWriter(writer);
+			ww = new PrintWriter(bw);
+			
+			ww.write("");
+			
+			for (Proyecto proyecto : proyectos) {
+				HashMap<String, WorkObject> workObjects = proyecto.getWBS().getWBS();
+				Set<String> keys = workObjects.keySet();
+				ww.append(proyecto.getNombre());
+				ww.append(";");
+				for(String key : keys) {
+					WorkObject wo = workObjects.get(key);
+					if (wo.esPaquete()) {
+						ww.append("1");
+						ww.append(",");
+						ww.append(wo.getNombre());
+						ww.append(",");
+						ww.append(wo.getDescripcion());
+						ww.append(",");
+						ww.append(wo.getPadre().getNombre());
+						ww.append(",");
+						for (String ancestro : wo.getPath()) {
+							ww.append(ancestro);
+							ww.append("-");
+						}
+						ww.append(",");
+						
+					}
+					else if (!wo.esPaquete()) {
+						ww.append("0");
+						ww.append(",");
+						ww.append(wo.getNombre());
+						ww.append(",");
+						ww.append(wo.getDescripcion());
+						ww.append(",");
+						ww.append(wo.getPadre().getNombre());
+						ww.append(",");
+						for (String ancestro : wo.getPath()) {
+							ww.append(ancestro);
+							ww.append("-");
+						}
+						ww.append(",");
+						Tarea ta = (Tarea) wo;
+						ww.append(ta.getTipo());
+						ww.append(",");
+						ww.append(Double.toString(ta.getTiempoEstimado()));
+						ww.append(",");
+						ww.append(ta.getFechaEstimada());
+						ww.append(",");
+						
+						
+						
+					}
+				}
+				ww.append(proyecto.getNombre());
+				ww.append(";");
+				
+			}
+			
+			ww.close();
+			bw.close();
+			
+			
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Ha sucedido un error: " + e);
+		}
+	}
+	
+	public void readWBS(String nombreArchivo) {
+		
+	}
 	
 	public ArrayList<Proyecto> read(String nombreArchivo) {
 		File archivo;

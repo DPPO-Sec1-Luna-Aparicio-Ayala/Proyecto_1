@@ -48,14 +48,11 @@ public class reportes extends JFrame {
 			for(String correo:reporteActividad.get(tipo).keySet()) {
 				//System.out.println("\n"+count+ ". "+correo+"\tTiempo: "+reporteActividad.get(tipo).get(correo));
 				String combo = "Tipo Actividad: " + tipo + " " +count+ ". "+correo+"\tTiempo: "+reporteActividad.get(tipo).get(correo);
-				tiposActividad.addItem(combo);
 				count+=1;
 			}
 		}
 		
 		for (String msj: reporteHPersonas.values()){
-			
-			Personas.addItem(msj);
 			
 		}
 		

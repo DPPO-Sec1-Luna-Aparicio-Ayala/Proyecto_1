@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 import Graficos.Imagenes;
 import Modelo.Participante;
+import Modelo.Tarea;
 
 public class CrearActividad extends JFrame implements ActionListener {
 
@@ -30,14 +31,18 @@ public class CrearActividad extends JFrame implements ActionListener {
 	private Participante participanteActual;
 	private JFrame presente; 
 	private String tipoSeleccionado;
+	private Tarea tareaSeleccionada;
 	private JComboBox tiposActividad;
+	private JComboBox tareas;
+	private Aplicacion app;
 	
 	/**
 	 * Create the frame.
 	 * @param cronometrar 
 	 * @param aplicacion 
 	 */
-	public CrearActividad(Aplicacion app) {
+	public CrearActividad(Aplicacion ap) {
+		app = ap;
 		setIconImage(img.BULB);
 		presente = new JFrame();
 		ListaTipos = app.darProyectoActual().gettypeActividades();
@@ -76,6 +81,26 @@ public class CrearActividad extends JFrame implements ActionListener {
 		tiposActividad.addActionListener(this);
 		panel.add(tiposActividad);
 		
+		
+		
+		
+		JLabel lblTarea = new JLabel("Tarea:");
+		lblTarea.setBounds(33, 180, 83, 14);
+		panel.add(lblTarea);
+		lblTarea.setFont(new Font("Tahoma", Font.BOLD, 11));
+		
+		tareas = new JComboBox();
+		tareas.setBounds(126, 180, 106, 22);
+		if (app.getWBS().getTareas().isEmpty()) {
+			JOptionPane.showMessageDialog(presente,"Primero cree una tarea, por favor.");
+		}
+		else {
+		for (Tarea tarea : app.getWBS().getTareas()) 
+		{ 
+			tareas.addItem(tarea.getNombre());
+		}}
+		tareas.addActionListener(this);
+		panel.add(tareas);
 		/*
 		JFormattedTextField frmtdtxtfldRealice = new JFormattedTextField();
 		frmtdtxtfldRealice.setBounds(126, 118, 106, 20);
@@ -126,8 +151,10 @@ public class CrearActividad extends JFrame implements ActionListener {
 				String tipo = tiposActividad.getSelectedItem().toString();
 				String titulo = frmtdtxtfldRealice.getText();
 				String descripcion = frmtdtxtfldActividad.getText();
+				Integer indexTarea = tareas.getSelectedIndex();
+				Tarea tarea = app.getWBS().getTareas().get(indexTarea);				
 				app.setCronometro();
-				app.ejecutarNuevaActividad(titulo, descripcion, tipo, participanteActual);
+				app.ejecutarNuevaActividad(titulo, descripcion, tipo, participanteActual, tarea);
 				setVisible(false); //recibir los inputs
 				app.getCronometro().setVisible(true);
 				}
@@ -138,6 +165,12 @@ public class CrearActividad extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		tipoSeleccionado = tiposActividad.getSelectedItem().toString();
+		if (e.getSource().equals(tiposActividad)) {
+			tipoSeleccionado = tiposActividad.getSelectedItem().toString();
+		}
+		else if (e.getSource().equals(tareas)) {
+			Integer indexTarea = tareas.getSelectedIndex();
+			tareaSeleccionada = app.getWBS().getTareas().get(indexTarea);
+		}
 	}
 }

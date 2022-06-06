@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import GestionArchivos.FileManager;
@@ -16,6 +17,8 @@ import Modelo.Actividad;
 import Modelo.Cronometro;
 import Modelo.Participante;
 import Modelo.Proyecto;
+import Modelo.Tarea;
+import Modelo.WBS;
 
 public class Aplicacion implements Serializable, ActionListener {
 	//ATRIBUTOS//
@@ -27,6 +30,7 @@ public class Aplicacion implements Serializable, ActionListener {
 	Cronometro cronometro = new Cronometro();
 	ArrayList<String> proyectosGuardados = new ArrayList<String>();
 	private int cronometrando;
+	private WBS wbs;
 	
 	//GUI//
 	private VentanaPrincipal principal;
@@ -39,7 +43,15 @@ public class Aplicacion implements Serializable, ActionListener {
 	private CrearActividad crearActividad;
 	private añadirParticipante añadirParticipante; 
 	private ReporteMensual generarReporte;
-	private crearAñadirPaquete crearAñandirPaquete;
+	private crearAñadirPaquete crearAñadirPaquete;
+	private añadirAPaquete añadirAPaquete;
+	private añadirPaquete añadirPaquete;
+	private listaPaquetes listaPaquetes;
+	private ReporteAvanceProy ReporteAvanceProy;
+	private ReporteCalidadPlanning ReporteCalidadPlanning;
+	private ReporteEquipo ReporteEquipo;
+	private reportes reportes;
+	private ReporteSumup ReporteSumup;
 	
 	//CONSTANTES//
 	public static final int PAUSADO = 1;
@@ -158,8 +170,8 @@ public class Aplicacion implements Serializable, ActionListener {
 		System.out.print(newProyect.getWBS());
 	}
 	
-	public void ejecutarNuevaActividad(String titulo, String descripcion, String tipo, Participante participante) {
-			proyectoActual.nuevaActividad(titulo,descripcion,tipo, participante);
+	public void ejecutarNuevaActividad(String titulo, String descripcion, String tipo, Participante participante, Tarea tarea) {
+			proyectoActual.nuevaActividad(titulo,descripcion,tipo, participante, tarea);
 			actividadActual = proyectoActual.getActividadActual();
 			JOptionPane.showMessageDialog(principal,"La actividad se creó con éxito.");				
 }
@@ -224,7 +236,8 @@ public class Aplicacion implements Serializable, ActionListener {
 		}
 		
 		public void VisibleCrearAñadirPaquete(boolean o) {
-			crearAñandirPaquete.setVisible(o);
+			//crearAñadirPaquete.setVisible(o);
+			crearAñadirPaquete.setFrameVisible(crearAñadirPaquete);
 			
 		}
 		
@@ -302,6 +315,10 @@ public class Aplicacion implements Serializable, ActionListener {
 		return participanteActual;
 	}
 	
+	public WBS getWBS() {
+		return wbs;
+	}
+	
 	public menuProyecto darMenuProyecto() {
 		return menuProyecto;
 	}
@@ -319,7 +336,7 @@ public class Aplicacion implements Serializable, ActionListener {
 	}
 	
 	public void setCrearAñadirPaquete() {
-		crearAñandirPaquete = new crearAñadirPaquete();
+		crearAñadirPaquete = new crearAñadirPaquete(this);
 	}
 	
 	public void setEscogerActividad() {

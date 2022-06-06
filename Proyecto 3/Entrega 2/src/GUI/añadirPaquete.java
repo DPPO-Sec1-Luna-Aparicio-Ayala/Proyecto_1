@@ -98,6 +98,10 @@ public class añadirPaquete {
 		txtSeDiseoPara.setBounds(61, 122, 128, 20);
 		frame.getContentPane().add(txtSeDiseoPara);
 		frame.setBounds(100, 100, 463, 307);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+	}
+	
+	public void setFrameVisible(añadirPaquete a) {
+		a.frame.setVisible(true);
 	}
 }

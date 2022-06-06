@@ -11,6 +11,7 @@ public class Paquete extends WorkObject{
 		setNombre(nombre);
 		setDescripcion(descripcion);
 		setPadre(paquete);
+		construirPath(paquete);	
 	}
 	
 	

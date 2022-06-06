@@ -16,7 +16,7 @@ public class Tarea extends WorkObject{
 		setDescripcion(descripcion);
 		setPadre(paquete);
 		setEsFinal(fin);
-		
+		construirPath(paquete);		
 	}
 	
 	public void anadirActividad(Actividad a) {
