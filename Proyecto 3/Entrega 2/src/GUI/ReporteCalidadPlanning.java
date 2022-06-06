@@ -7,8 +7,9 @@ public class ReporteCalidadPlanning extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param aplicacion 
 	 */
-	public ReporteCalidadPlanning() {
+	public ReporteCalidadPlanning(Aplicacion aplicacion) {
 		setBackground(new Color(0, 255, 255));
 
 	}

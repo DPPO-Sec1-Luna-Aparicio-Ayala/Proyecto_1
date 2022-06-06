@@ -153,8 +153,8 @@ public class menuProyecto extends JFrame {
 					HashMap<String,HashMap<String,Double>> reporteActividad = app.ejecutarMostrarReporteActividad();
 					HashMap<String, String> reporteHPersonas = app.ejecutarMostrarReportePersonas();
 					
-					app.setGenerarReporte(reporteActividad, reporteHPersonas);
-					app.VisibleGenerarReporte(true); //Verificar si reporte si queda visible
+					app.setReportes(reporteActividad, reporteHPersonas);
+					app.VisibleReportes(true);
 					setVisible(false);
 			} 
 			});

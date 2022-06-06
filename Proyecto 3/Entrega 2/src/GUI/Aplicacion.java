@@ -47,7 +47,7 @@ public class Aplicacion implements Serializable, ActionListener {
 	private añadirAPaquete añadirAPaquete;
 	private añadirPaquete añadirPaquete;
 	private listaPaquetes listaPaquetes;
-	private ReporteAvanceProy ReporteAvanceProy;
+	private ReporteAvaceProy ReporteAvanceProy;
 	private ReporteCalidadPlanning ReporteCalidadPlanning;
 	private ReporteEquipo ReporteEquipo;
 	private reportes reportes;
@@ -241,6 +241,39 @@ public class Aplicacion implements Serializable, ActionListener {
 			
 		}
 		
+		public void VisibleAñadirAPaquete(boolean o) {
+			añadirAPaquete.setVisible(o);
+		}
+		
+		public void VisibleAñadirPaquete(boolean o) {
+			añadirPaquete.setFrameVisible(añadirPaquete);
+		}
+		
+		public void VisibleListaPaquetes(boolean o) {
+			listaPaquetes.setVisible(o);
+		}
+		
+		public void VisibleReporteAvaceProy(boolean o) {
+			ReporteAvanceProy.setVisible(o);
+		}
+		
+		public void VisibleReporteCalidadPlanning(boolean o) {
+			ReporteCalidadPlanning.setVisible(o);
+		}
+		
+		public void VisibleReporteEquipo(boolean o) {
+			ReporteEquipo.setVisible(o);
+		}
+		
+		public void VisibleReportes(boolean o) {
+			reportes.setVisible(o);
+		}
+	
+		public void ReporteSumup(boolean o) {
+			ReporteSumup.setVisible(o);
+		}
+
+		
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object fuente = e.getSource();
@@ -339,6 +372,38 @@ public class Aplicacion implements Serializable, ActionListener {
 		crearAñadirPaquete = new crearAñadirPaquete(this);
 	}
 	
+	public void setAñadirAPaquete() {
+		añadirAPaquete = new añadirAPaquete(this);
+	}
+	
+	public void setAñadirPaquete() {
+		añadirPaquete = new añadirPaquete(this);
+	}
+	
+	public void setListaPaquetes() {
+		listaPaquetes = new listaPaquetes(this);
+	}
+	
+	public void setReporteAvanceProy() {
+		ReporteAvanceProy = new ReporteAvaceProy(this);
+	}
+	
+	public void setReporteCalidadPlanning() {
+		ReporteCalidadPlanning = new ReporteCalidadPlanning(this);
+	}
+	
+	public void setReporteEquipo() {
+		ReporteEquipo = new ReporteEquipo(this);
+	}
+	
+	public void setReportes (HashMap<String, HashMap<String, Double>> reporteActividad, HashMap<String, String> reporteHPersonas) {
+		reportes = new reportes(this, reporteActividad,  reporteHPersonas);
+	}
+	
+
+	public void setReporteSumups() {
+		ReporteSumup = new ReporteSumup(this);
+	}
 	public void setEscogerActividad() {
 		escogerActividad = new EscogerActiAModificar(this);
 	}
@@ -379,6 +444,13 @@ public class Aplicacion implements Serializable, ActionListener {
 	public static void main(String[] args) throws IOException	
 	{
 		new Aplicacion();
+	}
+
+	public void CrearAñadirPaquete(String nombre, String descripcion) {
+		
+		proyectoActual.nuevoPaquete(nombre, descripcion);
+		System.out.print(1);	
+		
 	}
 
 	

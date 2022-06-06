@@ -250,7 +250,7 @@ public class Proyecto implements Serializable{
 		String fechaI = LocalDateTime.now().format(formatter); //Hora/fecha inicio se autocompleta...  
 		String fechaF = "" ; //Hora/fecha fin se rellenaria al oprimir acabar actividad... 
 		Participante responsable = encargado; 
-		Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable, tarea);
+		Actividad nuevaActividad = new Actividad(titulo, descripcionActividad, tipo, fechaI, fechaF, responsable);
 		if (actividades.containsKey(nuevaActividad.getTitle())) {
 			actividades.get(nuevaActividad.getTitle()).add(nuevaActividad);
 		}
@@ -277,12 +277,16 @@ public class Proyecto implements Serializable{
 		wbs.anadirObjetoWBS(nuevaTarea);
 	}
 
-	public void nuevoPaquete(String nombre, String descripcion, Paquete padre) {
+	public void nuevoPaquete(String nombre, String descripcion) {
 
-		padre = paqueteActual;
+		Paquete padre = paqueteActual;
 		Paquete nuevoPaquete = new Paquete(nombre, descripcion, padre);
-		padre.agregarTareaoPaquete(nuevoPaquete);
+		if (padre != null) {
+			padre.agregarTareaoPaquete(nuevoPaquete);
+		}
 		wbs.anadirObjetoWBS(nuevoPaquete);
+		System.out.print(nuevoPaquete.getNombre());
+		System.out.print("Exito");
 
 	}
 

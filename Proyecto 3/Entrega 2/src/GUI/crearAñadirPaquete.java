@@ -43,7 +43,7 @@ public class crearAñadirPaquete extends JFrame{
 		btnNewButton.setToolTipText("");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				añadirPaquete pop = new añadirPaquete();
+				añadirPaquete pop = new añadirPaquete(app);
 				pop.setFrameVisible(pop);
 			}
 		});
@@ -53,7 +53,7 @@ public class crearAñadirPaquete extends JFrame{
 		JButton btnModificarPaqueteExistente = new JButton("Editar paquete");
 		btnModificarPaqueteExistente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listaPaquetes pop = new listaPaquetes();
+				añadirAPaquete pop = new añadirAPaquete(app) ;
 				pop.setVisible(true);
 			}
 		});

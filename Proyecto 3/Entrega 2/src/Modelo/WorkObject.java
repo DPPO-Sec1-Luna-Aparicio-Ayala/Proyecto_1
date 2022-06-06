@@ -36,7 +36,7 @@ public class WorkObject {
 	}
 	
 	public void construirPath(Paquete papa) {
-		if (!papa.equals(null)) {
+		if (papa != null) {
 			path.add(papa.getNombre());
 			construirPath(papa.getPadre());
 		}

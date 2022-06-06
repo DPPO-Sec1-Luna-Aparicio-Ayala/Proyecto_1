@@ -20,23 +20,8 @@ public class listaPaquetes extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					listaPaquetes frame = new listaPaquetes();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
-	public listaPaquetes() {
+	public listaPaquetes(Aplicacion aplicacion) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 556, 385);
 		contentPane = new JPanel();

@@ -11,6 +11,7 @@ import java.awt.SystemColor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 import java.awt.event.ActionEvent;
 
 public class añadirPaquete {
@@ -22,30 +23,20 @@ public class añadirPaquete {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					añadirPaquete window = new añadirPaquete();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	
 	/**
 	 * Create the application.
+	 * @param aplicacion 
 	 */
-	public añadirPaquete() {
-		initialize();
+	public añadirPaquete(Aplicacion aplicacion) {
+		initialize(aplicacion);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @param aplicacion 
 	 */
-	private void initialize() {
+	private void initialize(Aplicacion aplicacion) {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(0, 255, 255));
 		frame.getContentPane().setLayout(null);
@@ -59,7 +50,17 @@ public class añadirPaquete {
 		JButton btnNewButton_1 = new JButton("Enviar");
 		btnNewButton_1.setBounds(179, 209, 101, 22);
 		frame.getContentPane().add(btnNewButton_1);
-		btnNewButton.setBounds(298, 209, 101, 22);
+		btnNewButton_1.setBounds(298, 209, 101, 22);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+					
+				String nombre = txtPack.getText();
+				String descripcion = txtSeDiseoPara.getText();
+				aplicacion.CrearAñadirPaquete(nombre, descripcion);	
+				System.out.print(1);	
+				
+			} 
+			});
 		frame.getContentPane().add(btnNewButton);
 		
 		JLabel lblNewLabel = new JLabel("Crear Paquete!");

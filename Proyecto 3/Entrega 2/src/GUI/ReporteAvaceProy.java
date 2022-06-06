@@ -7,8 +7,9 @@ public class ReporteAvaceProy extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @param aplicacion 
 	 */
-	public ReporteAvaceProy() {
+	public ReporteAvaceProy(Aplicacion aplicacion) {
 		setBackground(new Color(0, 255, 255));
 
 	}

@@ -59,26 +59,76 @@ public class reportes extends JFrame {
 		JButton btnReporteMensual = new JButton("Reporte Mensual");
 		btnReporteMensual.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnReporteMensual.setBounds(26, 346, 171, 57);
+		btnReporteMensual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+					
+					
+					
+					app.setGenerarReporte(reporteActividad, reporteHPersonas);
+					app.VisibleGenerarReporte(true);
+					setVisible(false);
+			} 
+			});
 		contentPane.add(btnReporteMensual);
 		
 		JButton btnSumUpProyecto = new JButton("Sum Up Proyecto");
 		btnSumUpProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnSumUpProyecto.setBounds(26, 278, 171, 57);
+		btnSumUpProyecto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+					
+					
+					
+					app.setReporteSumups();
+					app.ReporteSumup(true);
+					setVisible(false);
+			} 
+			});
 		contentPane.add(btnSumUpProyecto);
 		
 		JButton btnRendimientoEquipo = new JButton("Rendimiento Equipo");
 		btnRendimientoEquipo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnRendimientoEquipo.setBounds(26, 210, 171, 57);
+		btnRendimientoEquipo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+					
+					
+					
+					app.setReporteEquipo();
+					app.VisibleReporteEquipo(true);
+					setVisible(false);
+			} 
+			});
 		contentPane.add(btnRendimientoEquipo);
 		
 		JButton btnCalidadPlaneacin = new JButton("Calidad Planeaci\u00F3n");
 		btnCalidadPlaneacin.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnCalidadPlaneacin.setBounds(26, 143, 171, 57);
+		btnCalidadPlaneacin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+					
+					
+					
+					app.setReporteCalidadPlanning();
+					app.VisibleReporteCalidadPlanning(true);
+					setVisible(false);
+			} 
+			});
 		contentPane.add(btnCalidadPlaneacin);
 		
 		JButton btnAvanceProyecto = new JButton("Avance Proyecto");
 		btnAvanceProyecto.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAvanceProyecto.setBounds(26, 77, 171, 57);
+		btnAvanceProyecto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+					
+					
+					
+					app.setReporteAvanceProy();
+					app.VisibleReporteAvaceProy(true);
+					setVisible(false);
+			} 
+			});
 		contentPane.add(btnAvanceProyecto);
 		
 		JLabel lblNewLabel_1 = new JLabel("Generador de Reportes!");
@@ -105,107 +155,6 @@ public class reportes extends JFrame {
         
 	}
 	
-	public void paint(Graphics g)
-    {
-        super.paint(g);
-        boolean bandera;
-        bandera = true;
-		if (bandera==true)
-        {
-			HashMap<String, Integer> grafico = app.generarGrafico();
-			
-            int v1 = grafico.get("01");
-            int v2 = grafico.get("02");
-            int v3 = grafico.get("03");
-            int v4 = grafico.get("04");
-            int v5 = grafico.get("05");
-            int v6 = grafico.get("06");
-            int v7 = grafico.get("07");
-            int v8 = grafico.get("08");
-            int v9 = grafico.get("09");
-            int v10 = grafico.get("10");
-            int v11 = grafico.get("11");
-            int v12 = grafico.get("12");
-            
-            
-            int suma = v1 +v2 + v3 + v4 + v5 + v6 + v7 + v8 + v9 + v10 + v11 + v12;
-            int grados1=v1*360/suma;
-            int grados2=v2*360/suma;
-            int grados3=v3*360/suma;
-            int grados4=v4*360/suma;
-            int grados5=v5*360/suma;
-            int grados6=v6*360/suma;
-            int grados7=v7*360/suma;
-            int grados8=v8*360/suma;
-            int grados9=v9*360/suma;
-            int grados10=v10*360/suma;
-            int grados11=v11*360/suma;
-            int grados12=v12*360/suma;
-
-            g.setColor(new Color(255,0,0));
-            g.fillArc(100,350,200,200,0,grados1);
-            g.fillRect(350,283,20,10);
-            g.drawString("Enero", 400, 290);            
-
-            g.setColor(new Color(0,128,0));
-            g.fillArc(100,350,200,200,grados1,grados2);
-            g.fillRect(350,313,20,10);
-            g.drawString("Febrero", 400, 320);            
-
-            g.setColor(new Color(0,0,255));
-            g.fillArc(100,350,200,200,grados1+grados2,grados3);
-            g.fillRect(350,343,20,10);
-            g.drawString("Marzo", 400, 350);
-            
-            g.setColor(new Color(0,255,0));
-            g.fillArc(100,350,200,200,grados1+grados2+grados3,grados4);
-            g.fillRect(350,373,20,10);
-            g.drawString("Abril", 400, 380);
-            
-            g.setColor(new Color(20,20,20));
-            g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4,grados5);
-            g.fillRect(350,400,20,10);
-            g.drawString("Mayo", 400, 410);
-             
-            
-            g.setColor(new Color(100,20,20));
-            g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5,grados6);
-            g.fillRect(350,433,20,10);
-            g.drawString("Junio", 400, 440);
-            
-            g.setColor(new Color(20,100,20));
-            g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6,grados7);
-            g.fillRect(350,463,20,10);
-            g.drawString("Julio", 400, 470);
-            
-            g.setColor(new Color(20,20,100));
-            g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6+grados7,grados8);
-            g.fillRect(350, 493,20,10);
-            g.drawString("Agosto", 400, 500);
-            
-            g.setColor(new Color(100,100,100));
-            g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6+grados7+grados8,grados9);
-            g.fillRect(350,523,20,10);
-            g.drawString("Septiembre", 400, 530);
-            
-            g.setColor(new Color(255,128,0));
-            g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6+grados7+grados8+grados9,grados10);
-            g.fillRect(350,553,20,10);
-            g.drawString("Octubre", 400, 560);
-            
-            g.setColor(new Color(215,175,55));
-            g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6+grados7+grados8+grados9+grados10,grados11);
-            g.fillRect(350,583,20,10);
-            g.drawString("Noviembre", 400, 590);
-            
-            g.setColor(new Color(255,0,255));
-            g.fillArc(100,350,200,200,grados1+grados2+grados3+grados4+grados5+grados6+grados7+grados8+grados9+grados10+grados11,grados12);
-            g.fillRect(350,613,20,10);
-            g.drawString("Diciembre", 400, 620);
-            
-        }
-        
-    }
     
 
 }
